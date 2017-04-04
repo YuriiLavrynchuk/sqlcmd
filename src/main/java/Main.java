@@ -7,6 +7,6 @@ import java.sql.SQLException;
  */
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InvalidException {
-        DBconnection connect = new DBconnection("postgres", "postgres", "1234").dbConnection();
+        boolean connect = new DBconnection("postgres", "postgres", "1234").dbConnection();
     }
 }

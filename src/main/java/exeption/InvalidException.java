@@ -10,7 +10,7 @@ public class InvalidException extends Exception {
     public InvalidException(String message) {
         super(message);
 //        this.dBconnection = dBconnection;
-        System.out.println("Input = " + message);
+        System.out.println("Output = " + message);
     }
 
 }
