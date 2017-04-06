@@ -23,7 +23,7 @@ public class JDBCtest {
             //1.Statement: используется для простых случаев без параметров
             Statement statement = null;
 
-//            statement = connection.createStatement();
+//            statement = model.createStatement();
             //Выполним запрос
 //            ResultSet result1 = statement.executeQuery(
 //                    "SELECT * FROM users where id >2 and id <10");
@@ -49,7 +49,7 @@ public class JDBCtest {
             //которые могут содержать входные параметры
 //            PreparedStatement preparedStatement = null;
             // ? - место вставки нашего значеня
-//            preparedStatement = connection.prepareStatement(
+//            preparedStatement = model.prepareStatement(
 //                    "SELECT * FROM users where id > ? and id < ?");
             //Устанавливаем в нужную позицию значения определённого типа
 //            preparedStatement.setInt(1, 2);
@@ -64,7 +64,7 @@ public class JDBCtest {
 //                        + "\t" + result2.getString("username"));
 //            }
 //
-//            preparedStatement = connection.prepareStatement(
+//            preparedStatement = model.prepareStatement(
 //                    "INSERT INTO users(username) values(?)");
 //            preparedStatement.setString(1, "user_name");
             //метод принимает значение без параметров
@@ -77,7 +77,7 @@ public class JDBCtest {
             // которые могут содержать входные и выходные параметры
 //            CallableStatement callableStatement = null;
             //Вызываем функцию myFunc (хранится в БД)
-//            callableStatement = connection.prepareCall(
+//            callableStatement = model.prepareCall(
 //                    " { call myfunc(?,?) } ");
             //Задаём входные параметры
 //            callableStatement.setString(1, "Dima");
