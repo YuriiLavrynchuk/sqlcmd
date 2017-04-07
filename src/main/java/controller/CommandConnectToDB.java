@@ -3,8 +3,8 @@ package controller;
 import exeption.InvalidException;
 import model.DBconnection;
 
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by Yuriy Lavrinchuk on 03.04.2017.
@@ -28,9 +28,9 @@ public class CommandConnectToDB implements Command {
     public String getUsername() {return username;}
     public String getPassword() {return password;}
 
-        @Override
-    public Statement execute() throws SQLException, InvalidException, ClassNotFoundException {
-            Statement connect = new DBconnection(CommandConnectToDB.this).dbConnection();
+    @Override
+    public Connection execute() throws SQLException, InvalidException, ClassNotFoundException {
+        Connection connect = new DBconnection(CommandConnectToDB.this).dbConnection();
             return connect;
         }
 }
