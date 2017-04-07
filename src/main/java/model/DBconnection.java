@@ -1,31 +1,20 @@
 package model;
 
-import controller.ConnectToDB;
+import controller.CommandConnectToDB;
 import exeption.InvalidException;
-
 import java.sql.*;
+import java.util.Arrays;
 
-//import ua.com.juja.sqlcmd.*;
-
-/**
- * Created by Admin on 27.03.2017.
- */
 public class DBconnection {
-    private String url;
-    private String dbname;
-    private String username;
-    private String password;
+    private CommandConnectToDB commandConnectToDB;
 
-    public DBconnection(ConnectToDB connectToDB) throws SQLException {
-        this.url = "jdbc:postgresql://localhost:5432/" + connectToDB.getDbname();
-        this.dbname = connectToDB.getDbname();
-        this.username = connectToDB.getUsername();
-        this.password = connectToDB.getPassword();
+    public DBconnection(CommandConnectToDB commandConnectToDB) throws SQLException {
+        this.commandConnectToDB = commandConnectToDB;
     }
 
     public boolean checkParametrs(){
         //TODO добавить проверки на ошибочные параметры
-            if(dbname == null || username == null || password == null || dbname == null) return false;
+            if(commandConnectToDB.getDbname() == null || commandConnectToDB.getUsername() == null || commandConnectToDB.getPassword() == null) return false;
             else return true;
     }
 
@@ -33,14 +22,15 @@ public class DBconnection {
 
         Statement statement;
         if (!checkParametrs())
-            throw new InvalidException("Invalid incoming parameter:" + " dbname: " + dbname + "username: " + username + " password: " + password);
+            throw new InvalidException("Invalid incoming parameter:" + " dbname: " + commandConnectToDB.getDbname() + "username: " + commandConnectToDB.getUsername() + " password: " + commandConnectToDB.getPassword());
         else {
             Class.forName("org.postgresql.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+                Connection connection = DriverManager.getConnection(commandConnectToDB.getUrl(), commandConnectToDB.getUsername(), commandConnectToDB.getPassword());
             System.out.println("Соединение установлено");
             statement = connection.createStatement();
 
 //            InsertMethod(statement);
+            SelectAllTablesMethod(statement);
 //            SelectMethod(statement);
 //            UpdateMethod(statement);
 //            DeleteMethod(statement);
@@ -63,9 +53,24 @@ public class DBconnection {
         statement.close();
     }
 
+    //SELECT * tables
+    private void SelectAllTablesMethod(Statement statement) throws SQLException {
+        ResultSet select = statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'");
+        String[] tables = new String[100];
+        int index = 0;
+        while (select.next()) {
+//            System.out.println("Номер в выборке #" + select.getRow()
+//                    + "\t" + select.getString("table_name"));
+        tables[index++] = select.getString("table_name");
+        }
+        tables = Arrays.copyOf(tables, index + 1, String[].class);
+        select.close();
+        statement.close();
+    }
+
     //SELECT
     private void SelectMethod(Statement statement) throws SQLException {
-        ResultSet select = statement.executeQuery("select * from users");
+        ResultSet select = statement.executeQuery("SELECT * FROM users");
         while (select.next()){
             System.out.println("Номер в выборке #" + select.getRow()
                     + "\t" + select.getInt("id")
@@ -81,7 +86,5 @@ public class DBconnection {
         statement.executeUpdate("INSERT INTO users VALUES('4', 'user3', '1258')");
         statement.close();
     }
-
-    //TODO доваить реализацию закрытия моединения
 }
 
