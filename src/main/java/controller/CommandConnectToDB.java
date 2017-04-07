@@ -29,7 +29,7 @@ public class CommandConnectToDB implements Command {
     public String getPassword() {return password;}
 
     @Override
-    public Connection execute() throws SQLException, InvalidException, ClassNotFoundException {
+    public Connection execute() throws InvalidException {
         Connection connect = new DBconnection(CommandConnectToDB.this).dbConnection();
             return connect;
         }
