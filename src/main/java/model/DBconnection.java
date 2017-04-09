@@ -1,28 +1,30 @@
 package model;
 
-import controller.CommandConnectToDB;
+import controller.ExConnectToDB;
 import exeption.InvalidException;
 import java.sql.*;
 
 public class DBconnection {
-    private CommandConnectToDB commandConnectToDB;
+    private ExConnectToDB exConnectToDB;
     private Connection connection;
 
-    public DBconnection(CommandConnectToDB commandConnectToDB){
-        this.commandConnectToDB = commandConnectToDB;
+    public DBconnection(ExConnectToDB exConnectToDB){
+        this.exConnectToDB = exConnectToDB;
     }
 
     private boolean checkParametrs(){
         //TODO добавить проверки на ошибочные параметры
-            if(commandConnectToDB.getDbname() == null || commandConnectToDB.getUsername() == null || commandConnectToDB.getPassword() == null) return false;
+            if(exConnectToDB.getDbname() == null ||
+                    exConnectToDB.getUsername() == null ||
+                    exConnectToDB.getPassword() == null) return false;
             else return true;
     }
 
     public Connection dbConnection() throws InvalidException {
         if (!checkParametrs())
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
-                    + commandConnectToDB.getDbname() + "username: " + commandConnectToDB.getUsername()
-                    + " password: " + commandConnectToDB.getPassword());
+                    + exConnectToDB.getDbname() + "username: " + exConnectToDB.getUsername()
+                    + " password: " + exConnectToDB.getPassword());
         else {
             try {
                 Class.forName("org.postgresql.Driver");
@@ -31,17 +33,20 @@ public class DBconnection {
                 e.printStackTrace();
             }
             try {
-                connection = DriverManager.getConnection(commandConnectToDB.getUrl(),
-                        commandConnectToDB.getUsername(), commandConnectToDB.getPassword());
+                connection = DriverManager.getConnection(exConnectToDB.getUrl(),
+                        exConnectToDB.getUsername(), exConnectToDB.getPassword());
                 System.out.println("Соединение установлено");
             } catch (SQLException e){
-                System.out.println("Can't get connection to database:" + commandConnectToDB.getDbname());
+                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
                 e.printStackTrace();
-                connection = null;
+                try {
+                    connection.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
         return connection;
     }
-
 }
 

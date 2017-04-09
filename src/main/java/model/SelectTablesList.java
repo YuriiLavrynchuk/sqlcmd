@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
-public class SelectAllTableClass {
+public class SelectTablesList {
     private Statement statement;
-    public SelectAllTableClass(Statement st) {
+    public SelectTablesList(Statement st) {
          this.statement = st;
     }
 
@@ -22,10 +22,16 @@ public class SelectAllTableClass {
             tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e){
+            System.out.println("ResultSet ERROR");
             e.printStackTrace();
-            return new String[0];
         }
-//        select.close();
-//        statement.close();
+        try {
+            statement.close();
+            System.out.println("SelectTablesList statement closed");
+        } catch (SQLException e) {
+            System.out.println("SelectTablesList statement.close() ERROR");
+            e.printStackTrace();
+        }
+        return new String[0];
     }
 }

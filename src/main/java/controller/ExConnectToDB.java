@@ -2,21 +2,20 @@ package controller;
 
 import exeption.InvalidException;
 import model.DBconnection;
+import model.Select;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Created by Yuriy Lavrinchuk on 03.04.2017.
- */
-public class CommandConnectToDB implements Command {
+public class ExConnectToDB implements Command {
 
     private String url = "jdbc:postgresql://localhost:5432/";
     private String dbname;
     private String username;
     private String password;
+    private Connection connect;
 
-    public CommandConnectToDB(String db, String user, String pass) {
+    public ExConnectToDB(String db, String user, String pass) {
         this.dbname = db;
         this.username = user;
         this.password = pass;
@@ -30,7 +29,7 @@ public class CommandConnectToDB implements Command {
 
     @Override
     public Connection execute() throws InvalidException {
-        Connection connect = new DBconnection(CommandConnectToDB.this).dbConnection();
+        connect = new DBconnection(ExConnectToDB.this).dbConnection();
             return connect;
-        }
+    }
 }

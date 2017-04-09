@@ -1,4 +1,4 @@
-import controller.CommandConnectToDB;
+import controller.ExConnectToDB;
 import exeption.InvalidException;
 import model.*;
 import org.junit.Before;
@@ -10,49 +10,51 @@ import java.util.Arrays;
 
 import static junit.framework.TestCase.assertEquals;
 
-/**
- * Created by Admin on 06.04.2017.
- */
 public class DBtest {
     Connection connectToDB;
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
-         connectToDB = new CommandConnectToDB("postgres", "postgres", "1234").execute();
+         connectToDB = new ExConnectToDB("postgres", "postgres", "1234").execute();
     }
 
 //    @Test
 //    public void testSelect() throws SQLException {
 //        Statement st = connectToDB.createStatement();
-//        SelectClass select = new SelectClass(st);
+//        Select select = new Select(st);
+//        st.close();
 //        connectToDB.close();
 //    }
-
+//
 //    @Test
 //    public void testDelete() throws SQLException {
 //        Statement st = connectToDB.createStatement();
-//        DeleteClass del = new DeleteClass(st);
+//        Delete del = new Delete(st);
+//        st.close();
 //        connectToDB.close();
 //    }
-
+//
 //    @Test
 //    public void testUpdate() throws SQLException {
 //        Statement st = connectToDB.createStatement();
-//        UpdateClass up = new UpdateClass(st);
+//        Update up = new Update(st);
+//        st.close();
 //        connectToDB.close();
 //    }
-
+//
 //    @Test
 //    public void testInsert() throws SQLException {
 //        Statement st = connectToDB.createStatement();
-//        InsertClass insert = new InsertClass(st);
+//        Insert insert = new Insert(st);
+//        st.close();
 //        connectToDB.close();
 //    }
 
     @Test
     public void testSelectAllTables() throws SQLException {
         Statement st = connectToDB.createStatement();
-        String[] selectall = new SelectAllTableClass(st).SelectAllTable();
+        String[] selectall = new SelectTablesList(st).SelectAllTable();
         assertEquals("[users]", Arrays.toString(selectall));
+        st.close();
         connectToDB.close();
     }
 }
