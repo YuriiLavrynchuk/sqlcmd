@@ -2,13 +2,10 @@ package controller;
 
 import exeption.InvalidException;
 import model.DBconnection;
-import model.Select;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
-public class ExConnectToDB implements Command {
-
+public class ExConnectToDB  implements ExecuteConnect{
     private String url = "jdbc:postgresql://localhost:5432/";
     private String dbname;
     private String username;
@@ -22,14 +19,29 @@ public class ExConnectToDB implements Command {
         this.url = url + db;
     }
 
-    public String getUrl() {return url; }
-    public String getDbname() {return dbname;}
-    public String getUsername() {return username;}
-    public String getPassword() {return password;}
-
     @Override
-    public Connection execute() throws InvalidException {
-        connect = new DBconnection(ExConnectToDB.this).dbConnection();
-            return connect;
+    public void connect() {
+        try {
+            connect = new DBconnection(ExConnectToDB.this).dbConnection();
+        } catch (InvalidException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getUrl() {
+        return url;
+    }
+    public String getDbname() {
+        return dbname;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public Connection getConnect(){
+        connect();
+        return connect;
     }
 }

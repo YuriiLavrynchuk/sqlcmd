@@ -1,6 +1,5 @@
 package controller;
 
-import exeption.InvalidException;
 import model.Delete;
 
 import java.sql.Connection;
@@ -14,12 +13,7 @@ public class ExDelete extends ExConnectToDB {
 
     public ExDelete(String db, String user, String pass) {
         super(db, user, pass);
-        try {
-            connection = super.execute();
-        } catch (InvalidException e) {
-            System.out.println("ExDelete create connection ERROR");
-            e.printStackTrace();
-        }
+        connection = super.getConnect();
     }
 
     public ExDelete delete(){

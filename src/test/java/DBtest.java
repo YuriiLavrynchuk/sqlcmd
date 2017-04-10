@@ -14,7 +14,7 @@ public class DBtest {
     Connection connectToDB;
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
-         connectToDB = new ExConnectToDB("postgres", "postgres", "1234").execute();
+         new ExConnectToDB("postgres", "postgres", "1234").connect();
     }
 
 //    @Test

@@ -1,6 +1,5 @@
 package controller;
 
-import exeption.InvalidException;
 import model.Update;
 
 import java.sql.Connection;
@@ -14,12 +13,7 @@ public class ExUpdate extends ExConnectToDB  {
 
     public ExUpdate(String db, String user, String pass) {
         super(db, user, pass);
-        try {
-            connection = super.execute();
-        } catch (InvalidException e) {
-            System.out.println("ExUpdate create connection ERROR");
-            e.printStackTrace();
-        }
+        connection = super.getConnect();
     }
 
     public ExUpdate update(){

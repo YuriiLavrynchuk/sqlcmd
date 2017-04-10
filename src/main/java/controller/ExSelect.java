@@ -1,10 +1,11 @@
 package controller;
 
-import exeption.InvalidException;
+import model.DataSet;
 import model.Select;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 /**
  * Created by Admin on 08.04.2017.
@@ -14,17 +15,14 @@ public class ExSelect extends ExConnectToDB {
 
     public ExSelect(String db, String user, String pass) {
         super(db, user, pass);
-        try {
-            connection = super.execute();
-        } catch (InvalidException e) {
-            System.out.println("ExSelect create connection ERROR");
-            e.printStackTrace();
-        }
+        connection = super.getConnect();
     }
 
     public ExSelect select(){
         try {
-            Select select = new Select(connection.createStatement());
+            DataSet[] sel = new Select(connection.createStatement()).select("users");
+            System.out.println(Arrays.toString(sel));
+
         } catch (SQLException e) {
             System.out.println("ExSelect select ERROR");
             e.printStackTrace();
