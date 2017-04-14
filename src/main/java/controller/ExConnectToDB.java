@@ -1,9 +1,9 @@
 package controller;
 
-import exeption.InvalidException;
 import model.DBconnection;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class ExConnectToDB  implements ExecuteConnect{
     private String url = "jdbc:postgresql://localhost:5432/";
@@ -23,8 +23,13 @@ public class ExConnectToDB  implements ExecuteConnect{
     public void connect() {
         try {
             connect = new DBconnection(ExConnectToDB.this).dbConnection();
-        } catch (InvalidException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            try {
+                connect.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
