@@ -38,9 +38,10 @@ public class DBconnection {
             try {
                 connection = DriverManager.getConnection(exConnectToDB.getUrl(),
                         exConnectToDB.getUsername(), exConnectToDB.getPassword());
-//                System.out.println("Connection success!");
+                System.out.println("Connection success!");
             } catch (SQLException e){
                 System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
+                throw new RuntimeException();
 //                e.printStackTrace();
 //                //TODO стоит ли закрывать здесь соединение?
 //                try {

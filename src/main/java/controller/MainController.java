@@ -17,23 +17,26 @@ public class MainController {
     }
 
     public MainController start(){
-        connectToDB();
 
-        while(true){
+        while(!connectToDB()) {
+            connectToDB();
+        }
+
+        if(connectToDB()) {
             dataInOut.outPut("Please insert command or help:");
             String command = dataInOut.inPut();
-
             if(command.equals("select")){
                 dataInOut.outPut("Insert tablename:");
                 String message = dataInOut.inPut();
                 ExSelect select = new ExSelect(connection, message).select();
             } else if (command.equals("help")){
-                doHelp();   
+                doHelp();
             } else if (command.equals("exit")){
                 doExit();
                 System.exit(0);
             }
         }
+        return null;
     }
 
     private void doHelp() {
@@ -60,27 +63,26 @@ public class MainController {
         dataInOut.outPut("Good by!");
         try {
             connection.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             printError(e);
         }
     }
 
-    private void connectToDB() {
+    private boolean connectToDB() {
         dataInOut.outPut("Hello!");
-        for (int i = 0; i < 10 ; i++) {
-            try{
-                dataInOut.outPut("Please insert dbname:");
-                String dbname = dataInOut.inPut();
-                dataInOut.outPut("Please insert username:");
-                String username = dataInOut.inPut();
-                dataInOut.outPut("Please insert password:");
-                String password = dataInOut.inPut();
-                connection = new ExConnectToDB(dbname, username, password).getConnect();
-                break;
-            }catch(Exception e){
-                printError(e);
-            }
-        }
-        dataInOut.outPut("Connection success!");
+                try {
+                    dataInOut.outPut("Please insert dbname:");
+                    String dbname = dataInOut.inPut();
+                    dataInOut.outPut("Please insert username:");
+                    String username = dataInOut.inPut();
+                    dataInOut.outPut("Please insert password:");
+                    String password = dataInOut.inPut();
+                    connection = new ExConnectToDB(dbname, username, password).getConnect();
+                }catch (Exception e){
+                    e.getMessage();
+                    return false;
+                }
+        return true;
+//        dataInOut.outPut("Connection success!");
     }
 }
