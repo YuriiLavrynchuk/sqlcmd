@@ -2,6 +2,7 @@ package model;
 
 import controller.ExConnectToDB;
 import exeption.InvalidException;
+import org.postgresql.util.PSQLException;
 import view.DataInOut;
 
 import java.sql.*;
@@ -27,7 +28,7 @@ public class DBconnection {
         if (!checkParametrs())
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
                     + exConnectToDB.getDbname() + "username: " + exConnectToDB.getUsername()
-                    + " password: " + exConnectToDB.getPassword());
+                    + " password: " + exConnectToDB.getPassword(), new RuntimeException());
         else {
             try {
                 Class.forName("org.postgresql.Driver");
@@ -40,8 +41,8 @@ public class DBconnection {
                         exConnectToDB.getUsername(), exConnectToDB.getPassword());
                 System.out.println("Connection success!");
             } catch (SQLException e){
-                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
-                throw new RuntimeException();
+//                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
+                throw new InvalidException("Can't get connection to database:" + exConnectToDB.getDbname(), e);
 //                e.printStackTrace();
 //                //TODO стоит ли закрывать здесь соединение?
 //                try {

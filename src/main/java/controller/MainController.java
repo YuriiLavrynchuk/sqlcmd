@@ -12,26 +12,29 @@ public class MainController {
     private DataInOut dataInOut;
     private Connection connection;
 
-    public MainController(DataInOut dataInOut){
+    public MainController(DataInOut dataInOut) {
         this.dataInOut = dataInOut;
     }
 
-    public MainController start(){
+    public MainController start() {
 
-        while(!connectToDB()) {
+        while (!connectToDB()){
             connectToDB();
+            if(connection != null){
+                break;
+            }
         }
 
-        if(connectToDB()) {
+        if (connection != null) {
             dataInOut.outPut("Please insert command or help:");
             String command = dataInOut.inPut();
-            if(command.equals("select")){
+            if (command.equals("select")) {
                 dataInOut.outPut("Insert tablename:");
                 String message = dataInOut.inPut();
                 ExSelect select = new ExSelect(connection, message).select();
-            } else if (command.equals("help")){
+            } else if (command.equals("help")) {
                 doHelp();
-            } else if (command.equals("exit")){
+            } else if (command.equals("exit")) {
                 doExit();
                 System.exit(0);
             }
@@ -52,7 +55,7 @@ public class MainController {
     private void printError(Exception exeption) {
         String eMessage = /*e.getClass().getSimpleName() + ": " + */ exeption.getMessage();
         Throwable cause = exeption.getCause();
-        if(cause != null){
+        if (cause != null) {
             eMessage += " " + /*cause.getClass().getSimpleName() + ": " + */ cause.getMessage();
         }
         dataInOut.outPut("FAIL! Cause: " + eMessage);
@@ -69,20 +72,26 @@ public class MainController {
     }
 
     private boolean connectToDB() {
+
         dataInOut.outPut("Hello!");
-                try {
-                    dataInOut.outPut("Please insert dbname:");
-                    String dbname = dataInOut.inPut();
-                    dataInOut.outPut("Please insert username:");
-                    String username = dataInOut.inPut();
-                    dataInOut.outPut("Please insert password:");
-                    String password = dataInOut.inPut();
-                    connection = new ExConnectToDB(dbname, username, password).getConnect();
-                }catch (Exception e){
-                    e.getMessage();
-                    return false;
-                }
-        return true;
-//        dataInOut.outPut("Connection success!");
+            dataInOut.outPut("Please insert dbname:");
+            String dbname = dataInOut.inPut();
+            dataInOut.outPut("Please insert username:");
+            String username = dataInOut.inPut();
+            dataInOut.outPut("Please insert password:");
+            String password = dataInOut.inPut();
+            try {
+                connection = new ExConnectToDB(dbname, username, password).getConnect();
+            }catch (Exception e){
+                connection = null;
+//                e.printStackTrace();
+                return false;
+            }
+            if(connection != null){
+                return true;
+            }
+            else{
+                return false;
+            }
     }
 }
