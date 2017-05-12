@@ -2,10 +2,13 @@ package model;
 
 import controller.ExConnectToDB;
 import exeption.InvalidException;
-import org.postgresql.util.PSQLException;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import view.DataInOut;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBconnection {
     private ExConnectToDB exConnectToDB;
@@ -37,13 +40,15 @@ public class DBconnection {
                 e.printStackTrace();
             }
             try {
+                LogManager.getRootLogger().setLevel(Level.OFF);
                 connection = DriverManager.getConnection(exConnectToDB.getUrl(),
                         exConnectToDB.getUsername(), exConnectToDB.getPassword());
+
                 System.out.println("Connection success!");
             } catch (SQLException e){
 //                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
-                throw new InvalidException("Can't get connection to database:" + exConnectToDB.getDbname(), e);
 //                e.printStackTrace();
+                throw new InvalidException("Can't get connection to database:" + exConnectToDB.getDbname(), e);
 //                //TODO стоит ли закрывать здесь соединение?
 //                try {
 //                    connection.close();

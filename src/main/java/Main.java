@@ -1,5 +1,3 @@
-import controller.ExConnectToDB;
-import controller.ExSelect;
 import controller.MainController;
 import exeption.InvalidException;
 import view.Console;

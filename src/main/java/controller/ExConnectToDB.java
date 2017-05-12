@@ -3,7 +3,6 @@ package controller;
 import model.DBconnection;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class ExConnectToDB  implements ExecuteConnect{
     private String url = "jdbc:postgresql://localhost:5432/";
@@ -16,7 +15,7 @@ public class ExConnectToDB  implements ExecuteConnect{
         this.dbname = db;
         this.username = user;
         this.password = pass;
-        this.url = url + db;
+        this.url = url + db + "?loggerLevel=OFF";
     }
 
     @Override

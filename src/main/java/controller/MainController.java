@@ -3,7 +3,6 @@ package controller;
 import view.DataInOut;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * Created by Admin on 11.04.2017.
@@ -26,17 +25,20 @@ public class MainController {
         }
 
         if (connection != null) {
-            dataInOut.outPut("Please insert command or help:");
-            String command = dataInOut.inPut();
-            if (command.equals("select")) {
-                dataInOut.outPut("Insert tablename:");
-                String message = dataInOut.inPut();
-                ExSelect select = new ExSelect(connection, message).select();
-            } else if (command.equals("help")) {
-                doHelp();
-            } else if (command.equals("exit")) {
-                doExit();
-                System.exit(0);
+//            TODO придумать выход из цикла
+            while(true){
+                dataInOut.outPut("Please insert command or help:");
+                String command = dataInOut.inPut();
+                if (command.equals("select")) {
+                    dataInOut.outPut("Insert tablename:");
+                    String message = dataInOut.inPut();
+                    ExSelect select = new ExSelect(connection, message).select();
+                } else if (command.equals("help")) {
+                    doHelp();
+                } else if (command.equals("exit")) {
+                    doExit();
+                    System.exit(0);
+                }
             }
         }
         return null;
@@ -44,12 +46,9 @@ public class MainController {
 
     private void doHelp() {
         dataInOut.outPut("Exist command:");
-        dataInOut.outPut("select");
-        dataInOut.outPut("      query from table");
-        dataInOut.outPut("tablelist");
-        dataInOut.outPut("      getting names all tables");
-        dataInOut.outPut("exit");
-        dataInOut.outPut("      exit from aplication");
+        dataInOut.outPut("select    - query from table");
+        dataInOut.outPut("tablelist - getting names all tables");
+        dataInOut.outPut("exit      - exit from aplication");
     }
 
     private void printError(Exception exeption) {
@@ -63,8 +62,8 @@ public class MainController {
     }
 
     private void doExit() {
-        dataInOut.outPut("Good by!");
         try {
+            dataInOut.outPut("Good by!");
             connection.close();
         } catch (Exception e) {
             printError(e);
