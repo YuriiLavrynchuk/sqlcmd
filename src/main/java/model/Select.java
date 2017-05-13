@@ -1,5 +1,7 @@
 package model;
 
+import exeption.InvalidException;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -29,7 +31,7 @@ public class Select {
             rs.close();
             return result;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return new DataSet[0];
         }
     }

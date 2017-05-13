@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DataSet;
 import model.Select;
 
@@ -14,20 +15,20 @@ public class ExSelect {
     private Connection connection;
     private String select;
 
-    public ExSelect(Connection connection, String select) {
+    public ExSelect(Connection connection, String select){
         this.connection = connection;
         this.select = select;
     }
 
     public ExSelect select(){
+        DataSet[] sel = new DataSet[0];
         try {
-            DataSet[] sel = new Select(connection.createStatement()).select(select);
-            System.out.println(Arrays.toString(sel));
-
-        } catch (SQLException e) {
-            System.out.println("ExSelect ERROR");
+            sel = new Select(connection.createStatement()).select(select);
+        } catch (Exception e) {
+//            connection.close();
             e.printStackTrace();
         }
+        System.out.println(Arrays.toString(sel));
         return null;
     }
 }

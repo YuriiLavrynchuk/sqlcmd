@@ -2,8 +2,6 @@ package model;
 
 import controller.ExConnectToDB;
 import exeption.InvalidException;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import view.DataInOut;
 
 import java.sql.Connection;
@@ -40,7 +38,7 @@ public class DBconnection {
                 e.printStackTrace();
             }
             try {
-                LogManager.getRootLogger().setLevel(Level.OFF);
+
                 connection = DriverManager.getConnection(exConnectToDB.getUrl(),
                         exConnectToDB.getUsername(), exConnectToDB.getPassword());
 
