@@ -31,6 +31,8 @@ public class MainController {
                 String command = dataInOut.inPut();
                 if (command.equals("select")) {
                     doSelect();
+                } else if(command.equals("delete")){
+                    doDelete();
                 } else if(command.equals("insert")){
                     doInsert();
                 } else if(command.equals("update")) {
@@ -46,6 +48,12 @@ public class MainController {
             }
         }
         return null;
+    }
+
+    private void doDelete() {
+        dataInOut.outPut("Enter Delete query:");
+        String deletemsg = dataInOut.inPut();
+        ExDelete delete = new ExDelete(connection, deletemsg).delete();
     }
 
     private void doInsert() {
@@ -81,6 +89,7 @@ public class MainController {
         dataInOut.outPut("tablelist - getting names all tables");
         dataInOut.outPut("update    - update rows in the table");
         dataInOut.outPut("insert    - insert new row in the table");
+        dataInOut.outPut("delete    - delete row from table");
         dataInOut.outPut("exit      - exit from application");
     }
 
