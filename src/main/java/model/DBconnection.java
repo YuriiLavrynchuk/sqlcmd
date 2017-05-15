@@ -18,7 +18,7 @@ public class DBconnection {
     }
 
     private boolean checkParametrs(){
-        //TODO добавить проверки на ошибочные параметры
+
             if(exConnectToDB.getDbname() == null ||
                     exConnectToDB.getUsername() == null ||
                     exConnectToDB.getPassword() == null) return false;
@@ -38,7 +38,6 @@ public class DBconnection {
                 e.printStackTrace();
             }
             try {
-
                 connection = DriverManager.getConnection(exConnectToDB.getUrl(),
                         exConnectToDB.getUsername(), exConnectToDB.getPassword());
 
@@ -47,12 +46,7 @@ public class DBconnection {
 //                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
 //                e.printStackTrace();
                 throw new InvalidException("Can't get connection to database:" + exConnectToDB.getDbname(), e);
-//                //TODO стоит ли закрывать здесь соединение?
-//                try {
-//                    connection.close();
-//                } catch (SQLException e1) {
-//                    e1.printStackTrace();
-//                }
+//                TODO стоит ли закрывать здесь соединение?
             }
         }
             return connection;

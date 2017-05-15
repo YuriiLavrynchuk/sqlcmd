@@ -5,11 +5,8 @@ package exeption;
  */
 public class InvalidException extends Exception {
 
-//    private DBconnection dBconnection;
-
     public InvalidException(String message, Exception e) {
         super(message);
-//        this.dBconnection = dBconnection;
         System.out.println(message + " " + e.getMessage());
     }
 

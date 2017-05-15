@@ -10,7 +10,7 @@ public class Update {
             System.out.println("Row updated");
         } catch (SQLException e) {
             System.out.println("Update ERROR");
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 }

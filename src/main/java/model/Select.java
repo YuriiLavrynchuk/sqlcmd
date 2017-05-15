@@ -1,7 +1,5 @@
 package model;
 
-import exeption.InvalidException;
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -45,7 +43,7 @@ public class Select {
             tableSize = selectCount.getInt(1);
             selectCount.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return tableSize;
     }

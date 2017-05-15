@@ -23,14 +23,7 @@ public class SelectTablesList {
             return tables;
         } catch (SQLException e){
             System.out.println("ResultSet ERROR");
-            e.printStackTrace();
-        }
-        try {
-            statement.close();
-            System.out.println("SelectTablesList statement closed");
-        } catch (SQLException e) {
-            System.out.println("SelectTablesList statement.close() ERROR");
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return new String[0];
     }

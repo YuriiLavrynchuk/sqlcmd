@@ -10,7 +10,7 @@ public class Insert {
             System.out.println("Row inserted");
         } catch (SQLException e) {
             System.out.println("Insert ERROR");
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 }

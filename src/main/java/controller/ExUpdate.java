@@ -5,9 +5,6 @@ import model.Update;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Created by Admin on 08.04.2017.
- */
 public class ExUpdate {
     private Connection connection;
     private String updatemsg;
@@ -22,7 +19,7 @@ public class ExUpdate {
             Update update = new Update(connection.createStatement(), updatemsg);
         } catch (SQLException e) {
             System.out.println("ExUpdate update ERROR");
-            e.printStackTrace();
+//            e.printStackTrace();
         }
             return null;
     }

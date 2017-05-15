@@ -23,7 +23,7 @@ public class ExConnectToDB  implements ExecuteConnect{
         try {
             connect = new DBconnection(ExConnectToDB.this).dbConnection();
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 

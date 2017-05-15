@@ -2,11 +2,6 @@ package model;
 
 import java.util.Arrays;
 
-
-/**
- * Created by Admin on 09.04.2017.
- */
-
 public class DataSet {
     static class Data {
         private String name;

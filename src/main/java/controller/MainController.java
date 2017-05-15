@@ -1,17 +1,12 @@
 package controller;
 
-import exeption.InvalidException;
 import model.SelectTablesList;
 import view.DataInOut;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by Admin on 11.04.2017.
- */
 public class MainController {
     private DataInOut dataInOut;
     private Connection connection;
