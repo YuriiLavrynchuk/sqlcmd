@@ -12,7 +12,7 @@ public class Select {
         this.statement = statement;
     }
 
-    public DataSet[] select(String tableName) {
+    public DataSet[] select(String tableName) throws SQLException {
         try {
             int size = getTableSize(tableName);
             ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
@@ -29,8 +29,10 @@ public class Select {
             rs.close();
             return result;
         } catch (SQLException e) {
-//            e.printStackTrace();
+            System.out.println("Select ERROR");
             return new DataSet[0];
+        } finally {
+            statement.close();
         }
     }
 

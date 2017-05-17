@@ -16,14 +16,12 @@ public class MainController {
     }
 
     public MainController start(){
-
         while (!connectToDB()){
             connectToDB();
             if(connection != null){
                 break;
             }
         }
-
         if (connection != null) {
 //            TODO придумать выход из цикла
             while(true) {
@@ -79,7 +77,7 @@ public class MainController {
             String[] tablesList = new SelectTablesList(connection.createStatement()).SelectAllTable();
             System.out.println(Arrays.toString(tablesList));
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -122,8 +120,8 @@ public class MainController {
             dataInOut.outPut("Please insert password:");
             String password = dataInOut.inPut();
             try {
-                connection = new ExConnectToDB(dbname, username, password).getConnect();
-            }catch (Exception e){
+                connection = new ExConnectToDB(dbname, username, password).getConnection();
+            } catch (Exception e){
                 connection = null;
 //                e.printStackTrace();
                 return false;
@@ -131,7 +129,7 @@ public class MainController {
             if(connection != null){
                 return true;
             }
-            else{
+            else {
                 return false;
             }
     }
