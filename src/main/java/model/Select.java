@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Select {
-    private Statement statement;
+    private final Statement statement;
 
     public Select(Statement statement){
         this.statement = statement;
@@ -35,10 +35,9 @@ public class Select {
     }
 
     private int getTableSize(String tableName){
-        ResultSet selectCount = null;
         int tableSize = 0;
         try {
-            selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
+            ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
             selectCount.next();
             tableSize = selectCount.getInt(1);
             selectCount.close();

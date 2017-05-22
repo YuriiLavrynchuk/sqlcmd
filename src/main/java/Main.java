@@ -11,6 +11,6 @@ public class Main {
 //        ExSelect select = new ExSelect(connect.getDbname(), connect.getUsername(), connect.getPassword()).select();
 
         DataInOut dataInOut = new Console();
-        MainController controller = new MainController(dataInOut).start();
+        new MainController(dataInOut).start();
     }
 }

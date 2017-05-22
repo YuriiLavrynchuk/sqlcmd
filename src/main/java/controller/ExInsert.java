@@ -5,22 +5,21 @@ import model.Insert;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ExInsert{
-    private Connection connection;
-    private String insertmsg;
+class ExInsert{
+    private final Connection connection;
+    private final String insertmsg;
 
     public ExInsert(Connection connection, String insertmsg) {
         this.connection = connection;
         this.insertmsg = insertmsg;
     }
 
-    public ExInsert insert(){
+    public void insert(){
         try {
-            Insert insert = new Insert(connection.createStatement(), insertmsg);
+            new Insert(connection.createStatement(), insertmsg);
         } catch (SQLException e) {
             System.out.println("ExInsert insert ERROR");
 //            e.printStackTrace();
         }
-        return null;
     }
 }

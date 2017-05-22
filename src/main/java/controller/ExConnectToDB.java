@@ -6,9 +6,9 @@ import java.sql.Connection;
 
 public class ExConnectToDB  implements ExecuteConnect{
     private String url = "jdbc:postgresql://localhost:5432/";
-    private String dbname;
-    private String username;
-    private String password;
+    private final String dbname;
+    private final String username;
+    private final String password;
     private Connection connect;
 
     public ExConnectToDB(String db, String user, String pass) {

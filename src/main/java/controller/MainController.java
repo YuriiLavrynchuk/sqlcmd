@@ -8,14 +8,14 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class MainController {
-    private DataInOut dataInOut;
+    private final DataInOut dataInOut;
     private Connection connection;
 
     public MainController(DataInOut dataInOut) {
         this.dataInOut = dataInOut;
     }
 
-    public MainController start(){
+    public void start(){
 
         while (!connectToDB()){
             connectToDB();
@@ -47,31 +47,30 @@ public class MainController {
                 }
             }
         }
-        return null;
     }
 
     private void doDelete() {
         dataInOut.outPut("Enter Delete query:");
         String deletemsg = dataInOut.inPut();
-        ExDelete delete = new ExDelete(connection, deletemsg).delete();
+        new ExDelete(connection, deletemsg).delete();
     }
 
     private void doInsert() {
         dataInOut.outPut("Enter Insert query:");
         String insertmsg = dataInOut.inPut();
-        ExInsert insert = new ExInsert(connection, insertmsg).insert();
+        new ExInsert(connection, insertmsg).insert();
     }
 
     private void doUpdate() {
         dataInOut.outPut("Enter Update query:");
         String updatemsg = dataInOut.inPut();
-        ExUpdate update = new ExUpdate(connection, updatemsg).update();
+        new ExUpdate(connection, updatemsg).update();
     }
 
     private void doSelect(){
          dataInOut.outPut("Enter tablename:");
          String selectmsg = dataInOut.inPut();
-         ExSelect select = new ExSelect(connection, selectmsg).select();
+         new ExSelect(connection, selectmsg).select();
     }
 
     private void doTableList() {
@@ -128,11 +127,6 @@ public class MainController {
 //                e.printStackTrace();
                 return false;
             }
-            if(connection != null){
-                return true;
-            }
-            else{
-                return false;
-            }
+        return connection != null;
     }
 }

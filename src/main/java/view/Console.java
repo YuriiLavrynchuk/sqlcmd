@@ -2,9 +2,6 @@ package view;
 
 import java.util.Scanner;
 
-/**
- * Created by yuriy.lavrinchuk on 10.04.2017.
- */
 public class Console implements DataInOut {
     @Override
     public void outPut(String message) {

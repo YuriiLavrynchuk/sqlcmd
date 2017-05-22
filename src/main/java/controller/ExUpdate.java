@@ -5,22 +5,21 @@ import model.Update;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ExUpdate {
-    private Connection connection;
-    private String updatemsg;
+class ExUpdate {
+    private final Connection connection;
+    private final String updatemsg;
 
     public ExUpdate(Connection connection, String updatemsg) {
         this.connection = connection;
         this.updatemsg = updatemsg;
     }
 
-    public ExUpdate update(){
+    public void update(){
         try {
-            Update update = new Update(connection.createStatement(), updatemsg);
+            new Update(connection.createStatement(), updatemsg);
         } catch (SQLException e) {
             System.out.println("ExUpdate update ERROR");
 //            e.printStackTrace();
         }
-            return null;
     }
 }
