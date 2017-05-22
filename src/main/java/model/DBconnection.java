@@ -32,16 +32,14 @@ public class DBconnection {
                 Class.forName("org.postgresql.Driver");
             } catch (ClassNotFoundException e) {
                 System.out.println("You should add JDBC jar to project.");
-                e.printStackTrace();
+//                e.printStackTrace();
             }
             try {
                 connection = DriverManager.getConnection(exConnectToDB.getUrl(),
                         exConnectToDB.getUsername(), exConnectToDB.getPassword());
-
                 System.out.println("Connection success!");
             } catch (SQLException e){
 //                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
-//                e.printStackTrace();
                 throw new InvalidException("Can't get connection to database:" + exConnectToDB.getDbname(), e);
 //                TODO стоит ли закрывать здесь соединение?
             }

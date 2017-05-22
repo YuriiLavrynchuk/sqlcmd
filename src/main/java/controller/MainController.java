@@ -18,7 +18,6 @@ public class MainController {
     public void start(){
 
         while (!connectToDB()){
-            connectToDB();
             if(connection != null){
                 break;
             }
@@ -75,7 +74,7 @@ public class MainController {
 
     private void doTableList() {
         try {
-            String[] tablesList = new SelectTablesList(connection.createStatement()).SelectAllTable();
+            String[] tablesList = new SelectTablesList(connection.createStatement()).selectAllTable();
             System.out.println(Arrays.toString(tablesList));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +120,7 @@ public class MainController {
             dataInOut.outPut("Please insert password:");
             String password = dataInOut.inPut();
             try {
-                connection = new ExConnectToDB(dbname, username, password).getConnect();
+                connection = new ExConnectToDB(dbname, username, password).getConnection();
             }catch (Exception e){
                 connection = null;
 //                e.printStackTrace();

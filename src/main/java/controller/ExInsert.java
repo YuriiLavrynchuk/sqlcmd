@@ -4,6 +4,7 @@ import model.Insert;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 class ExInsert{
     private final Connection connection;
@@ -15,8 +16,8 @@ class ExInsert{
     }
 
     public void insert(){
-        try {
-            new Insert(connection.createStatement(), insertmsg);
+        try (Statement statement = connection.createStatement()){
+            new Insert(statement, insertmsg);
         } catch (SQLException e) {
             System.out.println("ExInsert insert ERROR");
 //            e.printStackTrace();

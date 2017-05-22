@@ -4,6 +4,7 @@ import model.Delete;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 class ExDelete {
     private final Connection connection;
@@ -15,8 +16,8 @@ class ExDelete {
     }
 
     public void delete(){
-        try {
-            new Delete(connection.createStatement(), deletemsg);
+        try (Statement statement = connection.createStatement()){
+            new Delete(statement, deletemsg);
         } catch (SQLException e) {
             System.out.println("ExDelete delete ERROR");
 //            e.printStackTrace();
