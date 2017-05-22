@@ -31,22 +31,16 @@ public class MainController {
                 switch (command) {
                     case "select":
                         doSelect();
-                        break;
                     case "delete":
                         doDelete();
-                        break;
                     case "insert":
                         doInsert();
-                        break;
                     case "update":
                         doUpdate();
-                        break;
                     case "tablelist":
                         doTableList();
-                        break;
                     case "help":
                         doHelp();
-                        break;
                     case "exit":
                         doExit();
                         System.exit(0);
