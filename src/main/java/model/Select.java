@@ -12,11 +12,11 @@ public class Select {
         this.statement = statement;
     }
 
-    public DataSet[] select(String tableName) throws SQLException {
+    public DataSet[] select(String tableName) {
+        int size = getTableSize(tableName);
+        DataSet[] result = new DataSet[size];
         try (ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName)){
-            int size = getTableSize(tableName);
             ResultSetMetaData statement = rs.getMetaData();
-            DataSet[] result = new DataSet[size];
             int index = 0;
             while (rs.next()) {
                 DataSet dataSet = new DataSet();
