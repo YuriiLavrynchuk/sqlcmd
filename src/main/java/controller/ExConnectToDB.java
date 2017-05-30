@@ -39,7 +39,7 @@ public class ExConnectToDB  implements ExecuteConnect{
     public String getPassword() {
         return password;
     }
-    public Connection getConnect(){
+    public Connection getConnection(){
         connect();
         return connect;
     }

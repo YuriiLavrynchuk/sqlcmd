@@ -11,19 +11,25 @@ import java.util.Arrays;
 import static junit.framework.TestCase.assertEquals;
 
 public class DBtest {
-    Connection connectToDB;
+     private Connection connectToDB;
+     private Statement st;
+
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
-         new ExConnectToDB("postgres", "postgres", "1234").connect();
+        connectToDB = new ExConnectToDB("postgres", "postgres", "1234").getConnection();
+        st = connectToDB.createStatement();
     }
 
-//    @Test
-//    public void testSelect() throws SQLException {
-//        Statement st = connectToDB.createStatement();
-//        Select select = new Select(st);
-//        st.close();
-//        connectToDB.close();
-//    }
+    @Test
+    public void testSelect() throws SQLException {
+
+        DataSet[] select = new Select(st).select("users");
+        assertEquals(3, select.length);
+
+        st.close();
+        System.out.println("Connection close");
+        connectToDB.close();
+    }
 //
 //    @Test
 //    public void testDelete() throws SQLException {
@@ -51,10 +57,12 @@ public class DBtest {
 
     @Test
     public void testSelectAllTables() throws SQLException {
-        Statement st = connectToDB.createStatement();
+
         String[] selectall = new SelectTablesList(st).selectAllTable();
+        System.out.println(Arrays.toString(selectall));
         assertEquals("[users]", Arrays.toString(selectall));
         st.close();
+        System.out.println("Connection close");
         connectToDB.close();
     }
 }
