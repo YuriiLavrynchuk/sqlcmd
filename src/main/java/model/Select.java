@@ -6,18 +6,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Select {
-    private Statement statement;
+    private final Statement statement;
 
     public Select(Statement statement){
         this.statement = statement;
     }
 
-    public DataSet[] select(String tableName) throws SQLException {
-        try {
-            int size = getTableSize(tableName);
-            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+    public DataSet[] select(String tableName) {
+        int size = getTableSize(tableName);
+        DataSet[] result = new DataSet[size];
+        try (ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName)){
             ResultSetMetaData statement = rs.getMetaData();
-            DataSet[] result = new DataSet[size];
             int index = 0;
             while (rs.next()) {
                 DataSet dataSet = new DataSet();
@@ -26,24 +25,18 @@ public class Select {
                     dataSet.put(statement.getColumnName(i), rs.getObject(i));
                 }
             }
-            rs.close();
             return result;
         } catch (SQLException e) {
-            System.out.println("Select ERROR");
+//            e.printStackTrace();
             return new DataSet[0];
-        } finally {
-            statement.close();
         }
     }
 
     private int getTableSize(String tableName){
-        ResultSet selectCount = null;
         int tableSize = 0;
-        try {
-            selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
+        try (ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName)){
             selectCount.next();
             tableSize = selectCount.getInt(1);
-            selectCount.close();
         } catch (SQLException e) {
 //            e.printStackTrace();
         }

@@ -21,7 +21,7 @@ public class JDBCtest {
             System.out.println("Соединение установлено");
             //Для использования SQL запросов существуют 3 типа объектов:
             //1.Statement: используется для простых случаев без параметров
-            Statement statement = null;
+//            Statement statement = null;
 
 //            statement = model.createStatement();
             //Выполним запрос

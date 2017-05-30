@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class DataSet {
     static class Data {
-        private String name;
-        private Object value;
+        private final String name;
+        private final Object value;
 
         public Data(String name, Object value) {
             this.name = name;
@@ -21,14 +21,14 @@ public class DataSet {
         }
     }
 
-    public Data[] data = new Data[100]; // TODO remove magic number 100
-    public int index = 0;
+    private final Data[] data = new Data[100]; // TODO remove magic number 100
+    private int index = 0;
 
     public void put(String name, Object value) {
         data[index++] = new Data(name, value);
     }
 
-    public Object[] getValues() {
+    private Object[] getValues() {
         Object[] result = new Object[index];
         for (int i = 0; i < index; i++) {
             result[i] = data[i].getValue();
@@ -36,7 +36,7 @@ public class DataSet {
         return result;
     }
 
-    public String[] getNames() {
+    private String[] getNames() {
         String[] result = new String[index];
         for (int i = 0; i < index; i++) {
             result[i] = data[i].getName();

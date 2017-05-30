@@ -52,7 +52,7 @@ public class DBtest {
     @Test
     public void testSelectAllTables() throws SQLException {
         Statement st = connectToDB.createStatement();
-        String[] selectall = new SelectTablesList(st).SelectAllTable();
+        String[] selectall = new SelectTablesList(st).selectAllTable();
         assertEquals("[users]", Arrays.toString(selectall));
         st.close();
         connectToDB.close();

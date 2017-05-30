@@ -8,76 +8,77 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class MainController {
-    private DataInOut dataInOut;
+    private final DataInOut dataInOut;
     private Connection connection;
 
     public MainController(DataInOut dataInOut) {
         this.dataInOut = dataInOut;
     }
 
-    public MainController start(){
+    public void start(){
+
         while (!connectToDB()){
-            connectToDB();
             if(connection != null){
                 break;
             }
         }
+
         if (connection != null) {
 //            TODO придумать выход из цикла
             while(true) {
                 dataInOut.outPut("Please enter command or help:");
                 String command = dataInOut.inPut();
-                if (command.equals("select")) {
-                    doSelect();
-                } else if(command.equals("delete")){
-                    doDelete();
-                } else if(command.equals("insert")){
-                    doInsert();
-                } else if(command.equals("update")) {
-                    doUpdate();
-                } else if (command.equals("tablelist")) {
-                    doTableList();
-                } else if (command.equals("help")) {
-                    doHelp();
-                } else if (command.equals("exit")) {
-                    doExit();
-                    System.exit(0);
+                switch (command) {
+                    case "select":
+                        doSelect();
+                    case "delete":
+                        doDelete();
+                    case "insert":
+                        doInsert();
+                    case "update":
+                        doUpdate();
+                    case "tablelist":
+                        doTableList();
+                    case "help":
+                        doHelp();
+                    case "exit":
+                        doExit();
+                        System.exit(0);
                 }
             }
         }
-        return null;
     }
 
     private void doDelete() {
         dataInOut.outPut("Enter Delete query:");
         String deletemsg = dataInOut.inPut();
-        ExDelete delete = new ExDelete(connection, deletemsg).delete();
+        new ExDelete(connection, deletemsg).delete();
     }
 
     private void doInsert() {
         dataInOut.outPut("Enter Insert query:");
         String insertmsg = dataInOut.inPut();
-        ExInsert insert = new ExInsert(connection, insertmsg).insert();
+        new ExInsert(connection, insertmsg).insert();
     }
 
     private void doUpdate() {
         dataInOut.outPut("Enter Update query:");
         String updatemsg = dataInOut.inPut();
-        ExUpdate update = new ExUpdate(connection, updatemsg).update();
+        new ExUpdate(connection, updatemsg).update();
     }
 
     private void doSelect(){
          dataInOut.outPut("Enter tablename:");
          String selectmsg = dataInOut.inPut();
-         ExSelect select = new ExSelect(connection, selectmsg).select();
+         new ExSelect(connection, selectmsg).select();
     }
 
     private void doTableList() {
         try {
-            String[] tablesList = new SelectTablesList(connection.createStatement()).SelectAllTable();
+            String[] tablesList = new SelectTablesList(connection.createStatement()).selectAllTable();
             System.out.println(Arrays.toString(tablesList));
         } catch (SQLException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -121,16 +122,11 @@ public class MainController {
             String password = dataInOut.inPut();
             try {
                 connection = new ExConnectToDB(dbname, username, password).getConnection();
-            } catch (Exception e){
+            }catch (Exception e){
                 connection = null;
 //                e.printStackTrace();
                 return false;
             }
-            if(connection != null){
-                return true;
-            }
-            else {
-                return false;
-            }
+        return connection != null;
     }
 }

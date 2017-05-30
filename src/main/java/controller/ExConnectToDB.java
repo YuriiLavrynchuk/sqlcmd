@@ -9,7 +9,7 @@ public class ExConnectToDB  implements ExecuteConnect{
     private String dbname;
     private String username;
     private String password;
-    private Connection connection;
+    private Connection connect;
 
     public ExConnectToDB(String db, String user, String pass) {
         this.dbname = db;
@@ -21,7 +21,7 @@ public class ExConnectToDB  implements ExecuteConnect{
     @Override
     public void connect() {
         try {
-            connection = new DBconnection(ExConnectToDB.this).dbConnection();
+            connect = new DBconnection(ExConnectToDB.this).dbConnection();
         } catch (Exception e) {
 //            e.printStackTrace();
         }
@@ -39,8 +39,8 @@ public class ExConnectToDB  implements ExecuteConnect{
     public String getPassword() {
         return password;
     }
-    public Connection getConnection(){
+    public Connection getConnect(){
         connect();
-        return connection;
+        return connect;
     }
 }

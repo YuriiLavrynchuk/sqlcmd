@@ -5,25 +5,25 @@ import model.Select;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 
-public class ExSelect {
-    private Connection connection;
-    private String select;
+class ExSelect {
+    private final Connection connection;
+    private final String selectmsg;
 
-    public ExSelect(Connection connection, String select){
+    public ExSelect(Connection connection, String selectmsg){
         this.connection = connection;
-        this.select = select;
+        this.selectmsg = selectmsg;
     }
 
-    public ExSelect select(){
+    public void select(){
         DataSet[] select = new DataSet[0];
-        try {
-            select = new Select(connection.createStatement()).select(this.select);
+        try (Statement statement = connection.createStatement()){
+            select = new Select(statement).select(selectmsg);
         } catch (SQLException e) {
 //            e.printStackTrace();
         }
         System.out.println(Arrays.toString(select));
-        return null;
     }
 }
