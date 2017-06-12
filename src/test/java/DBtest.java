@@ -24,7 +24,7 @@ public class DBtest {
     public void testSelect() throws SQLException {
 
         DataSet[] select = new Select(st).select("users");
-        assertEquals(3, select.length);
+        assertEquals(4, select.length);
 
         st.close();
         System.out.println("Connection close");

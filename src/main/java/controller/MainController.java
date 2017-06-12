@@ -28,22 +28,21 @@ public class MainController {
             while(true) {
                 dataInOut.outPut("Please enter command or help:");
                 String command = dataInOut.inPut();
-                switch (command) {
-                    case "select":
-                        doSelect();
-                    case "delete":
-                        doDelete();
-                    case "insert":
-                        doInsert();
-                    case "update":
-                        doUpdate();
-                    case "tablelist":
-                        doTableList();
-                    case "help":
-                        doHelp();
-                    case "exit":
-                        doExit();
-                        System.exit(0);
+                if (command.equals("select")) {
+                    doSelect();
+                } else if(command.equals("delete")){
+                    doDelete();
+                } else if(command.equals("insert")){
+                    doInsert();
+                } else if(command.equals("update")) {
+                    doUpdate();
+                } else if (command.equals("tablelist")) {
+                    doTableList();
+                } else if (command.equals("help")) {
+                    doHelp();
+                } else if (command.equals("exit")) {
+                    doExit();
+                    System.exit(0);
                 }
             }
         }
