@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public class SelectTablesList {
     private final Statement statement;
+
     public SelectTablesList(Statement st) {
          this.statement = st;
     }

@@ -1,27 +1,25 @@
 package controller;
 
-import model.SelectTablesList;
 import view.DataInOut;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Arrays;
 
 public class MainController {
     private final DataInOut dataInOut;
+    private final Command[] commands;
     private Connection connection;
 
     public MainController(DataInOut dataInOut) {
         this.dataInOut = dataInOut;
+
+        this.commands = new Command[] {
+                new ExExit(dataInOut),
+                new ExHelp(dataInOut),
+                new ExTableList(dataInOut, connection)
+        };
     }
 
     public void start(){
-
-        while (!connectToDB()){
-            if(connection != null){
-                break;
-            }
-        }
 
         if (connection != null) {
 //            TODO придумать выход из цикла
@@ -36,13 +34,12 @@ public class MainController {
                     doInsert();
                 } else if(command.equals("update")) {
                     doUpdate();
-                } else if (command.equals("tablelist")) {
-                    doTableList();
-                } else if (command.equals("help")) {
-                    doHelp();
-                } else if (command.equals("exit")) {
-                    doExit();
-                    System.exit(0);
+                } else if (commands[2].checkCommand(command)) {
+                    commands[2].execute(command);
+                } else if (commands[1].checkCommand(command)) {
+                    commands[1].execute(command);
+                } else if (commands[0].checkCommand(command)) {
+                    commands[0].execute(command);
                 }
             }
         }
@@ -72,24 +69,9 @@ public class MainController {
          new ExSelect(connection, selectmsg).select();
     }
 
-    private void doTableList() {
-        try {
-            String[] tablesList = new SelectTablesList(connection.createStatement()).selectAllTable();
-            System.out.println(Arrays.toString(tablesList));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void doHelp() {
-        dataInOut.outPut("Exist command:");
-        dataInOut.outPut("select    - query from table");
-        dataInOut.outPut("tablelist - getting names all tables");
-        dataInOut.outPut("update    - update rows in the table");
-        dataInOut.outPut("insert    - insert new row in the table");
-        dataInOut.outPut("delete    - delete row from table");
-        dataInOut.outPut("exit      - exit from application");
-    }
+//    private void doTableList() {
+//        exTableList.doTableList();
+//    }
 
     private void printError(Exception exeption) {
         String eMessage = /*e.getClass().getSimpleName() + ": " + */ exeption.getMessage();
@@ -99,15 +81,6 @@ public class MainController {
         }
         dataInOut.outPut("FAIL! Cause: " + eMessage);
         dataInOut.outPut("Try again.");
-    }
-
-    private void doExit() {
-        try {
-            dataInOut.outPut("Good by!");
-            connection.close();
-        } catch (Exception e) {
-            printError(e);
-        }
     }
 
     private boolean connectToDB() {
