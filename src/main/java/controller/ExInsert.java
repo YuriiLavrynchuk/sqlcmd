@@ -1,21 +1,32 @@
 package controller;
 
 import model.Insert;
+import view.DataInOut;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class ExInsert{
-    private final Connection connection;
-    private final String insertmsg;
+class ExInsert implements Command{
 
-    public ExInsert(Connection connection, String insertmsg) {
-        this.connection = connection;
-        this.insertmsg = insertmsg;
+    private DataInOut dataInOut;
+
+    public ExInsert(DataInOut dataInOut) {
+        this.dataInOut = dataInOut;
     }
 
-    public void insert(){
+    @Override
+    public boolean checkCommand(String command) {
+        return command.equals("insert");
+    }
+
+    @Override
+    public void execute(String command) {}
+
+    @Override
+    public void execute(String command, Connection connection) {
+        dataInOut.outPut("Enter Insert query:");
+        String insertmsg = dataInOut.inPut();
         try (Statement statement = connection.createStatement()){
             new Insert(statement, insertmsg);
         } catch (SQLException e) {

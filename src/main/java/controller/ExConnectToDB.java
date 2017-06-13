@@ -4,7 +4,7 @@ import model.DBconnection;
 
 import java.sql.Connection;
 
-public class ExConnectToDB  implements ExecuteConnect{
+public class ExConnectToDB {
     private String url = "jdbc:postgresql://localhost:5432/";
     private String dbname;
     private String username;
@@ -18,7 +18,6 @@ public class ExConnectToDB  implements ExecuteConnect{
         this.url = url + db + "?loggerLevel=OFF";
     }
 
-    @Override
     public void connect() {
         try {
             connect = new DBconnection(ExConnectToDB.this).dbConnection();
