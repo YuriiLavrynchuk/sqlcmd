@@ -2,6 +2,8 @@ package controller;
 
 import view.DataInOut;
 
+import java.sql.Connection;
+
 public class ExHelp implements  Command{
 
     private DataInOut dataInOut;
@@ -25,5 +27,10 @@ public class ExHelp implements  Command{
         dataInOut.outPut("insert    - insert new row in the table");
         dataInOut.outPut("delete    - delete row from table");
         dataInOut.outPut("exit      - exit from application");
+    }
+
+    @Override
+    public void execute(String command, Connection connection) {
+
     }
 }

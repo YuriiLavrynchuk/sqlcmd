@@ -2,6 +2,8 @@ package controller;
 
 import view.DataInOut;
 
+import java.sql.Connection;
+
 /**
  * Created by yuriy.lavrinchuk on 12.06.2017.
  */
@@ -22,5 +24,10 @@ public class ExExit implements Command {
     public void execute(String command) {
         dataInOut.outPut("Good by!");
         System.exit(0);
+    }
+
+    @Override
+    public void execute(String command, Connection connection) {
+
     }
 }

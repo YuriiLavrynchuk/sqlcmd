@@ -10,20 +10,22 @@ import java.util.Arrays;
 public class ExTableList implements Command{
 
     private DataInOut dataInOut;
-    private Connection connection;
 
-    public ExTableList(DataInOut dataInOut, Connection connection) {
+    ExTableList(DataInOut dataInOut) {
         this.dataInOut = dataInOut;
-        this.connection = connection;
     }
 
     @Override
     public boolean checkCommand(String command) {
+
         return command.equals("tablelist");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command) {}
+
+    @Override
+    public void execute(String command, Connection connection) {
         try {
             String[] tablesList = new SelectTablesList(connection.createStatement()).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));

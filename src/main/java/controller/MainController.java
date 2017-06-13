@@ -15,11 +15,18 @@ public class MainController {
         this.commands = new Command[] {
                 new ExExit(dataInOut),
                 new ExHelp(dataInOut),
-                new ExTableList(dataInOut, connection)
+                new ExTableList(dataInOut),
+                new ExUpdate(dataInOut)
         };
     }
 
     public void start(){
+
+        while(!connectToDB()){
+            if(connection != null){
+                break;
+            }
+        }
 
         if (connection != null) {
 //            TODO придумать выход из цикла
@@ -32,10 +39,10 @@ public class MainController {
                     doDelete();
                 } else if(command.equals("insert")){
                     doInsert();
-                } else if(command.equals("update")) {
-                    doUpdate();
+                } else if(commands[3].checkCommand(command)) {
+                    commands[3].execute(command, connection);
                 } else if (commands[2].checkCommand(command)) {
-                    commands[2].execute(command);
+                    commands[2].execute(command, connection);
                 } else if (commands[1].checkCommand(command)) {
                     commands[1].execute(command);
                 } else if (commands[0].checkCommand(command)) {
@@ -57,21 +64,11 @@ public class MainController {
         new ExInsert(connection, insertmsg).insert();
     }
 
-    private void doUpdate() {
-        dataInOut.outPut("Enter Update query:");
-        String updatemsg = dataInOut.inPut();
-        new ExUpdate(connection, updatemsg).update();
-    }
-
     private void doSelect(){
          dataInOut.outPut("Enter tablename:");
          String selectmsg = dataInOut.inPut();
          new ExSelect(connection, selectmsg).select();
     }
-
-//    private void doTableList() {
-//        exTableList.doTableList();
-//    }
 
     private void printError(Exception exeption) {
         String eMessage = /*e.getClass().getSimpleName() + ": " + */ exeption.getMessage();
