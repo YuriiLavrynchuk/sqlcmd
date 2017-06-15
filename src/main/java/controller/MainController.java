@@ -17,7 +17,8 @@ public class MainController {
                 new ExHelp(dataInOut),
                 new ExTableList(dataInOut),
                 new ExUpdate(dataInOut),
-                new ExInsert(dataInOut)
+                new ExInsert(dataInOut),
+                new ExDelete(dataInOut)
         };
     }
 
@@ -36,8 +37,8 @@ public class MainController {
                 String command = dataInOut.inPut();
                 if (command.equals("select")) {
                     doSelect();
-                } else if(command.equals("delete")){
-                    doDelete();
+                } else if(commands[5].checkCommand(command)){
+                    commands[5].execute(command, connection);
                 } else if(commands[4].checkCommand(command)){
                     commands[4].execute(command, connection);
                 } else if(commands[3].checkCommand(command)) {
@@ -52,18 +53,6 @@ public class MainController {
             }
         }
     }
-
-    private void doDelete() {
-        dataInOut.outPut("Enter Delete query:");
-        String deletemsg = dataInOut.inPut();
-        new ExDelete(connection, deletemsg).delete();
-    }
-
-//    private void doInsert() {
-//        dataInOut.outPut("Enter Insert query:");
-//        String insertmsg = dataInOut.inPut();
-//        new ExInsert(connection, insertmsg).insert();
-//    }
 
     private void doSelect(){
          dataInOut.outPut("Enter tablename:");

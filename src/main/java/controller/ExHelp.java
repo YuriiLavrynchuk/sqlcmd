@@ -30,7 +30,5 @@ public class ExHelp implements  Command{
     }
 
     @Override
-    public void execute(String command, Connection connection) {
-
-    }
+    public void execute(String command, Connection connection) {}
 }
