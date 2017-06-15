@@ -2,22 +2,33 @@ package controller;
 
 import model.DataSet;
 import model.Select;
+import view.DataInOut;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
-class ExSelect {
-    private final Connection connection;
-    private final String selectmsg;
+class ExSelect implements Command {
 
-    public ExSelect(Connection connection, String selectmsg){
-        this.connection = connection;
-        this.selectmsg = selectmsg;
+    private DataInOut dataInOut;
+
+    public ExSelect(DataInOut dataInOut){
+        this.dataInOut = dataInOut;
     }
 
-    public void select(){
+    @Override
+    public boolean checkCommand(String command) {
+        return command.equals("select");
+    }
+
+    @Override
+    public void execute(String command) {}
+
+    @Override
+    public void execute(String command, Connection connection) {
+        dataInOut.outPut("Enter tablename:");
+        String selectmsg = dataInOut.inPut();
         DataSet[] select = new DataSet[0];
         try (Statement statement = connection.createStatement()){
             select = new Select(statement).select(selectmsg);

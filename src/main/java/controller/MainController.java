@@ -18,7 +18,8 @@ public class MainController {
                 new ExTableList(dataInOut),
                 new ExUpdate(dataInOut),
                 new ExInsert(dataInOut),
-                new ExDelete(dataInOut)
+                new ExDelete(dataInOut),
+                new ExSelect(dataInOut)
         };
     }
 
@@ -35,8 +36,8 @@ public class MainController {
             while(true) {
                 dataInOut.outPut("Please enter command or help:");
                 String command = dataInOut.inPut();
-                if (command.equals("select")) {
-                    doSelect();
+                if (commands[6].checkCommand(command)) {
+                    commands[6].execute(command, connection);
                 } else if(commands[5].checkCommand(command)){
                     commands[5].execute(command, connection);
                 } else if(commands[4].checkCommand(command)){
@@ -52,12 +53,6 @@ public class MainController {
                 }
             }
         }
-    }
-
-    private void doSelect(){
-         dataInOut.outPut("Enter tablename:");
-         String selectmsg = dataInOut.inPut();
-         new ExSelect(connection, selectmsg).select();
     }
 
     private void printError(Exception exeption) {
