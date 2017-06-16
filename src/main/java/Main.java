@@ -1,8 +1,10 @@
+import controller.ExConnectToDB;
 import controller.MainController;
 import exeption.InvalidException;
 import view.Console;
 import view.DataInOut;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
@@ -11,6 +13,7 @@ public class Main {
 //        ExSelect select = new ExSelect(connect.getDbname(), connect.getUsername(), connect.getPassword()).select();
 
         DataInOut dataInOut = new Console();
-        new MainController(dataInOut).start();
+        Connection connection = new ExConnectToDB(dataInOut).getConnection();
+        new MainController(dataInOut, connection).start();
     }
 }

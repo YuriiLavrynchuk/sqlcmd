@@ -9,9 +9,11 @@ import java.sql.Statement;
 
 class ExDelete implements Command {
     private DataInOut dataInOut;
+    private Connection connection;
 
-    ExDelete(DataInOut dataInOut){
+    ExDelete(DataInOut dataInOut, Connection connection){
         this.dataInOut = dataInOut;
+        this.connection = connection;
     }
 
     @Override
@@ -20,10 +22,7 @@ class ExDelete implements Command {
     }
 
     @Override
-    public void execute(String command) {}
-
-    @Override
-    public void execute(String command, Connection connection) {
+    public void execute(String command) {
         dataInOut.outPut("Enter Delete query:");
         String deletemsg = dataInOut.inPut();
         try (Statement statement = connection.createStatement()){

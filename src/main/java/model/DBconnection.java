@@ -1,6 +1,5 @@
 package model;
 
-import controller.ExConnectToDB;
 import exeption.InvalidException;
 
 import java.sql.Connection;
@@ -8,25 +7,31 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBconnection {
-    private final ExConnectToDB exConnectToDB;
+    private String url = "jdbc:postgresql://localhost:5432/";
+    private String dbname;
+    private String username;
+    private String password;
 
-    public DBconnection(ExConnectToDB exConnectToDB){
-        this.exConnectToDB = exConnectToDB;
+    public DBconnection(String dbname, String username, String password) {
+        this.dbname = dbname;
+        this.username = username;
+        this.password = password;
+        this.url = url + dbname + "?loggerLevel=OFF";
     }
 
     private boolean checkParametrs(){
 
-        return !(exConnectToDB.getDbname() == null ||
-                exConnectToDB.getUsername() == null ||
-                exConnectToDB.getPassword() == null);
+        return !(dbname == null ||
+                username == null ||
+                password == null);
     }
 
     public Connection dbConnection() throws InvalidException {
         Connection connection;
         if (!checkParametrs())
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
-                    + exConnectToDB.getDbname() + "username: " + exConnectToDB.getUsername()
-                    + " password: " + exConnectToDB.getPassword(), new RuntimeException());
+                    + dbname + "username: " + username
+                    + " password: " + password, new RuntimeException());
         else {
             try {
                 Class.forName("org.postgresql.Driver");
@@ -35,12 +40,10 @@ public class DBconnection {
 //                e.printStackTrace();
             }
             try {
-                connection = DriverManager.getConnection(exConnectToDB.getUrl(),
-                        exConnectToDB.getUsername(), exConnectToDB.getPassword());
+                connection = DriverManager.getConnection(url, username, password);
                 System.out.println("Connection success!");
             } catch (SQLException e){
-//                System.out.println("Can't get connection to database:" + exConnectToDB.getDbname());
-                throw new InvalidException("Can't get connection to database:" + exConnectToDB.getDbname(), e);
+                throw new InvalidException("Can't get connection to database:" + username, e);
 //                TODO стоит ли закрывать здесь соединение?
             }
         }

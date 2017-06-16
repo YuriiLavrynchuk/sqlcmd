@@ -1,8 +1,11 @@
-import controller.ExConnectToDB;
 import exeption.InvalidException;
-import model.*;
+import model.DBconnection;
+import model.DataSet;
+import model.Select;
+import model.SelectTablesList;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,7 +19,7 @@ public class DBtest {
 
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
-        connectToDB = new ExConnectToDB("postgres", "postgres", "1234").getConnection();
+        connectToDB = new DBconnection("postgres", "postgres", "1234").dbConnection();
         st = connectToDB.createStatement();
     }
 

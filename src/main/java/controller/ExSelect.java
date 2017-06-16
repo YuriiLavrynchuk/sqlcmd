@@ -10,11 +10,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 class ExSelect implements Command {
-
     private DataInOut dataInOut;
+    private Connection connection;
 
-    public ExSelect(DataInOut dataInOut){
+    public ExSelect(DataInOut dataInOut, Connection connection){
         this.dataInOut = dataInOut;
+        this.connection = connection;
     }
 
     @Override
@@ -23,10 +24,7 @@ class ExSelect implements Command {
     }
 
     @Override
-    public void execute(String command) {}
-
-    @Override
-    public void execute(String command, Connection connection) {
+    public void execute(String command) {
         dataInOut.outPut("Enter tablename:");
         String selectmsg = dataInOut.inPut();
         DataSet[] select = new DataSet[0];

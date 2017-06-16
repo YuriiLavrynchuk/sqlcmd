@@ -8,11 +8,12 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class ExTableList implements Command{
-
     private DataInOut dataInOut;
+    private Connection connection;
 
-    ExTableList(DataInOut dataInOut) {
+    ExTableList(DataInOut dataInOut, Connection connection) {
         this.dataInOut = dataInOut;
+        this.connection = connection;
     }
 
     @Override
@@ -22,10 +23,7 @@ public class ExTableList implements Command{
     }
 
     @Override
-    public void execute(String command) {}
-
-    @Override
-    public void execute(String command, Connection connection) {
+    public void execute(String command) {
         try {
             String[] tablesList = new SelectTablesList(connection.createStatement()).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));

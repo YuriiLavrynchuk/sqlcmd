@@ -8,23 +8,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExInsert implements Command{
-
     private DataInOut dataInOut;
+    private Connection connection;
 
-    public ExInsert(DataInOut dataInOut) {
+    public ExInsert(DataInOut dataInOut, Connection connection) {
         this.dataInOut = dataInOut;
+        this.connection = connection;
     }
 
     @Override
     public boolean checkCommand(String command) {
+
         return command.equals("insert");
     }
 
     @Override
-    public void execute(String command) {}
-
-    @Override
-    public void execute(String command, Connection connection) {
+    public void execute(String command) {
         dataInOut.outPut("Enter Insert query:");
         String insertmsg = dataInOut.inPut();
         try (Statement statement = connection.createStatement()){

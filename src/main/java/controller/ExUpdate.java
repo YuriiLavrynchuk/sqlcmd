@@ -8,11 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExUpdate implements Command {
-
       private DataInOut dataInOut;
+      private Connection connection;
 
-    ExUpdate(DataInOut dataInOut) {
+    ExUpdate(DataInOut dataInOut, Connection connection) {
         this.dataInOut = dataInOut;
+        this.connection = connection;
     }
 
     @Override
@@ -21,10 +22,7 @@ class ExUpdate implements Command {
     }
 
     @Override
-    public void execute(String command) {}
-
-    @Override
-    public void execute(String command, Connection connection) {
+    public void execute(String command) {
         dataInOut.outPut("Enter Update query:");
         String updatemsg = dataInOut.inPut();
         try(Statement statement = connection.createStatement()) {

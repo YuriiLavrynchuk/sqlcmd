@@ -1,45 +1,39 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
+import view.DataInOut;
 
 import java.sql.Connection;
 
 public class ExConnectToDB {
-    private String url = "jdbc:postgresql://localhost:5432/";
-    private String dbname;
-    private String username;
-    private String password;
-    private Connection connect;
+    private final DataInOut dataInOut;
+    private Connection connection;
 
-    public ExConnectToDB(String db, String user, String pass) {
-        this.dbname = db;
-        this.username = user;
-        this.password = pass;
-        this.url = url + db + "?loggerLevel=OFF";
+    public ExConnectToDB(DataInOut dataInOut) throws InvalidException {
+        this.dataInOut = dataInOut;
     }
 
     public void connect() {
-        try {
-            connect = new DBconnection(ExConnectToDB.this).dbConnection();
-        } catch (Exception e) {
-//            e.printStackTrace();
+        while (connection == null) {
+            dataInOut.outPut("Hello!");
+            dataInOut.outPut("Please insert dbname:");
+            String dbname = dataInOut.inPut();
+            dataInOut.outPut("Please insert username:");
+            String username = dataInOut.inPut();
+            dataInOut.outPut("Please insert password:");
+            String password = dataInOut.inPut();
+            try {
+                connection = new DBconnection(dbname, username, password).dbConnection();
+            } catch (Exception e) {
+                connection = null;
+//                e.printStackTrace();
+            }
         }
     }
 
-    public String getUrl() {
-        return url;
-    }
-    public String getDbname() {
-        return dbname;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public String getPassword() {
-        return password;
-    }
     public Connection getConnection(){
         connect();
-        return connect;
+        return connection;
     }
 }
