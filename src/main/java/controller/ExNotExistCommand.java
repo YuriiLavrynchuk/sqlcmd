@@ -15,5 +15,6 @@ public class ExNotExistCommand implements Command {
 
     @Override
     public void execute(String command) {
+        dataInOut.outPut("Not exists command.");
     }
 }

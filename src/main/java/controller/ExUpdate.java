@@ -27,6 +27,7 @@ class ExUpdate implements Command {
         String updatemsg = dataInOut.inPut();
         try(Statement statement = connection.createStatement()) {
             new Update(statement, updatemsg);
+            dataInOut.outPut("Row updated");
         } catch (SQLException e) {
             System.out.println("ExUpdate update ERROR");
 //            e.printStackTrace();

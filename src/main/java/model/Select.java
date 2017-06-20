@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 public class Select {
     private final Statement statement;
@@ -41,5 +42,22 @@ public class Select {
 //            e.printStackTrace();
         }
         return tableSize;
+    }
+
+    public String[] getTableColumns(String tableName) {
+        try {
+            ResultSet rs = statement.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'");
+            String[] tables = new String[100];
+            int index = 0;
+            while (rs.next()) {
+                tables[index++] = rs.getString("column_name");
+            }
+            tables = Arrays.copyOf(tables, index, String[].class);
+            statement.close();
+            return tables;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new String[0];
+        }
     }
 }

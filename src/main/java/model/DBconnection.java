@@ -41,7 +41,6 @@ public class DBconnection {
             }
             try {
                 connection = DriverManager.getConnection(url, username, password);
-                System.out.println("Connection success!");
             } catch (SQLException e){
                 throw new InvalidException("Can't get connection to database:" + username, e);
 //                TODO стоит ли закрывать здесь соединение?

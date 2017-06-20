@@ -1,8 +1,5 @@
 import exeption.InvalidException;
-import model.DBconnection;
-import model.DataSet;
-import model.Select;
-import model.SelectTablesList;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,45 +24,49 @@ public class DBtest {
     public void testSelect() throws SQLException {
 
         DataSet[] select = new Select(st).select("users");
-        assertEquals(4, select.length);
-
+        assertEquals(5, select.length);
         st.close();
-        System.out.println("Connection close");
-        connectToDB.close();
     }
-//
-//    @Test
-//    public void testDelete() throws SQLException {
-//        Statement st = connectToDB.createStatement();
-//        Delete del = new Delete(st);
-//        st.close();
-//        connectToDB.close();
-//    }
-//
-//    @Test
-//    public void testUpdate() throws SQLException {
-//        Statement st = connectToDB.createStatement();
-//        Update up = new Update(st);
-//        st.close();
-//        connectToDB.close();
-//    }
-//
-//    @Test
-//    public void testInsert() throws SQLException {
-//        Statement st = connectToDB.createStatement();
-//        Insert insert = new Insert(st);
-//        st.close();
-//        connectToDB.close();
-//    }
+
+    @Test
+    public void testGetcolumns() throws SQLException {
+
+        String[] columns = new Select(st).getTableColumns("users");
+        assertEquals("[id, name, password]", Arrays.toString(columns));
+        st.close();
+    }
 
     @Test
     public void testSelectAllTables() throws SQLException {
 
         String[] selectall = new SelectTablesList(st).selectAllTable();
-        System.out.println(Arrays.toString(selectall));
         assertEquals("[users]", Arrays.toString(selectall));
         st.close();
-        System.out.println("Connection close");
-        connectToDB.close();
+    }
+
+    @Test
+    public void testCRUD() throws SQLException {
+        //delete
+        st = connectToDB.createStatement();
+        new Delete(st, "delete from users where id = 5");
+        st.close();
+
+        //insert
+        st = connectToDB.createStatement();
+        new Insert(st, "insert into users values(5, 'User5', 5555)");
+        st.close();
+
+        //update
+        st = connectToDB.createStatement();
+        new Update(st, "update users set password = '9999' where id = 5");
+        st.close();
+
+        st = connectToDB.createStatement();
+        DataSet[] select = new Select(st).select("users where id = 5");
+        assertEquals("[DataSet{\n" +
+                "names:[id, name, password]\n" +
+                "values:[5, User5, 9999]\n" +
+                "}]", Arrays.toString(select));
+        st.close();
     }
 }

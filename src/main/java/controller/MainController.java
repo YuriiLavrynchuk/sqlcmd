@@ -9,7 +9,6 @@ public class MainController {
     private final Command[] commands;
     private Connection connection;
 
-
     public MainController(DataInOut dataInOut, Connection connection) {
         this.dataInOut = dataInOut;
         this.connection = connection;
@@ -22,6 +21,7 @@ public class MainController {
                 new ExInsert(dataInOut, connection),
                 new ExDelete(dataInOut, connection),
                 new ExSelect(dataInOut, connection),
+                new ExGetColumns(dataInOut, connection),
                 new ExNotExistCommand(dataInOut)
         };
     }
@@ -37,6 +37,7 @@ public class MainController {
                 for(Command command : commands){
                     if(command.checkCommand(intput)){
                         command.execute(intput);
+                        break;
                     }
                 }
             }
@@ -44,10 +45,10 @@ public class MainController {
     }
 
     private void printError(Exception exeption) {
-        String eMessage = /*e.getClass().getSimpleName() + ": " + */ exeption.getMessage();
+        String eMessage = exeption.getMessage();
         Throwable cause = exeption.getCause();
         if (cause != null) {
-            eMessage += " " + /*cause.getClass().getSimpleName() + ": " + */ cause.getMessage();
+            eMessage += " " + cause.getMessage();
         }
         dataInOut.outPut("FAIL! Cause: " + eMessage);
         dataInOut.outPut("Try again.");

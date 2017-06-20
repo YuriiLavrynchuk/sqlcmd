@@ -25,6 +25,7 @@ public class ExConnectToDB {
             String password = dataInOut.inPut();
             try {
                 connection = new DBconnection(dbname, username, password).dbConnection();
+                dataInOut.outPut("Connection success!");
             } catch (Exception e) {
                 connection = null;
 //                e.printStackTrace();
