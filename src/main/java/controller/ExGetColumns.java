@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
-/**
- * Created by yuriy.lavrinchuk on 20.06.2017.
- */
 public class ExGetColumns implements Command {
     private final Connection connection;
     private DataInOut dataInOut;
