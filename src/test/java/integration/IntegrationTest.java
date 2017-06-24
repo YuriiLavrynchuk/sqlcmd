@@ -1,11 +1,9 @@
 package integration;
 
-import controller.MainController;
 import exeption.InvalidException;
 import model.DBconnection;
 import org.junit.Before;
 import org.junit.Test;
-import view.DataInOut;
 
 import java.io.PrintStream;
 import java.sql.Connection;
@@ -31,7 +29,7 @@ public class IntegrationTest {
         in.add("help");
         in.add("exit");
 
-        new MainController((DataInOut)in, connectToDB).start();
+//        new MainController(in, connectToDB).start();
         assertEquals("", out.getData());
     }
 }

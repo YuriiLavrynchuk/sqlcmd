@@ -19,6 +19,7 @@ public class ExHelp implements  Command{
     @Override
     public void execute(String command) {
         dataInOut.outPut("Exist command:");
+        dataInOut.outPut("connect       - connection to database");
         dataInOut.outPut("select        - query from table");
         dataInOut.outPut("tablelist     - getting names all tables");
         dataInOut.outPut("update        - update rows in the table");

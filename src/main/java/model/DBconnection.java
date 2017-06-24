@@ -11,6 +11,7 @@ public class DBconnection {
     private String dbname;
     private String username;
     private String password;
+    private Connection connection;
 
     public DBconnection(String dbname, String username, String password) {
         this.dbname = dbname;
@@ -27,7 +28,7 @@ public class DBconnection {
     }
 
     public Connection dbConnection() throws InvalidException {
-        Connection connection;
+
         if (!checkParametrs())
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
                     + dbname + "username: " + username
@@ -41,6 +42,7 @@ public class DBconnection {
             }
             try {
                 connection = DriverManager.getConnection(url, username, password);
+
             } catch (SQLException e){
                 throw new InvalidException("Can't get connection to database:" + username, e);
 //                TODO стоит ли закрывать здесь соединение?
