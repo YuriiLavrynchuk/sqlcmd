@@ -25,7 +25,7 @@ public class IntegrationTest {
     }
     @Test
     public void testExit() throws InvalidException {
-        Connection connectToDB = new DBconnection("postgres", "postgres", "1234").dbConnection();
+        Connection connectToDB = new DBconnection().connection("postgres", "postgres", "1234");
         in.add("help");
         in.add("exit");
 

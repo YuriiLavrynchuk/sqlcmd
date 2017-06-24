@@ -1,5 +1,6 @@
 package controller;
 
+import model.DBconnection;
 import view.DataInOut;
 
 import java.sql.Connection;
@@ -7,44 +8,47 @@ import java.sql.Connection;
 public class MainController {
     private final DataInOut dataInOut;
     private final Command[] commands;
+//    private DBconnection dbConnection;
 //    private final ExConnectToDB exConnectToDB;
     private Connection connection;
 
-    public MainController(DataInOut dataInOut) {
+    public MainController(DataInOut dataInOut, DBconnection dbConnection) {
         this.dataInOut = dataInOut;
+//        this.dbConnection = dbConnection;
 //        exConnectToDB= new ExConnectToDB(dataInOut);
 
         this.commands = new Command[] {
-                new ExConnectToDB(dataInOut),
-                new ExExit(dataInOut),
+                new ExConnectToDB(dataInOut, dbConnection),
                 new ExHelp(dataInOut),
-                new CheckConnection(dataInOut),
-//                new ExTableList(dataInOut, connection),
-//                new ExUpdate(dataInOut, connection),
-//                new ExInsert(dataInOut, connection),
-//                new ExDelete(dataInOut, connection),
-//                new ExSelect(dataInOut, connection),
-//                new ExGetColumns(dataInOut, connection),
+                new ExExit(dataInOut),
+                new CheckConnection(dataInOut, dbConnection),
+                new ExTableList(dataInOut, dbConnection),
+                new ExUpdate(dataInOut, dbConnection),
+                new ExInsert(dataInOut, dbConnection),
+                new ExDelete(dataInOut, dbConnection),
+                new ExSelect(dataInOut, dbConnection),
+                new ExGetColumns(dataInOut, dbConnection),
                 new ExNotExistCommand(dataInOut)
         };
     }
 
-    public void start(){
+    public void start() {
         dataInOut.outPut("Hello!");
-        dataInOut.outPut("Please connect to database using command connect");
+        dataInOut.outPut("Please connect to database using command 'connect'");
 //            TODO придумать выход из цикла
-            while(true) {
-                dataInOut.outPut("Please enter command or help:");
-                String intput = dataInOut.inPut();
 
-                for(Command command : commands){
-                    if(command.checkCommand(intput)){
-                        command.execute(intput);
-                        break;
-                    }
+        while (true) {
+            String intput = dataInOut.inPut();
+
+            for (Command command : commands) {
+                if (command.checkCommand(intput)) {
+                    command.execute(intput);
+                    break;
                 }
             }
+            dataInOut.outPut("Please enter command or help:");
         }
+    }
 
 
     private void printError(Exception exeption) {

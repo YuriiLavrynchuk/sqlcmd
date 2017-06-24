@@ -1,22 +1,24 @@
 package controller;
 
+import model.DBconnection;
 import view.DataInOut;
 
 public class CheckConnection implements Command {
     private DataInOut dataInOut;
+    private DBconnection dbConnection;
 
-    public CheckConnection(DataInOut dataInOut) {
+    public CheckConnection(DataInOut dataInOut, DBconnection dbConnection) {
         this.dataInOut = dataInOut;
+        this.dbConnection = dbConnection;
     }
 
     @Override
     public boolean checkCommand(String command) {
-        ExConnectToDB exConnectToDB = new ExConnectToDB(dataInOut);
-        return exConnectToDB.checkConnection();
+        return !dbConnection.checkConnection();
     }
 
     @Override
     public void execute(String command) {
-        dataInOut.outPut("You can't use commands, please first connect to database");
+        dataInOut.outPut(String.format("You can't use command '%s', please first connect to database using command 'connect'", command));
     }
 }

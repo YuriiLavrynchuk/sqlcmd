@@ -1,8 +1,10 @@
 import controller.MainController;
 import exeption.InvalidException;
+import model.DBconnection;
 import view.Console;
 import view.DataInOut;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
@@ -12,6 +14,7 @@ public class Main {
 
         DataInOut dataInOut = new Console();
 //        Connection connection = new ExConnectToDB(dataInOut);
-        new MainController(dataInOut).start();
+        DBconnection dbConnection = new DBconnection();
+        new MainController(dataInOut, dbConnection).start();
     }
 }

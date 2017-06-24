@@ -1,5 +1,6 @@
 package controller;
 
+import model.DBconnection;
 import model.Insert;
 import view.DataInOut;
 
@@ -9,11 +10,11 @@ import java.sql.Statement;
 
 class ExInsert implements Command{
     private DataInOut dataInOut;
-    private Connection connection;
+    private DBconnection dBconnection;
 
-    public ExInsert(DataInOut dataInOut, Connection connection) {
+    public ExInsert(DataInOut dataInOut, DBconnection dBconnection) {
         this.dataInOut = dataInOut;
-        this.connection = connection;
+        this.dBconnection = dBconnection;
     }
 
     @Override
@@ -26,11 +27,10 @@ class ExInsert implements Command{
     public void execute(String command) {
         dataInOut.outPut("Enter Insert query:");
         String insertmsg = dataInOut.inPut();
-        try (Statement statement = connection.createStatement()){
+        try (Statement statement = dBconnection.getStatement()){
             new Insert(statement, insertmsg);
-            dataInOut.outPut("Row inserted");
         } catch (SQLException e) {
-            System.out.println("ExInsert insert ERROR");
+            dataInOut.outPut("ExInsert insert ERROR");
 //            e.printStackTrace();
         }
     }

@@ -1,19 +1,19 @@
 package controller;
 
+import model.DBconnection;
 import model.Delete;
 import view.DataInOut;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExDelete implements Command {
     private DataInOut dataInOut;
-    private Connection connection;
+    private DBconnection dBconnection;
 
-    ExDelete(DataInOut dataInOut, Connection connection){
+    ExDelete(DataInOut dataInOut, DBconnection dBconnection){
         this.dataInOut = dataInOut;
-        this.connection = connection;
+        this.dBconnection = dBconnection;
     }
 
     @Override
@@ -25,12 +25,11 @@ class ExDelete implements Command {
     public void execute(String command) {
         dataInOut.outPut("Enter Delete query:");
         String deletemsg = dataInOut.inPut();
-        try (Statement statement = connection.createStatement()){
+        try (Statement statement = dBconnection.getStatement()){
             new Delete(statement, deletemsg);
-            dataInOut.outPut("Row deleted");
-        } catch (SQLException e) {
-            System.out.println("ExDelete delete ERROR");
+        } catch (Exception e) {
 //            e.printStackTrace();
+            dataInOut.outPut("ExDelete delete ERROR");
         }
     }
 }

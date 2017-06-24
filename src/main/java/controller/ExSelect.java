@@ -1,21 +1,21 @@
 package controller;
 
+import model.DBconnection;
 import model.DataSet;
 import model.Select;
 import view.DataInOut;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
 class ExSelect implements Command {
     private DataInOut dataInOut;
-    private Connection connection;
+    private DBconnection dBconnection;
 
-    public ExSelect(DataInOut dataInOut, Connection connection){
+    public ExSelect(DataInOut dataInOut, DBconnection dBconnection){
         this.dataInOut = dataInOut;
-        this.connection = connection;
+        this.dBconnection = dBconnection;
     }
 
     @Override
@@ -28,7 +28,7 @@ class ExSelect implements Command {
         dataInOut.outPut("Enter tablename:");
         String selectmsg = dataInOut.inPut();
         DataSet[] select = new DataSet[0];
-        try (Statement statement = connection.createStatement()){
+        try (Statement statement = dBconnection.getStatement()){
             select = new Select(statement).select(selectmsg);
         } catch (SQLException e) {
 //            e.printStackTrace();

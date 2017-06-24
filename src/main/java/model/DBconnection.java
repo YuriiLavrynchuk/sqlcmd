@@ -5,31 +5,23 @@ import exeption.InvalidException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBconnection {
-    private String url = "jdbc:postgresql://localhost:5432/";
-    private String dbname;
-    private String username;
-    private String password;
     private Connection connection;
+    private Statement statement;
 
-    public DBconnection(String dbname, String username, String password) {
-        this.dbname = dbname;
-        this.username = username;
-        this.password = password;
-        this.url = url + dbname + "?loggerLevel=OFF";
-    }
-
-    private boolean checkParametrs(){
+    private boolean checkParametrs(String dbname, String username, String password){
 
         return !(dbname == null ||
                 username == null ||
                 password == null);
     }
 
-    public Connection dbConnection() throws InvalidException {
+    public Connection connection(String dbname, String username, String password) throws InvalidException {
+        String url = "jdbc:postgresql://localhost:5432/" + dbname + "?loggerLevel=OFF";
 
-        if (!checkParametrs())
+        if (!checkParametrs(dbname, username, password))
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
                     + dbname + "username: " + username
                     + " password: " + password, new RuntimeException());
@@ -42,13 +34,25 @@ public class DBconnection {
             }
             try {
                 connection = DriverManager.getConnection(url, username, password);
-
             } catch (SQLException e){
                 throw new InvalidException("Can't get connection to database:" + username, e);
 //                TODO стоит ли закрывать здесь соединение?
             }
         }
-            return connection;
-        }
+        return connection;
     }
+
+    public boolean checkConnection(){
+        return connection != null;
+    }
+
+    public Statement getStatement() {
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
+    }
+}
 

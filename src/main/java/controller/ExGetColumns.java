@@ -1,5 +1,6 @@
 package controller;
 
+import model.DBconnection;
 import model.Select;
 import view.DataInOut;
 
@@ -9,12 +10,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 public class ExGetColumns implements Command {
-    private final Connection connection;
     private DataInOut dataInOut;
+    private DBconnection dBconnection;
 
-    public ExGetColumns(DataInOut dataInOut, Connection connection){
+    public ExGetColumns(DataInOut dataInOut, DBconnection dBconnection){
         this.dataInOut = dataInOut;
-        this.connection = connection;
+        this.dBconnection = dBconnection;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class ExGetColumns implements Command {
         dataInOut.outPut("Enter tablename:");
         String selectmsg = dataInOut.inPut();
         String[] select = new String[0];
-        try (Statement statement = connection.createStatement()){
+        try (Statement statement = dBconnection.getStatement()){
             select = new Select(statement).getTableColumns(selectmsg);
         } catch (SQLException e) {
 //            e.printStackTrace();

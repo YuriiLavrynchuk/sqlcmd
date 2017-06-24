@@ -8,10 +8,11 @@ import java.sql.Connection;
 public class ExConnectToDB implements Command{
     private final DataInOut dataInOut;
     private Connection connection;
+    private DBconnection dbConnection;
 
-    public ExConnectToDB(DataInOut dataInOut){
+    public ExConnectToDB(DataInOut dataInOut, DBconnection dbConnection){
         this.dataInOut = dataInOut;
-        connection = null;
+        this.dbConnection = dbConnection;
     }
 
     @Override
@@ -24,9 +25,8 @@ public class ExConnectToDB implements Command{
         connect();
     }
 
-    private Connection connect(){
-        while (connection == null) {
-//            dataInOut.outPut("Hello!");
+    public Connection connect(){
+//        while (connection == null) {
             dataInOut.outPut("Please insert dbname:");
             String dbname = dataInOut.inPut();
             dataInOut.outPut("Please insert username:");
@@ -34,17 +34,13 @@ public class ExConnectToDB implements Command{
             dataInOut.outPut("Please insert password:");
             String password = dataInOut.inPut();
             try {
-                connection = new DBconnection(dbname, username, password).dbConnection();
+                connection = dbConnection.connection(dbname, username, password);
                 dataInOut.outPut("Connection success!");
             } catch (Exception e) {
                 connection = null;
 //                e.printStackTrace();
             }
-        }
+//        }
         return connection;
-    }
-
-    public boolean checkConnection(){
-        return connection != null;
     }
 }
