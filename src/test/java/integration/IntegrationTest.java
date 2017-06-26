@@ -2,11 +2,12 @@ package integration;
 
 import controller.*;
 import exeption.InvalidException;
-import model.DBconnection;
+import model.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.PrintStream;
+import java.io.*;
 import java.sql.Connection;
 
 import static org.junit.Assert.assertEquals;
@@ -15,15 +16,19 @@ public class IntegrationTest {
 
     private static ConfigurableInputStream in;
     private static LogOutputStream out;
+    private static DBconnection dBconnection;
+    private static Connection connection;
 
-    @Before
-    public static void setup(){
+    @BeforeClass
+    public static void setup() throws InvalidException {
+
         in = new ConfigurableInputStream();
         out = new LogOutputStream();
 
         System.setIn(in);
         System.setOut(new PrintStream(out));
     }
+
     @Test
     public void testExit() {
 
