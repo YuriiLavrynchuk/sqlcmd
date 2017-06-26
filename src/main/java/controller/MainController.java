@@ -8,14 +8,9 @@ import java.sql.Connection;
 public class MainController {
     private final DataInOut dataInOut;
     private final Command[] commands;
-//    private DBconnection dbConnection;
-//    private final ExConnectToDB exConnectToDB;
-    private Connection connection;
 
     public MainController(DataInOut dataInOut, DBconnection dbConnection) {
         this.dataInOut = dataInOut;
-//        this.dbConnection = dbConnection;
-//        exConnectToDB= new ExConnectToDB(dataInOut);
 
         this.commands = new Command[] {
                 new ExConnectToDB(dataInOut, dbConnection),
@@ -49,7 +44,6 @@ public class MainController {
             dataInOut.outPut("Please enter command or help:");
         }
     }
-
 
     private void printError(Exception exeption) {
         String eMessage = exeption.getMessage();

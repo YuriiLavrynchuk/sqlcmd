@@ -5,7 +5,7 @@ import view.DataInOut;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ConfigurableInputStream extends InputStream implements DataInOut {
+public class ConfigurableInputStream extends InputStream {
     private String line;
 
     @Override
@@ -29,18 +29,6 @@ public class ConfigurableInputStream extends InputStream implements DataInOut {
 
     public String getLine(){
         add(line);
-        return line;
-    }
-
-    @Override
-    public void outPut(String message) {
-
-    }
-
-    @Override
-    public String inPut() {
-//        Scanner scanner = new Scanner(System.in);
-
         return line;
     }
 }

@@ -1,5 +1,6 @@
 package integration;
 
+import controller.*;
 import exeption.InvalidException;
 import model.DBconnection;
 import org.junit.Before;
@@ -16,7 +17,7 @@ public class IntegrationTest {
     private static LogOutputStream out;
 
     @Before
-    public /*static*/ void setup() throws InvalidException {
+    public static void setup(){
         in = new ConfigurableInputStream();
         out = new LogOutputStream();
 
@@ -24,12 +25,13 @@ public class IntegrationTest {
         System.setOut(new PrintStream(out));
     }
     @Test
-    public void testExit() throws InvalidException {
-        Connection connectToDB = new DBconnection().connection("postgres", "postgres", "1234");
+    public void testExit() {
+
         in.add("help");
         in.add("exit");
 
-//        new MainController(in, connectToDB).start();
+        Main.main(new String[0]);
+
         assertEquals("", out.getData());
     }
 }
