@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="3b04c93c-9345-4f9a-b3e8-cd6ce2f9cdd0" name="Default" comment="I started new project sqlcmd on maven and add git." />
-    <list default="true" id="50fd00d5-63af-4cab-8fa6-d8b7ef49ded5" name="sqlcmd" comment="Попытка сделать правильный вывод в консоль сообшений при &#10;ошибке подключения к БД(не првильный логин/пароль).">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/controller/Main.java" />
+    <list default="true" id="50fd00d5-63af-4cab-8fa6-d8b7ef49ded5" name="sqlcmd" comment="реализация IntegrationTest">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/integration/ConfigurableInputStream.java" afterPath="$PROJECT_DIR$/src/test/java/integration/ConfigurableInputStream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/integration/IntegrationTest.java" afterPath="$PROJECT_DIR$/src/test/java/integration/IntegrationTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -974,7 +970,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498497837790</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="реализация IntegrationTest">
+      <created>1498503035555</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1498503035555</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1123,7 +1126,8 @@
     <MESSAGE value="Рефактор классов ExExit и ExHelp, начал работу над ExTablelist" />
     <MESSAGE value="Изменил зависимость MainController с Connection на DBconnection." />
     <MESSAGE value="Попытка сделать правильный вывод в консоль сообшений при &#10;ошибке подключения к БД(не првильный логин/пароль)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Попытка сделать правильный вывод в консоль сообшений при &#10;ошибке подключения к БД(не првильный логин/пароль)." />
+    <MESSAGE value="реализация IntegrationTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="реализация IntegrationTest" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
