@@ -1,10 +1,8 @@
 package controller;
 
+import exeption.*;
 import view.DataInOut;
 
-/**
- * Created by yuriy.lavrinchuk on 12.06.2017.
- */
 public class ExExit implements Command {
 
     private DataInOut dataInOut;
@@ -21,6 +19,6 @@ public class ExExit implements Command {
     @Override
     public void execute(String command) {
         dataInOut.outPut("Good by!");
-        System.exit(0);
+        throw new ExitExeption();
     }
 }

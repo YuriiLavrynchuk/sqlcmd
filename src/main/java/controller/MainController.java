@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.ExitExeption;
 import model.DBconnection;
 import view.DataInOut;
 
@@ -27,23 +28,33 @@ public class MainController {
         };
     }
 
-    public void start() {
-        dataInOut.outPut("Hello!");
-        dataInOut.outPut("Please connect to database using command 'connect'");
-//            TODO придумать выход из цикла
-
-        while (true) {
-            String intput = dataInOut.inPut();
-
-            for (Command command : commands) {
-                if (command.checkCommand(intput)) {
-                    command.execute(intput);
-                    break;
-                }
-            }
-            dataInOut.outPut("Please enter command or help:");
+    public void run() {
+        try {
+            start();
+        } catch (ExitExeption e){
+            //do nothing
         }
     }
+
+    public void start() {
+
+        dataInOut.outPut("Hello!");
+        dataInOut.outPut("Please connect to database using command 'connect'");
+
+            while (true) {
+                String intput = dataInOut.inPut();
+
+                for (Command command : commands) {
+                    if (command.checkCommand(intput)) {
+                        command.execute(intput);
+                        break;
+                    }
+                }
+                dataInOut.outPut("Please enter command or help:");
+            }
+        }
+//            TODO придумать выход из цикла
+
 
     private void printError(Exception exeption) {
         String eMessage = exeption.getMessage();
