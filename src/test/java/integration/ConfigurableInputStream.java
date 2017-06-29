@@ -1,11 +1,7 @@
 package integration;
 
-import view.DataInOut;
-
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 public class ConfigurableInputStream extends InputStream {
     private boolean endLine = false;
@@ -28,7 +24,6 @@ public class ConfigurableInputStream extends InputStream {
         if (ch == '\n') {
             endLine = true;
         }
-
         return (int)ch;
     }
 
