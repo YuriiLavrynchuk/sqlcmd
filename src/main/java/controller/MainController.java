@@ -1,6 +1,6 @@
 package controller;
 
-import exeption.ExitExeption;
+import exeption.ExitException;
 import model.DBconnection;
 import view.DataInOut;
 
@@ -31,7 +31,7 @@ public class MainController {
     public void run() {
         try {
             start();
-        } catch (ExitExeption e){
+        } catch (ExitException e){
             //do nothing
         }
     }
@@ -45,16 +45,22 @@ public class MainController {
                 String intput = dataInOut.inPut();
 
                 for (Command command : commands) {
+                    try {
                     if (command.checkCommand(intput)) {
                         command.execute(intput);
+                        break;
+                    }
+                    } catch (Exception e) {
+                        if (e instanceof ExitException) {
+                            throw e;
+                        }
+                        printError(e);
                         break;
                     }
                 }
                 dataInOut.outPut("Please enter command or help:");
             }
         }
-//            TODO придумать выход из цикла
-
 
     private void printError(Exception exeption) {
         String eMessage = exeption.getMessage();

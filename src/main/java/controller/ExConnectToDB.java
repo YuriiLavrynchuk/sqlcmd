@@ -40,7 +40,6 @@ public class ExConnectToDB implements Command{
                 connection = null;
 //                e.printStackTrace();
             }
-//        }
         return connection;
     }
 }

@@ -2,7 +2,7 @@ package integration;
 
 import controller.Main;
 import exeption.InvalidException;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -13,11 +13,11 @@ import static org.junit.Assert.assertEquals;
 
 public class IntegrationTest {
 
-    private static ConfigurableInputStream in;
-    private static ByteArrayOutputStream out;
+    private ConfigurableInputStream in;
+    private ByteArrayOutputStream out;
 
-    @BeforeClass
-    public static void setup() throws InvalidException {
+    @Before
+    public void setup() throws InvalidException {
 
         in = new ConfigurableInputStream();
         out = new ByteArrayOutputStream();
@@ -25,6 +25,15 @@ public class IntegrationTest {
         System.setIn(in);
         System.setOut(new PrintStream(out));
     }
+
+//    @Before
+//    public void cleareIn() {
+//        try {
+//            in.reset();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Test
     public void testHelp() {
@@ -328,10 +337,107 @@ public class IntegrationTest {
                 "Good by!\r\n", getData());
     }
 
+    @Test
+    public void testDeleteWithErrorAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("delete");
+        in.add("del");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //delete
+                "Enter Delete query:\r\n" +
+                //deletemsg
+                "DELETE ERROR\r\n" +
+                "Please enter command or help:\r\n" +
+                //exit
+                "Good by!\r\n", getData());
+    }
+
+    @Test
+    public void testUpdateWithErrorAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("update");
+        in.add("updt");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //update
+                "Enter Update query:\r\n" +
+                //updatemsg
+                "Update ERROR\r\n" +
+                "Please enter command or help:\r\n" +
+                //exit
+                "Good by!\r\n", getData());
+    }
+
+    @Test
+    public void testInsertWithErrorAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("insert");
+        in.add("insr");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //insert
+                "Enter Insert query:\r\n" +
+                //insertmsg
+                "Insert ERROR\r\n" +
+                "Please enter command or help:\r\n" +
+                //exit
+                "Good by!\r\n", getData());
+    }
 
     public String getData() {
         try {
-            return new String(out.toByteArray(), "UTF-8");
+            String result = new String(out.toByteArray(), "UTF-8");
+            out.reset();
+            return result;
         } catch (UnsupportedEncodingException e) {
             return e.getMessage();
         }
