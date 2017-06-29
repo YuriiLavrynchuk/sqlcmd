@@ -19,6 +19,6 @@ public class ExExit implements Command {
     @Override
     public void execute(String command) {
         dataInOut.outPut("Good by!");
-        throw new ExitExeption();
+        throw new ExitException();
     }
 }
