@@ -27,14 +27,6 @@ class ExSelect implements Command {
         dataInOut.outPut("Enter tablename:");
         String selectmsg = dataInOut.inPut();
 
-//        DataSet[] select = new DataSet[0];
-//        try (Statement statement = dBconnection.getStatement()){
-//            select = new Select(statement, dataInOut).select(selectmsg);
-//        } catch (SQLException e) {
-////            e.printStackTrace();
-//        }
-//        System.out.println(Arrays.toString(select));
-
         Statement statement = dBconnection.getStatement();
         Select select = new Select(statement, dataInOut);
         String[] tableColumns = select.getTableColumns(selectmsg);

@@ -249,27 +249,85 @@ public class IntegrationTest {
         in.add("postgres");
         in.add("1234");
         in.add("select");
-        in.add("users where id = 5");
+        in.add("users");
         in.add("exit");
 
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
                 "Please connect to database using command 'connect'\r\n" +
+                //conncet
                 "Please insert dbname:\r\n" +
+                //dbname
                 "Please insert username:\r\n" +
+                //username
                 "Please insert password:\r\n" +
+                //password
                 "Connection success!\r\n" +
                 "Please enter command or help:\r\n" +
+                //select
                 "Enter tablename:\r\n" +
-
-                "[DataSet{\r\n" +
-                "names:[id, name, password]\r\n" +
-                "values:[5, User5, 9999]\r\n" +
-                "}]\r\n" +
+                //tablename
+                "--------------------\r\n" +
+                "|id|name|password|\r\n" +
+                "--------------------\r\n" +
+                "|1|Admin|1111|\r\n" +
+                "|2|User2|4532|\r\n" +
+                "|3|User3|6443|\r\n" +
+                "|4|User4|4444|\r\n" +
+                "|5|User5|9999|\r\n" +
+                "--------------------\r\n" +
                 "Please enter command or help:\r\n" +
+                //exit
                 "Good by!\r\n", getData());
     }
+
+    @Test
+    public void testConnectAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("tablelist");
+        in.add("connect");
+        in.add("test");
+        in.add("postgres");
+        in.add("1234");
+        in.add("tablelist");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //tablelist
+                "[users]\r\n" +
+                "Please enter command or help:\r\n" +
+                //connect
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //tablelist
+                "[test]\r\n" +
+                "Please enter command or help:\r\n" +
+                //exit
+                "Good by!\r\n", getData());
+    }
+
 
     public String getData() {
         try {

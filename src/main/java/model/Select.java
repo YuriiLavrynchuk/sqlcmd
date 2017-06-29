@@ -18,24 +18,6 @@ public class Select {
     }
 
     public DataSet[] select(String tableName) throws SQLException {
-//        int size = getTableSize(tableName);
-//        DataSet[] result = new DataSet[size];
-//        try (ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName)){
-//            ResultSetMetaData statement = rs.getMetaData();
-//            int index = 0;
-//            while (rs.next()) {
-//                DataSet dataSet = new DataSet();
-//                result[index++] = dataSet;
-//                for (int i = 1; i <= statement.getColumnCount(); i++) {
-//                    dataSet.put(statement.getColumnName(i), rs.getObject(i));
-//                }
-//            }
-//            return result;
-//        } catch (SQLException e) {
-////            e.printStackTrace();
-//            return new DataSet[0];
-//        }
-
         int size = getTableSize(tableName);
         ResultSet rs = null;
         try {
