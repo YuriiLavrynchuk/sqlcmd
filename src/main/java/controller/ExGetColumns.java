@@ -4,7 +4,6 @@ import model.DBconnection;
 import model.Select;
 import view.DataInOut;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class ExGetColumns implements Command {
         String selectmsg = dataInOut.inPut();
         String[] select = new String[0];
         try (Statement statement = dBconnection.getStatement()){
-            select = new Select(statement).getTableColumns(selectmsg);
+            select = new Select(statement, dataInOut).getTableColumns(selectmsg);
         } catch (SQLException e) {
 //            e.printStackTrace();
         }

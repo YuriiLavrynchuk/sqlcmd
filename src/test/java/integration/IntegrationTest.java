@@ -1,13 +1,13 @@
 package integration;
 
-import controller.*;
+import controller.Main;
 import exeption.InvalidException;
-import model.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.*;
-import java.sql.Connection;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -209,6 +209,64 @@ public class IntegrationTest {
                 //notexistcommand
                 "Not exists command.\r\n" +
                 //exit
+                "Please enter command or help:\r\n" +
+                "Good by!\r\n", getData());
+    }
+
+    @Test
+    public void testTableListAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("tablelist");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //tablelist
+                "[users]\r\n" +
+                //exit
+                "Please enter command or help:\r\n" +
+                "Good by!\r\n", getData());
+    }
+
+    @Test
+    public void testSelectAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("select");
+        in.add("users where id = 5");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                "Please insert dbname:\r\n" +
+                "Please insert username:\r\n" +
+                "Please insert password:\r\n" +
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                "Enter tablename:\r\n" +
+
+                "[DataSet{\r\n" +
+                "names:[id, name, password]\r\n" +
+                "values:[5, User5, 9999]\r\n" +
+                "}]\r\n" +
                 "Please enter command or help:\r\n" +
                 "Good by!\r\n", getData());
     }
