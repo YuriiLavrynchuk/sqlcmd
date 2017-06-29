@@ -1,5 +1,7 @@
 package model;
 
+import view.DataInOut;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -8,39 +10,62 @@ import java.util.Arrays;
 
 public class Select {
     private final Statement statement;
+    private DataInOut dataInOut;
 
-    public Select(Statement statement){
+    public Select(Statement statement, DataInOut dataInOut){
         this.statement = statement;
+        this.dataInOut = dataInOut;
     }
 
-    public DataSet[] select(String tableName) {
+    public DataSet[] select(String tableName) throws SQLException {
+//        int size = getTableSize(tableName);
+//        DataSet[] result = new DataSet[size];
+//        try (ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName)){
+//            ResultSetMetaData statement = rs.getMetaData();
+//            int index = 0;
+//            while (rs.next()) {
+//                DataSet dataSet = new DataSet();
+//                result[index++] = dataSet;
+//                for (int i = 1; i <= statement.getColumnCount(); i++) {
+//                    dataSet.put(statement.getColumnName(i), rs.getObject(i));
+//                }
+//            }
+//            return result;
+//        } catch (SQLException e) {
+////            e.printStackTrace();
+//            return new DataSet[0];
+//        }
+
         int size = getTableSize(tableName);
+        ResultSet rs = null;
+        try {
+            rs = statement.executeQuery("SELECT * FROM " + tableName);
+
+        ResultSetMetaData rsmd = rs.getMetaData();
         DataSet[] result = new DataSet[size];
-        try (ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName)){
-            ResultSetMetaData statement = rs.getMetaData();
-            int index = 0;
-            while (rs.next()) {
-                DataSet dataSet = new DataSet();
-                result[index++] = dataSet;
-                for (int i = 1; i <= statement.getColumnCount(); i++) {
-                    dataSet.put(statement.getColumnName(i), rs.getObject(i));
-                }
+        int index = 0;
+        while (rs.next()) {
+            DataSet dataSet = new DataSet();
+            result[index++] = dataSet;
+            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                dataSet.put(rsmd.getColumnName(i), rs.getObject(i));
             }
-            return result;
+        }
+//        rs.close();
+//        statement.close();
+        return result;
         } catch (SQLException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             return new DataSet[0];
         }
     }
 
-    private int getTableSize(String tableName){
+
+    private int getTableSize(String tableName) throws SQLException {
         int tableSize = 0;
-        try (ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName)){
+            ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
             selectCount.next();
             tableSize = selectCount.getInt(1);
-        } catch (SQLException e) {
-//            e.printStackTrace();
-        }
         return tableSize;
     }
 
@@ -53,7 +78,7 @@ public class Select {
                 tables[index++] = rs.getString("column_name");
             }
             tables = Arrays.copyOf(tables, index, String[].class);
-            statement.close();
+//            statement.close();
             return tables;
         } catch (SQLException e) {
             e.printStackTrace();

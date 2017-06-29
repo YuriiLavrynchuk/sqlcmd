@@ -2,6 +2,7 @@ import exeption.InvalidException;
 import model.*;
 import org.junit.Before;
 import org.junit.Test;
+import view.DataInOut;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import static junit.framework.TestCase.assertEquals;
 public class DBtest {
      private Connection connectToDB;
      private Statement st;
+     private DataInOut dataInOut;
 
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
@@ -23,7 +25,7 @@ public class DBtest {
     @Test
     public void testSelect() throws SQLException {
 
-        DataSet[] select = new Select(st).select("users");
+        DataSet[] select = new Select(st, dataInOut).select("users");
         assertEquals(5, select.length);
         st.close();
     }
@@ -31,7 +33,7 @@ public class DBtest {
     @Test
     public void testGetcolumns() throws SQLException {
 
-        String[] columns = new Select(st).getTableColumns("users");
+        String[] columns = new Select(st, dataInOut).getTableColumns("users");
         assertEquals("[id, name, password]", Arrays.toString(columns));
         st.close();
     }
@@ -62,7 +64,7 @@ public class DBtest {
         st.close();
 
         st = connectToDB.createStatement();
-        DataSet[] select = new Select(st).select("users where id = 5");
+        DataSet[] select = new Select(st, dataInOut).select("users where id = 5");
         assertEquals("[DataSet{\n" +
                 "names:[id, name, password]\n" +
                 "values:[5, User5, 9999]\n" +
