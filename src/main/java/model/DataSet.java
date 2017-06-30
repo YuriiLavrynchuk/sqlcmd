@@ -3,6 +3,7 @@ package model;
 import java.util.Arrays;
 
 public class DataSet {
+
     static class Data {
         private String name;
         private Object value;
@@ -31,7 +32,6 @@ public class DataSet {
                 return;
             }
         }
-
         data[freeIndex++] = new Data(name, value);
     }
 
@@ -43,28 +43,12 @@ public class DataSet {
         return result;
     }
 
-    private String[] getNames() {
+    public String[] getNames() {
         String[] result = new String[freeIndex];
         for (int i = 0; i < freeIndex; i++) {
             result[i] = data[i].getName();
         }
         return result;
-    }
-
-    public Object get(String name) {
-        for (int i = 0; i < freeIndex; i++) {
-            if (data[i].getName().equals(name)) {
-                return data[i].getValue();
-            }
-        }
-        return null;
-    }
-
-    public void updateFrom(DataSet newValue) {
-        for (int index = 0; index < newValue.freeIndex; index++) {
-            Data data = newValue.data[index];
-            this.put(data.name, data.value);
-        }
     }
 
     @Override

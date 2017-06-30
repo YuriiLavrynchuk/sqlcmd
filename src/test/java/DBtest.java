@@ -47,6 +47,49 @@ public class DBtest {
     }
 
     @Test
+    public void testInsertUsingPut() throws SQLException {
+        st = connectToDB.createStatement();
+        new Delete(st, "delete from users where id = 7");
+        st.close();
+//        // when
+//        DataSet input = new DataSet();
+//        input.put("name", "Stiven");
+//        input.put("password", "pass");
+//        input.put("id", 13);
+//        manager.create("user", input);
+//
+//        // then
+//        DataSet[] users = manager.getTableData("user");
+//        assertEquals(1, users.length);
+//
+//        DataSet user = users[0];
+//        assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
+//        assertEquals("[Stiven, pass, 13]", Arrays.toString(user.getValues()));
+
+        st = connectToDB.createStatement();
+        DataSet input = new DataSet();
+        input.put("id", 7);
+        input.put("name", "User7");
+        input.put("password", "7777");
+        new Insert(st, "users", input);
+        st.close();
+
+          // then
+        st = connectToDB.createStatement();
+        DataSet[] users = new Select(st, dataInOut).select("users where id=7");
+        assertEquals(1, users.length);
+        st.close();
+
+        DataSet user = users[0];
+        assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
+        assertEquals("[7, User7, 7777]", Arrays.toString(user.getValues()));
+
+        st = connectToDB.createStatement();
+        new Delete(st, "delete from users where id = 7");
+        st.close();
+    }
+
+    @Test
     public void testCRUD() throws SQLException {
         //delete
         st = connectToDB.createStatement();

@@ -1,10 +1,10 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import model.SelectTablesList;
 import view.DataInOut;
 
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
@@ -23,12 +23,13 @@ public class ExTableList implements Command{
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command) throws InvalidException {
         try(Statement statement = dBconnection.getStatement()) {
             String[] tablesList = new SelectTablesList(statement).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            e.printStackTrace();
+            throw new InvalidException("ERROR SelectTablesList", e);
         }
     }
 }
