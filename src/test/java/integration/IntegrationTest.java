@@ -280,10 +280,10 @@ public class IntegrationTest {
                 "--------------------\r\n" +
                 "|id|name|password|\r\n" +
                 "--------------------\r\n" +
-                "|1|Admin|1111|\r\n" +
-                "|2|User2|4532|\r\n" +
-                "|3|User3|6443|\r\n" +
-                "|4|User4|4444|\r\n" +
+                "|1|Admin|0000|\r\n" +
+                "|2|User1|1111|\r\n" +
+                "|3|User3|aaaa|\r\n" +
+                "|4|Yuriy|1258|\r\n" +
                 "|5|User5|9999|\r\n" +
                 "--------------------\r\n" +
                 "Please enter command or help:\r\n" +
@@ -430,6 +430,66 @@ public class IntegrationTest {
                 "Insert ERROR\r\n" +
                 "Please enter command or help:\r\n" +
                 //exit
+                "Good by!\r\n", getData());
+    }
+
+    @Test
+    public void testGetColumnsAfterConnect() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("1234");
+        in.add("get columns");
+        in.add("users");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "Connection success!\r\n" +
+                "Please enter command or help:\r\n" +
+                //get columns
+                "Enter tablename:\r\n" +
+                //updatemsg
+                "[id, name, password]\r\n" +
+                "Please enter command or help:\r\n" +
+                //exit
+                "Good by!\r\n", getData());
+    }
+
+    @Test
+    public void testConnectWithWrongParametr() {
+        in.add("connect");
+        in.add("postgres");
+        in.add("postgres");
+        in.add("0000");
+        in.add("exit");
+
+        Main.main(new String[0]);
+
+        assertEquals("Hello!\r\n" +
+                "Please connect to database using command 'connect'\r\n" +
+                //conncet
+                "Please insert dbname:\r\n" +
+                //dbname
+                "Please insert username:\r\n" +
+                //username
+                "Please insert password:\r\n" +
+                //password
+                "FAIL! Cause:\r\n" +
+                "FATAL: password authentication failed for user \"postgres\"\r\n" +
+                "Can't get connection to database:postgres\r\n" +
+                "Try again.\r\n" +
+                //exit
+                "Please enter command or help:\r\n" +
                 "Good by!\r\n", getData());
     }
 

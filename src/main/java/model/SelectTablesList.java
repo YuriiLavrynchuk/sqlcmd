@@ -23,7 +23,8 @@ public class SelectTablesList {
             tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e){
-            System.out.println("ResultSet ERROR");
+            e.printStackTrace();
+//            System.out.println("ResultSet ERROR");
         }
         return new String[0];
     }

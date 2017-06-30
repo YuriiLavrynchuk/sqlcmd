@@ -27,7 +27,12 @@ class ExSelect implements Command {
         dataInOut.outPut("Enter tablename:");
         String selectmsg = dataInOut.inPut();
 
-        Statement statement = dBconnection.getStatement();
+        Statement statement = null;
+        try {
+            statement = dBconnection.getStatement();
+        } catch (SQLException e) {
+
+        }
         Select select = new Select(statement, dataInOut);
         String[] tableColumns = select.getTableColumns(selectmsg);
         printHeader(tableColumns);
@@ -37,10 +42,9 @@ class ExSelect implements Command {
             tableData = select.select(selectmsg);
             printTable(tableData);
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
-
 
     private void printTable(DataSet[] tableData) {
         for (DataSet row : tableData) {

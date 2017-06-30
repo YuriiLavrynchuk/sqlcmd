@@ -4,7 +4,6 @@ import model.DBconnection;
 import model.SelectTablesList;
 import view.DataInOut;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class ExTableList implements Command{
             String[] tablesList = new SelectTablesList(statement).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));
         } catch (SQLException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }

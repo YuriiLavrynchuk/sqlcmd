@@ -2,9 +2,14 @@ package exeption;
 
 public class InvalidException extends Exception {
 
-    public InvalidException(String message, Exception e) {
-        super(message);
-        System.out.println(message + " " + e.getMessage());
-    }
+    public InvalidException(String message, Exception exception) {
 
+        String eMessage = exception.getMessage();
+        Throwable cause = exception.getCause();
+        if (cause != null) {
+            eMessage += " " + cause.getMessage();
+        }
+        System.out.println("FAIL! Cause:\r\n" + eMessage + "\r\n" + message);
+        System.out.println("Try again.");
+    }
 }
