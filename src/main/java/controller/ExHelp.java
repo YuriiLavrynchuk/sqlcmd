@@ -18,14 +18,14 @@ public class ExHelp implements  Command{
 
     @Override
     public void execute(String command) {
-        dataInOut.outPut("Exist command:");
-        dataInOut.outPut("connect       - connection to database");
-        dataInOut.outPut("select        - query from table");
-        dataInOut.outPut("tablelist     - getting names all tables");
-        dataInOut.outPut("update        - update rows in the table");
-        dataInOut.outPut("insert        - insert new row in the table");
-        dataInOut.outPut("delete        - delete row from table");
-        dataInOut.outPut("exit          - exit from application");
-        dataInOut.outPut("get columns   - get columns from table");
+        dataInOut.outPut("Exist command:\r\n" +
+                             "connect       - connection to database\r\n" +
+                             "select        - query from table\r\n" +
+                             "tablelist     - getting names all tables\r\n" +
+                             "update        - update rows in the table\r\n" +
+                             "insert        - insert new row in the table\r\n" +
+                             "delete        - delete row from table\r\n" +
+                             "exit          - exit from application\r\n" +
+                             "get columns   - get columns from table");
     }
 }

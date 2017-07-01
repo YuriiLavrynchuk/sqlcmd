@@ -10,11 +10,9 @@ import java.util.Arrays;
 
 public class Select {
     private final Statement statement;
-    private DataInOut dataInOut;
 
     public Select(Statement statement, DataInOut dataInOut){
         this.statement = statement;
-        this.dataInOut = dataInOut;
     }
 
     public DataSet[] select(String tableName) throws SQLException {
@@ -37,7 +35,7 @@ public class Select {
 //        statement.close();
         return result;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return new DataSet[0];
         }
     }
@@ -51,7 +49,14 @@ public class Select {
         return tableSize;
     }
 
-    public String[] getTableColumns(String tableName) {
+    public String[] getTableColumns(String msg) {
+        String tableName;
+        int spaceindex = msg.indexOf(" ");
+        if(spaceindex > 0){
+            tableName = msg.substring(0, spaceindex);
+        }else {
+            tableName = msg;
+        }
         try {
             ResultSet rs = statement.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'");
             String[] tables = new String[100];
@@ -63,7 +68,6 @@ public class Select {
 //            statement.close();
             return tables;
         } catch (SQLException e) {
-            e.printStackTrace();
             return new String[0];
         }
     }

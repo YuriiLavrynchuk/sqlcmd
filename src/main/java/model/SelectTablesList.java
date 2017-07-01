@@ -12,7 +12,7 @@ public class SelectTablesList {
          this.statement = st;
     }
 
-    public String[] selectAllTable(){
+    public String[] selectAllTable() throws SQLException{
         try {
             ResultSet select = statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'");
             String[] tables = new String[100];
@@ -23,7 +23,6 @@ public class SelectTablesList {
             tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e){
-            System.out.println("ResultSet ERROR");
         }
         return new String[0];
     }

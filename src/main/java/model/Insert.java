@@ -14,4 +14,17 @@ public class Insert {
             statement.close();
         }
     }
+
+    public Insert(Statement st, String tablename, DataSet input) {
+        try {
+            String tableNames = new GetNamesValuesFormated(input, "%s,").GetNamesFormated();
+            String values = new GetNamesValuesFormated(input, "'%s',").getValuesFormated();
+
+            st.executeUpdate("INSERT INTO " + tablename + " (" + tableNames + ")" +
+                    "VALUES (" + values + ")");
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

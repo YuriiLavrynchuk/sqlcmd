@@ -36,7 +36,6 @@ public class DBconnection {
                 connection = DriverManager.getConnection(url, username, password);
             } catch (SQLException e){
                 throw new InvalidException("Can't get connection to database:" + username, e);
-//                TODO стоит ли закрывать здесь соединение?
             }
         }
         return connection;
@@ -46,11 +45,11 @@ public class DBconnection {
         return connection != null;
     }
 
-    public Statement getStatement() {
+    public Statement getStatement() throws SQLException {
         try {
             statement = connection.createStatement();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
         return statement;
     }

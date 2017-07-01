@@ -1,10 +1,9 @@
 package controller;
 
 import exeption.ExitException;
+import exeption.InvalidException;
 import model.DBconnection;
 import view.DataInOut;
-
-import java.sql.Connection;
 
 public class MainController {
     private final DataInOut dataInOut;
@@ -28,7 +27,7 @@ public class MainController {
         };
     }
 
-    public void run() {
+    public void run() throws InvalidException {
         try {
             start();
         } catch (ExitException e){
@@ -36,7 +35,7 @@ public class MainController {
         }
     }
 
-    public void start() {
+    public void start() throws InvalidException, ExitException {
 
         dataInOut.outPut("Hello!");
         dataInOut.outPut("Please connect to database using command 'connect'");
@@ -54,21 +53,10 @@ public class MainController {
                         if (e instanceof ExitException) {
                             throw e;
                         }
-                        printError(e);
-                        break;
+                        throw new InvalidException("ERROR", e);
                     }
                 }
                 dataInOut.outPut("Please enter command or help:");
             }
         }
-
-    private void printError(Exception exeption) {
-        String eMessage = exeption.getMessage();
-        Throwable cause = exeption.getCause();
-        if (cause != null) {
-            eMessage += " " + cause.getMessage();
-        }
-        dataInOut.outPut("FAIL! Cause: " + eMessage);
-        dataInOut.outPut("Try again.");
-    }
 }
