@@ -48,24 +48,11 @@ public class DBtest {
 
     @Test
     public void testInsertUsingPut() throws SQLException {
+
         st = connectToDB.createStatement();
         new Delete(st, "delete from users where id = 7");
         st.close();
-//        // when
-//        DataSet input = new DataSet();
-//        input.put("name", "Stiven");
-//        input.put("password", "pass");
-//        input.put("id", 13);
-//        manager.create("user", input);
-//
-//        // then
-//        DataSet[] users = manager.getTableData("user");
-//        assertEquals(1, users.length);
-//
-//        DataSet user = users[0];
-//        assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
-//        assertEquals("[Stiven, pass, 13]", Arrays.toString(user.getValues()));
-
+        //when
         st = connectToDB.createStatement();
         DataSet input = new DataSet();
         input.put("id", 7);
@@ -87,6 +74,42 @@ public class DBtest {
         st = connectToDB.createStatement();
         new Delete(st, "delete from users where id = 7");
         st.close();
+    }
+
+    @Test
+    public void testUpdatetUsingPut() throws SQLException {
+
+        st = connectToDB.createStatement();
+        new Delete(st, "delete from users where id = 7");
+        st.close();
+
+        st = connectToDB.createStatement();
+        DataSet input = new DataSet();
+
+        input.put("id", 7);
+        input.put("name", "User7");
+        input.put("password", "7777");
+        new Insert(st, "users", input);
+        st.close();
+
+        DataSet newValue = new DataSet();
+        newValue.put("password", "8888");
+        newValue.put("name", "User7777");
+        new Update (connectToDB, "users", 7, newValue);
+
+        st = connectToDB.createStatement();
+        DataSet[] users = new Select(st, dataInOut).select("users where id=7");
+        assertEquals(1, users.length);
+        st.close();
+
+        DataSet user = users[0];
+        assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
+        assertEquals("[7, User7777, 8888]", Arrays.toString(user.getValues()));
+
+        st = connectToDB.createStatement();
+        new Delete(st, "delete from users where id = 7");
+        st.close();
+
     }
 
     @Test

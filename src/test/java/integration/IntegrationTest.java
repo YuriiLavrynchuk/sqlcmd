@@ -280,10 +280,10 @@ public class IntegrationTest {
                 "--------------------\r\n" +
                 "|id|name|password|\r\n" +
                 "--------------------\r\n" +
-                "|1|Admin|0000|\r\n" +
-                "|2|User1|1111|\r\n" +
-                "|3|User3|aaaa|\r\n" +
-                "|4|Yuriy|1258|\r\n" +
+                "|1|Admin|1111|\r\n" +
+                "|2|User2|4532|\r\n" +
+                "|3|User3|6443|\r\n" +
+                "|4|User4|4444|\r\n" +
                 "|5|User5|9999|\r\n" +
                 "--------------------\r\n" +
                 "Please enter command or help:\r\n" +

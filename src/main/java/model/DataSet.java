@@ -26,12 +26,6 @@ public class DataSet {
     public int freeIndex = 0;
 
     public void put(String name, Object value) {
-        for (int index = 0; index < freeIndex; index++) {
-            if (data[index].getName().equals(name)) {
-                data[index].value = value;
-                return;
-            }
-        }
         data[freeIndex++] = new Data(name, value);
     }
 

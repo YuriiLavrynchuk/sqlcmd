@@ -17,13 +17,11 @@ public class Select {
 
     public DataSet[] select(String tableName) throws SQLException {
         int size = getTableSize(tableName);
-        ResultSet rs = null;
         try {
-            rs = statement.executeQuery("SELECT * FROM " + tableName);
-
-        ResultSetMetaData rsmd = rs.getMetaData();
-        DataSet[] result = new DataSet[size];
-        int index = 0;
+            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DataSet[] result = new DataSet[size];
+            int index = 0;
         while (rs.next()) {
             DataSet dataSet = new DataSet();
             result[index++] = dataSet;
