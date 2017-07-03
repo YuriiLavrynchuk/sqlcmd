@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import model.Delete;
 import view.DataInOut;
@@ -11,7 +12,7 @@ class ExDelete implements Command {
     private DataInOut dataInOut;
     private DBconnection dBconnection;
 
-    ExDelete(DataInOut dataInOut, DBconnection dBconnection){
+    ExDelete(DataInOut dataInOut, DBconnection dBconnection) {
         this.dataInOut = dataInOut;
         this.dBconnection = dBconnection;
     }
@@ -27,9 +28,9 @@ class ExDelete implements Command {
         String deletemsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
             new Delete(statement, deletemsg);
-        } catch (Exception e) {
-//            e.printStackTrace();
-            dataInOut.outPut("ExDelete delete ERROR");
+        } catch (SQLException e) {
+            //do nothing
+            new InvalidException("ExDelete delete ERROR", e);
         }
     }
 }

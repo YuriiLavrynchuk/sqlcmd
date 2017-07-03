@@ -29,11 +29,8 @@ public class Select {
                 dataSet.put(rsmd.getColumnName(i), rs.getObject(i));
             }
         }
-//        rs.close();
-//        statement.close();
         return result;
         } catch (SQLException e) {
-//            e.printStackTrace();
             return new DataSet[0];
         }
     }
@@ -47,7 +44,7 @@ public class Select {
         return tableSize;
     }
 
-    public String[] getTableColumns(String msg) {
+    public String[] getTableColumns(String msg) throws SQLException{
         String tableName;
         int spaceindex = msg.indexOf(" ");
         if(spaceindex > 0){

@@ -42,7 +42,6 @@ public class MainController {
 
             while (true) {
                 String intput = dataInOut.inPut();
-
                 for (Command command : commands) {
                     try {
                     if (command.checkCommand(intput)) {

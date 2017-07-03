@@ -30,7 +30,6 @@ public class DBconnection {
                 Class.forName("org.postgresql.Driver");
             } catch (ClassNotFoundException e) {
                 System.out.println("You should add JDBC jar to project.");
-//                e.printStackTrace();
             }
             try {
                 connection = DriverManager.getConnection(url, username, password);

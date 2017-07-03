@@ -28,7 +28,6 @@ public class ExTableList implements Command{
             String[] tablesList = new SelectTablesList(statement).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));
         } catch (Exception e) {
-//            e.printStackTrace();
             throw new InvalidException("ERROR SelectTablesList", e);
         }
     }

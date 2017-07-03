@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import view.DataInOut;
 
@@ -26,7 +27,6 @@ public class ExConnectToDB implements Command{
     }
 
     public Connection connect(){
-//        while (connection == null) {
             dataInOut.outPut("Please insert dbname:");
             String dbname = dataInOut.inPut();
             dataInOut.outPut("Please insert username:");
@@ -36,9 +36,8 @@ public class ExConnectToDB implements Command{
             try {
                 connection = dbConnection.connection(dbname, username, password);
                 dataInOut.outPut("Connection success!");
-            } catch (Exception e) {
+            } catch (InvalidException e) {
                 connection = null;
-//                e.printStackTrace();
             }
         return connection;
     }
