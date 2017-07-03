@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import model.Select;
 import view.DataInOut;
@@ -30,8 +31,8 @@ public class ExGetColumns implements Command {
         try (Statement statement = dBconnection.getStatement()){
             select = new Select(statement, dataInOut).getTableColumns(selectmsg);
         } catch (SQLException e) {
-//            e.printStackTrace();
+            new InvalidException("ExGetColumns get columns error", e);
         }
-        System.out.println(Arrays.toString(select));
+        dataInOut.outPut(Arrays.toString(select));
     }
 }

@@ -9,9 +9,7 @@ public class Delete {
             statement.executeUpdate(deletemsg);
             System.out.println("Row deleted");
         } catch (SQLException e) {
-            System.out.println("DELETE ERROR");
-        } finally {
-            statement.close();
+            throw e;
         }
     }
 }

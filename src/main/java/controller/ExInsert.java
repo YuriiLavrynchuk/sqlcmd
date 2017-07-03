@@ -4,7 +4,6 @@ import model.DBconnection;
 import model.Insert;
 import view.DataInOut;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -19,7 +18,6 @@ class ExInsert implements Command{
 
     @Override
     public boolean checkCommand(String command) {
-
         return command.equals("insert");
     }
 
@@ -30,8 +28,7 @@ class ExInsert implements Command{
         try (Statement statement = dBconnection.getStatement()){
             new Insert(statement, insertmsg);
         } catch (SQLException e) {
-            dataInOut.outPut("ExInsert insert ERROR");
-//            e.printStackTrace();
+            //do nothing
         }
     }
 }

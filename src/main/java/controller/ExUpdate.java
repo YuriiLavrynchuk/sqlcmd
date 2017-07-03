@@ -28,8 +28,7 @@ class ExUpdate implements Command {
         try(Statement statement = dBconnection.getStatement()) {
             new Update(statement, updatemsg);
         } catch (SQLException e) {
-//            e.printStackTrace();
-            System.out.println("ExUpdate update ERROR");
+            //do nothing
         }
     }
 }

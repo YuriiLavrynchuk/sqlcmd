@@ -1,11 +1,11 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import model.DataSet;
 import model.Select;
 import view.DataInOut;
 
-import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExSelect implements Command {
@@ -27,22 +27,14 @@ class ExSelect implements Command {
         dataInOut.outPut("Enter tablename:");
         String selectmsg = dataInOut.inPut();
 
-        Statement statement = null;
-        try {
-            statement = dBconnection.getStatement();
-        } catch (SQLException e) {
-
-        }
-        Select select = new Select(statement, dataInOut);
-        String[] tableColumns = select.getTableColumns(selectmsg);
-        printHeader(tableColumns);
-
-        DataSet[] tableData = null;
-        try {
-            tableData = select.select(selectmsg);
+        try (Statement statement = dBconnection.getStatement()){
+            Select select = new Select(statement, dataInOut);
+            String[] tableColumns = select.getTableColumns(selectmsg);
+            printHeader(tableColumns);
+            DataSet[] tableData = select.select(selectmsg);
             printTable(tableData);
-        } catch (SQLException e) {
-//            e.printStackTrace();
+        } catch (Exception e) {
+            new InvalidException("ExSelect select Error", e);
         }
     }
 

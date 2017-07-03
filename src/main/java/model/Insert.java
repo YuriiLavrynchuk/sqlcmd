@@ -1,5 +1,7 @@
 package model;
 
+import exeption.InvalidException;
+
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -9,13 +11,11 @@ public class Insert {
             statement.executeUpdate(insertmsg);
             System.out.println("Row inserted");
         } catch (SQLException e) {
-            System.out.println("Insert ERROR");
-        } finally {
-            statement.close();
+            new InvalidException("ExInsert insert ERROR", e);
         }
     }
 
-    public Insert(Statement st, String tablename, DataSet input) {
+    public Insert(Statement st, String tablename, DataSet input) throws SQLException {
         try {
             String tableNames = new GetNamesValuesFormated(input, "%s,").GetNamesFormated();
             String values = new GetNamesValuesFormated(input, "'%s',").getValuesFormated();
@@ -24,7 +24,7 @@ public class Insert {
                     "VALUES (" + values + ")");
             st.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //do nothing
         }
     }
 }
