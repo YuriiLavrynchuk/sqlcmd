@@ -2,34 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="3b04c93c-9345-4f9a-b3e8-cd6ce2f9cdd0" name="Default" comment="I started new project sqlcmd on maven and add git." />
-    <list default="true" id="50fd00d5-63af-4cab-8fa6-d8b7ef49ded5" name="sqlcmd" comment="Закончил изменение вывода exceptions">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/model/DBconnection.java" afterPath="$PROJECT_DIR$/src/main/java/model/DbConnection.java" />
+    <list default="true" id="50fd00d5-63af-4cab-8fa6-d8b7ef49ded5" name="sqlcmd" comment="Почистил код">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/CheckConnection.java" afterPath="$PROJECT_DIR$/src/main/java/controller/CheckConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/Command.java" afterPath="$PROJECT_DIR$/src/main/java/controller/Command.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExConnectToDB.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExConnectToDB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExDelete.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExDelete.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExExit.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExExit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExGetColumns.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExGetColumns.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExHelp.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExHelp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExInsert.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExInsert.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExNotExistCommand.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExNotExistCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExSelect.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExSelect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExTableList.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExTableList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ExUpdate.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ExUpdate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/Main.java" afterPath="$PROJECT_DIR$/src/main/java/controller/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/DataSet.java" afterPath="$PROJECT_DIR$/src/main/java/model/DataSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/Delete.java" afterPath="$PROJECT_DIR$/src/main/java/model/Delete.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/GetNamesValuesFormated.java" afterPath="$PROJECT_DIR$/src/main/java/model/GetNamesValuesFormated.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/Insert.java" afterPath="$PROJECT_DIR$/src/main/java/model/Insert.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/Select.java" afterPath="$PROJECT_DIR$/src/main/java/model/Select.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/SelectTablesList.java" afterPath="$PROJECT_DIR$/src/main/java/model/SelectTablesList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/Update.java" afterPath="$PROJECT_DIR$/src/main/java/model/Update.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/DBtest.java" afterPath="$PROJECT_DIR$/src/test/java/DBtest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/integration/ConfigurableInputStream.java" afterPath="$PROJECT_DIR$/src/test/java/integration/ConfigurableInputStream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/integration/IntegrationTest.java" afterPath="$PROJECT_DIR$/src/test/java/integration/IntegrationTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/integration/LogOutputStream.java" afterPath="$PROJECT_DIR$/src/test/java/integration/LogOutputStream.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -63,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Insert.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Insert.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/model/Insert.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -71,16 +46,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1232,7 +1197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499106569421</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Почистил код">
+      <created>1499108978272</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1499108978272</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1363,7 +1335,6 @@
       <path value="C:\ua\com\juja\sqlcmd\sqlcmd" />
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="I started new project sqlcmd on maven and add git." />
     <MESSAGE value="sqlcmd" />
     <MESSAGE value="подключен jdbc driver а также создан класс для проверки подключения" />
     <MESSAGE value="подключен jdbc driver а также создан класс для проверки подключения к БД" />
@@ -1388,7 +1359,8 @@
     <MESSAGE value="Проверил try/catch/with resources и начал переделывать&#10;вывод exceptions" />
     <MESSAGE value="Изменение вывода exceptions" />
     <MESSAGE value="Закончил изменение вывода exceptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Закончил изменение вывода exceptions" />
+    <MESSAGE value="Почистил код" />
+    <option name="LAST_COMMIT_MESSAGE" value="Почистил код" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1760,6 +1732,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Insert.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1767,14 +1747,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
