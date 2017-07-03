@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import model.Insert;
 import view.DataInOut;
@@ -28,7 +29,7 @@ class ExInsert implements Command{
         try (Statement statement = dBconnection.getStatement()){
             new Insert(statement, insertmsg);
         } catch (SQLException e) {
-            //do nothing
+            new InvalidException("ExInsert insert ERROR", e);
         }
     }
 }

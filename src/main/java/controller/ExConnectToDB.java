@@ -5,6 +5,7 @@ import model.DBconnection;
 import view.DataInOut;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class ExConnectToDB implements Command{
     private final DataInOut dataInOut;
@@ -36,8 +37,9 @@ public class ExConnectToDB implements Command{
             try {
                 connection = dbConnection.connection(dbname, username, password);
                 dataInOut.outPut("Connection success!");
-            } catch (InvalidException e) {
+            } catch (Exception e) {
                 connection = null;
+                new InvalidException("Can't get connection to database:" + dbname, e);
             }
         return connection;
     }

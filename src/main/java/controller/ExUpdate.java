@@ -1,5 +1,6 @@
 package controller;
 
+import exeption.InvalidException;
 import model.DBconnection;
 import model.Update;
 import view.DataInOut;
@@ -28,7 +29,7 @@ class ExUpdate implements Command {
         try(Statement statement = dBconnection.getStatement()) {
             new Update(statement, updatemsg);
         } catch (SQLException e) {
-            //do nothing
+            new InvalidException("Update ERROR", e);
         }
     }
 }

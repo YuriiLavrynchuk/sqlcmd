@@ -18,7 +18,7 @@ public class DBconnection {
                 password == null);
     }
 
-    public Connection connection(String dbname, String username, String password) throws InvalidException {
+    public Connection connection(String dbname, String username, String password) throws InvalidException, SQLException {
         String url = "jdbc:postgresql://localhost:5432/" + dbname + "?loggerLevel=OFF";
 
         if (!checkParametrs(dbname, username, password))
@@ -34,7 +34,7 @@ public class DBconnection {
             try {
                 connection = DriverManager.getConnection(url, username, password);
             } catch (SQLException e){
-                throw new InvalidException("Can't get connection to database:" + username, e);
+                throw e;
             }
         }
         return connection;

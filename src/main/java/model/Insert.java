@@ -11,7 +11,7 @@ public class Insert {
             statement.executeUpdate(insertmsg);
             System.out.println("Row inserted");
         } catch (SQLException e) {
-            new InvalidException("ExInsert insert ERROR", e);
+            throw e;
         }
     }
 
@@ -24,7 +24,7 @@ public class Insert {
                     "VALUES (" + values + ")");
             st.close();
         } catch (SQLException e) {
-            //do nothing
+            throw e;
         }
     }
 }

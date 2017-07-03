@@ -26,15 +26,6 @@ public class IntegrationTest {
         System.setOut(new PrintStream(out));
     }
 
-//    @Before
-//    public void cleareIn() {
-//        try {
-//            in.reset();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     @Test
     public void testHelp() {
 
@@ -280,10 +271,10 @@ public class IntegrationTest {
                 "--------------------\r\n" +
                 "|id|name|password|\r\n" +
                 "--------------------\r\n" +
-                "|1|Admin|0000|\r\n" +
-                "|2|User1|1111|\r\n" +
-                "|3|User3|aaaa|\r\n" +
-                "|4|Yuriy|1258|\r\n" +
+                "|1|Admin|1111|\r\n" +
+                "|2|User2|4532|\r\n" +
+                "|3|User3|6443|\r\n" +
+                "|4|User4|4444|\r\n" +
                 "|5|User5|9999|\r\n" +
                 "--------------------\r\n" +
                 "Please enter command or help:\r\n" +
@@ -364,11 +355,11 @@ public class IntegrationTest {
                 "Enter Delete query:\r\n" +
                 //deletemsg
                 "FAIL! Cause:\r\n" +
-                "ERROR: syntax error at or near \"del\"\r\n" +
+                "ERROR: syntax error at or near \"del\"\n" +
                 "  Позиция: 1\r\n" +
                 "ExDelete delete ERROR\r\n" +
                 "Try again.\r\n" +
-                "Please enter command or help:\n" +
+                "Please enter command or help:\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -400,8 +391,8 @@ public class IntegrationTest {
                 "Enter Update query:\r\n" +
                 //updatemsg
                 "FAIL! Cause:\r\n" +
-//                "ERROR: syntax error at or near \"updt\"\r\n" +
-//                "  Позиция: 1\r\n" +
+                "ERROR: syntax error at or near \"updt\"\n" +
+                "  Позиция: 1\r\n" +
                 "Update ERROR\r\n" +
                 "Try again.\r\n" +
                 "Please enter command or help:\r\n" +
@@ -435,7 +426,11 @@ public class IntegrationTest {
                 //insert
                 "Enter Insert query:\r\n" +
                 //insertmsg
-                "Insert ERROR\r\n" +
+                "FAIL! Cause:\r\n" +
+                "ERROR: syntax error at or near \"insr\"\n" +
+                "  Позиция: 1\r\n" +
+                "ExInsert insert ERROR\r\n" +
+                "Try again.\r\n" +
                 "Please enter command or help:\r\n" +
                 //exit
                 "Good by!\r\n", getData());

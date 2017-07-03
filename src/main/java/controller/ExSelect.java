@@ -6,6 +6,7 @@ import model.DataSet;
 import model.Select;
 import view.DataInOut;
 
+import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExSelect implements Command {
@@ -33,7 +34,7 @@ class ExSelect implements Command {
             printHeader(tableColumns);
             DataSet[] tableData = select.select(selectmsg);
             printTable(tableData);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             new InvalidException("ExSelect select Error", e);
         }
     }

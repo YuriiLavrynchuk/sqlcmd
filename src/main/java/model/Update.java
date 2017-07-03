@@ -13,7 +13,7 @@ public class Update {
             statement.executeUpdate(updatemsg);
             System.out.println("Row updated");
         } catch (SQLException e) {
-            new InvalidException("Update ERROR", e);
+            throw e;
         }
     }
 
@@ -31,7 +31,7 @@ public class Update {
             ps.setInt(index, id);
             ps.executeUpdate();
         } catch (SQLException e){
-            //do nothing
+            throw e;
         }
     }
 }

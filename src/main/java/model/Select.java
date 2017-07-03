@@ -35,12 +35,15 @@ public class Select {
         }
     }
 
-
     private int getTableSize(String tableName) throws SQLException {
         int tableSize = 0;
+        try{
             ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
             selectCount.next();
             tableSize = selectCount.getInt(1);
+        } catch (SQLException e) {
+            throw e;
+        }
         return tableSize;
     }
 
@@ -60,7 +63,7 @@ public class Select {
                 tables[index++] = rs.getString("column_name");
             }
             tables = Arrays.copyOf(tables, index, String[].class);
-//            statement.close();
+
             return tables;
         } catch (SQLException e) {
             return new String[0];
