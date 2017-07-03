@@ -1,7 +1,7 @@
 package controller;
 
 import exeption.InvalidException;
-import model.DBconnection;
+import model.DbConnection;
 import model.Delete;
 import view.DataInOut;
 
@@ -9,12 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExDelete implements Command {
-    private DataInOut dataInOut;
-    private DBconnection dBconnection;
+    private final DataInOut dataInOut;
+    private final DbConnection dBconnection;
 
-    ExDelete(DataInOut dataInOut, DBconnection dBconnection) {
+    ExDelete(DataInOut dataInOut, DbConnection dbConnection) {
         this.dataInOut = dataInOut;
-        this.dBconnection = dBconnection;
+        this.dBconnection = dbConnection;
     }
 
     @Override
@@ -25,9 +25,9 @@ class ExDelete implements Command {
     @Override
     public void execute(String command) {
         dataInOut.outPut("Enter Delete query:");
-        String deletemsg = dataInOut.inPut();
+        String deleteMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
-            new Delete(statement, deletemsg);
+            new Delete(statement, deleteMsg);
         } catch (SQLException e) {
             new InvalidException("ExDelete delete ERROR", e);
         }

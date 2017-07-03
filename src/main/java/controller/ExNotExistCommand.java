@@ -3,7 +3,7 @@ package controller;
 import view.DataInOut;
 
 public class ExNotExistCommand implements Command {
-    private DataInOut dataInOut;
+    private final DataInOut dataInOut;
     public ExNotExistCommand(DataInOut dataInOut) {
         this.dataInOut = dataInOut;
     }

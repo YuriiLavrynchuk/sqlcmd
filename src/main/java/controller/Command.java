@@ -2,7 +2,7 @@ package controller;
 
 import exeption.InvalidException;
 
-public interface Command {
+interface Command {
 
     boolean checkCommand (String command);
 

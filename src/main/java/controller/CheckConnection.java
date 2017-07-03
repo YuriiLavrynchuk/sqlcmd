@@ -1,20 +1,20 @@
 package controller;
 
-import model.DBconnection;
+import model.DbConnection;
 import view.DataInOut;
 
 public class CheckConnection implements Command {
-    private DataInOut dataInOut;
-    private DBconnection dbConnection;
+    private final DataInOut dataInOut;
+    private final DbConnection dBconnection;
 
-    public CheckConnection(DataInOut dataInOut, DBconnection dbConnection) {
+    public CheckConnection(DataInOut dataInOut, DbConnection dbConnection) {
         this.dataInOut = dataInOut;
-        this.dbConnection = dbConnection;
+        this.dBconnection = dbConnection;
     }
 
     @Override
     public boolean checkCommand(String command) {
-        return !dbConnection.checkConnection();
+        return !dBconnection.checkConnection();
     }
 
     @Override

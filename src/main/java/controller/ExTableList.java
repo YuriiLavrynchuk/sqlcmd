@@ -1,7 +1,7 @@
 package controller;
 
 import exeption.InvalidException;
-import model.DBconnection;
+import model.DbConnection;
 import model.SelectTablesList;
 import view.DataInOut;
 
@@ -10,12 +10,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 public class ExTableList implements Command{
-    private DataInOut dataInOut;
-    private DBconnection dBconnection;
+    private final DataInOut dataInOut;
+    private final DbConnection dBconnection;
 
-    ExTableList(DataInOut dataInOut, DBconnection dBconnection) {
+    ExTableList(DataInOut dataInOut, DbConnection dbConnection) {
         this.dataInOut = dataInOut;
-        this.dBconnection = dBconnection;
+        this.dBconnection = dbConnection;
     }
 
     @Override

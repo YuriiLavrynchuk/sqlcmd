@@ -4,7 +4,7 @@ import view.DataInOut;
 
 public class ExHelp implements  Command{
 
-    private DataInOut dataInOut;
+    private final DataInOut dataInOut;
 
     public ExHelp(DataInOut dataInOut) {
 

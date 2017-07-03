@@ -7,23 +7,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBconnection {
+public class DbConnection {
     private Connection connection;
-    private Statement statement;
 
-    private boolean checkParametrs(String dbname, String username, String password){
+    private boolean checkParam(String dbName, String username, String password){
 
-        return !(dbname == null ||
+        return !(dbName == null ||
                 username == null ||
                 password == null);
     }
 
-    public Connection connection(String dbname, String username, String password) throws InvalidException, SQLException {
-        String url = "jdbc:postgresql://localhost:5432/" + dbname + "?loggerLevel=OFF";
+    public Connection connection(String dbName, String username, String password) throws InvalidException, SQLException {
+        String url = "jdbc:postgresql://localhost:5432/" + dbName + "?loggerLevel=OFF";
 
-        if (!checkParametrs(dbname, username, password))
+        if (!checkParam(dbName, username, password))
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
-                    + dbname + "username: " + username
+                    + dbName + "username: " + username
                     + " password: " + password, new RuntimeException());
         else {
             try {
@@ -45,6 +44,7 @@ public class DBconnection {
     }
 
     public Statement getStatement() throws SQLException {
+        Statement statement = null;
         try {
             statement = connection.createStatement();
         } catch (SQLException e) {

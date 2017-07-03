@@ -2,27 +2,27 @@ package controller;
 
 import exeption.ExitException;
 import exeption.InvalidException;
-import model.DBconnection;
+import model.DbConnection;
 import view.DataInOut;
 
-public class MainController {
+class MainController {
     private final DataInOut dataInOut;
     private final Command[] commands;
 
-    public MainController(DataInOut dataInOut, DBconnection dbConnection) {
+    public MainController(DataInOut dataInOut, DbConnection dBconnection) {
         this.dataInOut = dataInOut;
 
         this.commands = new Command[] {
-                new ExConnectToDB(dataInOut, dbConnection),
+                new ExConnectToDB(dataInOut, dBconnection),
                 new ExHelp(dataInOut),
                 new ExExit(dataInOut),
-                new CheckConnection(dataInOut, dbConnection),
-                new ExTableList(dataInOut, dbConnection),
-                new ExUpdate(dataInOut, dbConnection),
-                new ExInsert(dataInOut, dbConnection),
-                new ExDelete(dataInOut, dbConnection),
-                new ExSelect(dataInOut, dbConnection),
-                new ExGetColumns(dataInOut, dbConnection),
+                new CheckConnection(dataInOut, dBconnection),
+                new ExTableList(dataInOut, dBconnection),
+                new ExUpdate(dataInOut, dBconnection),
+                new ExInsert(dataInOut, dBconnection),
+                new ExDelete(dataInOut, dBconnection),
+                new ExSelect(dataInOut, dBconnection),
+                new ExGetColumns(dataInOut, dBconnection),
                 new ExNotExistCommand(dataInOut)
         };
     }
@@ -35,17 +35,17 @@ public class MainController {
         }
     }
 
-    public void start() throws InvalidException, ExitException {
+    private void start() throws InvalidException, ExitException {
 
         dataInOut.outPut("Hello!");
         dataInOut.outPut("Please connect to database using command 'connect'");
 
             while (true) {
-                String intput = dataInOut.inPut();
+                String intPut = dataInOut.inPut();
                 for (Command command : commands) {
                     try {
-                    if (command.checkCommand(intput)) {
-                        command.execute(intput);
+                    if (command.checkCommand(intPut)) {
+                        command.execute(intPut);
                         break;
                     }
                     } catch (Exception e) {

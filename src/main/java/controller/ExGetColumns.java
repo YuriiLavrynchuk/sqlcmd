@@ -1,7 +1,7 @@
 package controller;
 
 import exeption.InvalidException;
-import model.DBconnection;
+import model.DbConnection;
 import model.Select;
 import view.DataInOut;
 
@@ -10,12 +10,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 public class ExGetColumns implements Command {
-    private DataInOut dataInOut;
-    private DBconnection dBconnection;
+    private final DataInOut dataInOut;
+    private final DbConnection dBconnection;
 
-    public ExGetColumns(DataInOut dataInOut, DBconnection dBconnection){
+    public ExGetColumns(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
-        this.dBconnection = dBconnection;
+        this.dBconnection = dbConnection;
     }
 
     @Override
@@ -26,10 +26,10 @@ public class ExGetColumns implements Command {
     @Override
     public void execute(String command) {
         dataInOut.outPut("Enter tablename:");
-        String selectmsg = dataInOut.inPut();
+        String selectMsg = dataInOut.inPut();
         String[] select = new String[0];
         try (Statement statement = dBconnection.getStatement()){
-            select = new Select(statement, dataInOut).getTableColumns(selectmsg);
+            select = new Select(statement, dataInOut).getTableColumns(selectMsg);
         } catch (SQLException e) {
             new InvalidException("ExGetColumns get columns error", e);
         }

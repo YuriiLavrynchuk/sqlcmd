@@ -496,7 +496,7 @@ public class IntegrationTest {
                 "Good by!\r\n", getData());
     }
 
-    public String getData() {
+    private String getData() {
         try {
             String result = new String(out.toByteArray(), "UTF-8");
             out.reset();

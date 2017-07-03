@@ -1,9 +1,9 @@
 package model;
 
-public class GetNamesValuesFormated {
+class GetNamesValuesFormated {
 
-    private String format;
-    private DataSet newValue;
+    private final String format;
+    private final DataSet newValue;
 
     public GetNamesValuesFormated(DataSet newValue, String format) {
         this.newValue = newValue;

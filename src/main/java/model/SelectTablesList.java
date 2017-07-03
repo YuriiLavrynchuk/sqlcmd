@@ -12,7 +12,7 @@ public class SelectTablesList {
          this.statement = st;
     }
 
-    public String[] selectAllTable() throws SQLException{
+    public String[] selectAllTable() {
         try {
             ResultSet select = statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'");
             String[] tables = new String[100];

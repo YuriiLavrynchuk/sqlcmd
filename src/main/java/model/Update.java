@@ -1,26 +1,24 @@
 package model;
 
-import exeption.InvalidException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Update {
-    public Update(Statement statement, String updatemsg) throws SQLException {
+    public Update(Statement statement, String updateMsg) throws SQLException {
         try {
-            statement.executeUpdate(updatemsg);
+            statement.executeUpdate(updateMsg);
             System.out.println("Row updated");
         } catch (SQLException e) {
             throw e;
         }
     }
 
-    public Update(Connection connection, String tablename, int id, DataSet newValue) throws SQLException {
+    public Update(Connection connection, String tableName, int id, DataSet newValue) throws SQLException {
 
         String tableNames = new GetNamesValuesFormated(newValue, "%s = ?,").GetNamesFormated();
-        String sql = "UPDATE public." + tablename + " SET " + tableNames + " WHERE id = ?";
+        String sql = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";
 
         try(PreparedStatement ps = connection.prepareStatement(sql)){
             int index = 1;

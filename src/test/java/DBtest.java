@@ -18,7 +18,7 @@ public class DBtest {
 
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
-        connectToDB = new DBconnection().connection("postgres", "postgres", "1234");
+        connectToDB = new DbConnection().connection("postgres", "postgres", "1234");
         st = connectToDB.createStatement();
     }
 
@@ -31,7 +31,7 @@ public class DBtest {
     }
 
     @Test
-    public void testGetcolumns() throws SQLException {
+    public void testGetColumns() throws SQLException {
 
         String[] columns = new Select(st, dataInOut).getTableColumns("users");
         assertEquals("[id, name, password]", Arrays.toString(columns));
@@ -41,8 +41,8 @@ public class DBtest {
     @Test
     public void testSelectAllTables() throws SQLException {
 
-        String[] selectall = new SelectTablesList(st).selectAllTable();
-        assertEquals("[users]", Arrays.toString(selectall));
+        String[] selectAll = new SelectTablesList(st).selectAllTable();
+        assertEquals("[users]", Arrays.toString(selectAll));
         st.close();
     }
 
@@ -77,7 +77,7 @@ public class DBtest {
     }
 
     @Test
-    public void testUpdatetUsingPut() throws SQLException {
+    public void testUpdateUsingPut() throws SQLException {
 
         st = connectToDB.createStatement();
         new Delete(st, "delete from users where id = 7");

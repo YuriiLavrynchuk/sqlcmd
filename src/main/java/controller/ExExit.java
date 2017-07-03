@@ -5,7 +5,7 @@ import view.DataInOut;
 
 public class ExExit implements Command {
 
-    private DataInOut dataInOut;
+    private final DataInOut dataInOut;
 
     public ExExit(DataInOut dataInOut){
         this.dataInOut = dataInOut;

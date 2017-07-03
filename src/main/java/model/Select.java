@@ -19,14 +19,14 @@ public class Select {
         int size = getTableSize(tableName);
         try {
             ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
-            ResultSetMetaData rsmd = rs.getMetaData();
+            ResultSetMetaData rsMd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
             int index = 0;
         while (rs.next()) {
             DataSet dataSet = new DataSet();
             result[index++] = dataSet;
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                dataSet.put(rsmd.getColumnName(i), rs.getObject(i));
+            for (int i = 1; i <= rsMd.getColumnCount(); i++) {
+                dataSet.put(rsMd.getColumnName(i), rs.getObject(i));
             }
         }
         return result;
@@ -35,23 +35,23 @@ public class Select {
         }
     }
 
-    private int getTableSize(String tableName) throws SQLException {
+    private int getTableSize(String tableName) {
         int tableSize = 0;
         try{
             ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
             selectCount.next();
             tableSize = selectCount.getInt(1);
         } catch (SQLException e) {
-            throw e;
+            //do nothing
         }
         return tableSize;
     }
 
-    public String[] getTableColumns(String msg) throws SQLException{
+    public String[] getTableColumns(String msg) {
         String tableName;
-        int spaceindex = msg.indexOf(" ");
-        if(spaceindex > 0){
-            tableName = msg.substring(0, spaceindex);
+        int spaceIndex = msg.indexOf(" ");
+        if(spaceIndex > 0){
+            tableName = msg.substring(0, spaceIndex);
         }else {
             tableName = msg;
         }

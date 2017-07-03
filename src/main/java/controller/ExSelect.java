@@ -1,7 +1,7 @@
 package controller;
 
 import exeption.InvalidException;
-import model.DBconnection;
+import model.DbConnection;
 import model.DataSet;
 import model.Select;
 import view.DataInOut;
@@ -10,12 +10,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 class ExSelect implements Command {
-    private DataInOut dataInOut;
-    private DBconnection dBconnection;
+    private final DataInOut dataInOut;
+    private final DbConnection dBconnection;
 
-    public ExSelect(DataInOut dataInOut, DBconnection dBconnection){
+    public ExSelect(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
-        this.dBconnection = dBconnection;
+        this.dBconnection = dbConnection;
     }
 
     @Override
@@ -26,13 +26,13 @@ class ExSelect implements Command {
     @Override
     public void execute(String command) {
         dataInOut.outPut("Enter tablename:");
-        String selectmsg = dataInOut.inPut();
+        String selectMsg = dataInOut.inPut();
 
         try (Statement statement = dBconnection.getStatement()){
             Select select = new Select(statement, dataInOut);
-            String[] tableColumns = select.getTableColumns(selectmsg);
+            String[] tableColumns = select.getTableColumns(selectMsg);
             printHeader(tableColumns);
-            DataSet[] tableData = select.select(selectmsg);
+            DataSet[] tableData = select.select(selectMsg);
             printTable(tableData);
         } catch (SQLException e) {
             new InvalidException("ExSelect select Error", e);

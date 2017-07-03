@@ -1,20 +1,18 @@
 package controller;
 
 import exeption.InvalidException;
-import model.DBconnection;
+import model.DbConnection;
 import view.DataInOut;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class ExConnectToDB implements Command{
     private final DataInOut dataInOut;
-    private Connection connection;
-    private DBconnection dbConnection;
+    private final DbConnection dBconnection;
 
-    public ExConnectToDB(DataInOut dataInOut, DBconnection dbConnection){
+    public ExConnectToDB(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
-        this.dbConnection = dbConnection;
+        this.dBconnection = dbConnection;
     }
 
     @Override
@@ -27,20 +25,20 @@ public class ExConnectToDB implements Command{
         connect();
     }
 
-    public Connection connect(){
+    private void connect(){
             dataInOut.outPut("Please insert dbname:");
-            String dbname = dataInOut.inPut();
+            String dbName = dataInOut.inPut();
             dataInOut.outPut("Please insert username:");
             String username = dataInOut.inPut();
             dataInOut.outPut("Please insert password:");
             String password = dataInOut.inPut();
-            try {
-                connection = dbConnection.connection(dbname, username, password);
+        Connection connection;
+        try {
+                connection = dBconnection.connection(dbName, username, password);
                 dataInOut.outPut("Connection success!");
             } catch (Exception e) {
                 connection = null;
-                new InvalidException("Can't get connection to database:" + dbname, e);
+                new InvalidException("Can't get connection to database:" + dbName, e);
             }
-        return connection;
     }
 }
