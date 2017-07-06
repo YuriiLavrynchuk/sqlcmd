@@ -20,21 +20,18 @@ public class DbConnection {
     public Connection connection(String dbName, String username, String password) throws InvalidException, SQLException {
         String url = "jdbc:postgresql://localhost:5432/" + dbName + "?loggerLevel=OFF";
 
-        if (!checkParam(dbName, username, password))
+        if (!checkParam(dbName, username, password)){
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
                     + dbName + "username: " + username
                     + " password: " + password, new RuntimeException());
+        }
         else {
             try {
                 Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e){
                 System.out.println("You should add JDBC jar to project.");
             }
-            try {
-                connection = DriverManager.getConnection(url, username, password);
-            } catch (SQLException e){
-                throw e;
-            }
+            connection = DriverManager.getConnection(url, username, password);
         }
         return connection;
     }
@@ -44,12 +41,7 @@ public class DbConnection {
     }
 
     public Statement getStatement() throws SQLException {
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            throw e;
-        }
+        Statement statement = connection.createStatement();
         return statement;
     }
 }

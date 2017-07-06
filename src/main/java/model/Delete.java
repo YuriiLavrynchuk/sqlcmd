@@ -8,7 +8,7 @@ public class Delete {
         try {
             statement.executeUpdate(deleteMsg);
             System.out.println("Row deleted");
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw e;
         }
     }

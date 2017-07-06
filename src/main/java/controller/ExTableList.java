@@ -13,22 +13,22 @@ public class ExTableList implements Command{
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
 
-    ExTableList(DataInOut dataInOut, DbConnection dbConnection) {
+    ExTableList(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("tablelist");
     }
 
     @Override
     public void execute(String command) throws InvalidException {
-        try(Statement statement = dBconnection.getStatement()) {
+        try(Statement statement = dBconnection.getStatement()){
             String[] tablesList = new SelectTablesList(statement).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw new InvalidException("ERROR SelectTablesList", e);
         }
     }

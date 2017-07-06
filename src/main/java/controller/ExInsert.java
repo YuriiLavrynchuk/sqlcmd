@@ -12,23 +12,23 @@ class ExInsert implements Command{
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
 
-    public ExInsert(DataInOut dataInOut, DbConnection dbConnection) {
+    public ExInsert(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("insert");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         dataInOut.outPut("Enter Insert query:");
         String insertMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
             new Insert(statement, insertMsg);
-        } catch (SQLException e) {
+        } catch (SQLException e){
             new InvalidException("ExInsert insert ERROR", e);
         }
     }

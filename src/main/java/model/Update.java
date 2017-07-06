@@ -10,7 +10,7 @@ public class Update {
         try {
             statement.executeUpdate(updateMsg);
             System.out.println("Row updated");
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw e;
         }
     }
@@ -22,7 +22,7 @@ public class Update {
 
         try(PreparedStatement ps = connection.prepareStatement(sql)){
             int index = 1;
-            for (Object value : newValue.getValues()) {
+            for (Object value : newValue.getValues()){
                 ps.setObject(index, value);
                 index++;
             }

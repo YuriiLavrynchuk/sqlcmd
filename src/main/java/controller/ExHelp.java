@@ -6,18 +6,18 @@ public class ExHelp implements  Command{
 
     private final DataInOut dataInOut;
 
-    public ExHelp(DataInOut dataInOut) {
+    public ExHelp(DataInOut dataInOut){
 
         this.dataInOut = dataInOut;
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("help");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         dataInOut.outPut("Exist command:\r\n" +
                              "connect       - connection to database\r\n" +
                              "select        - query from table\r\n" +

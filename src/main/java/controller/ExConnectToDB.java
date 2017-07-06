@@ -16,12 +16,12 @@ public class ExConnectToDB implements Command{
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("connect");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         connect();
     }
 
@@ -36,7 +36,7 @@ public class ExConnectToDB implements Command{
         try {
                 connection = dBconnection.connection(dbName, username, password);
                 dataInOut.outPut("Connection success!");
-            } catch (Exception e) {
+            } catch (Exception e){
                 connection = null;
                 new InvalidException("Can't get connection to database:" + dbName, e);
             }

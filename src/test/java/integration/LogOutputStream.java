@@ -12,7 +12,7 @@ class LogOutputStream extends OutputStream {
         log += new String(bytes, "UTF-8");
     }
 
-    public String getData() {
+    public String getData(){
         return log;
     }
 }

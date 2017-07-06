@@ -12,23 +12,23 @@ class ExDelete implements Command {
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
 
-    ExDelete(DataInOut dataInOut, DbConnection dbConnection) {
+    ExDelete(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("delete");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         dataInOut.outPut("Enter Delete query:");
         String deleteMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
             new Delete(statement, deleteMsg);
-        } catch (SQLException e) {
+        } catch (SQLException e){
             new InvalidException("ExDelete delete ERROR", e);
         }
     }

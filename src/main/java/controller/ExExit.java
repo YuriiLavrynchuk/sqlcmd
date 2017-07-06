@@ -12,12 +12,12 @@ public class ExExit implements Command {
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("exit");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         dataInOut.outPut("Good by!");
         throw new ExitException();
     }

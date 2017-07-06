@@ -8,7 +8,7 @@ public class Insert {
         try {
             statement.executeUpdate(insertMsg);
             System.out.println("Row inserted");
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw e;
         }
     }
@@ -21,7 +21,7 @@ public class Insert {
             st.executeUpdate("INSERT INTO " + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw e;
         }
     }

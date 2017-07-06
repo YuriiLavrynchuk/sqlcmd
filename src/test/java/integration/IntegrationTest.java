@@ -27,7 +27,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testHelp() {
+    public void testHelp(){
 
         in.add("help");
         in.add("exit");
@@ -53,7 +53,7 @@ public class IntegrationTest {
 
 
     @Test
-    public void testExit() {
+    public void testExit(){
 
         in.add("exit");
 
@@ -66,7 +66,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testTableListWithoutConnect() {
+    public void testTableListWithoutConnect(){
 
         in.add("tablelist");
         in.add("exit");
@@ -83,7 +83,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testSelectWithoutConnect() {
+    public void testSelectWithoutConnect(){
 
         in.add("select");
         in.add("exit");
@@ -100,7 +100,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testDeleteWithoutConnect() {
+    public void testDeleteWithoutConnect(){
 
         in.add("delete");
         in.add("exit");
@@ -117,7 +117,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testGetColumnsWithoutConnect() {
+    public void testGetColumnsWithoutConnect(){
 
         in.add("get columns");
         in.add("exit");
@@ -134,7 +134,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testUpdateWithoutConnect() {
+    public void testUpdateWithoutConnect(){
 
         in.add("update");
         in.add("exit");
@@ -151,7 +151,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testNoExistCommandWithoutConnect() {
+    public void testNoExistCommandWithoutConnect(){
 
         in.add("xxxxxx");
         in.add("exit");
@@ -168,7 +168,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testInsertWithoutConnect() {
+    public void testInsertWithoutConnect(){
 
         in.add("insert");
         in.add("exit");
@@ -185,7 +185,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testNoExistCommandAfterConnect() {
+    public void testNoExistCommandAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -214,7 +214,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testTableListAfterConnect() {
+    public void testTableListAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -243,7 +243,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testSelectAfterConnect() {
+    public void testSelectAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -283,7 +283,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testConnectAfterConnect() {
+    public void testConnectAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -329,7 +329,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testDeleteWithErrorAfterConnect() {
+    public void testDeleteWithErrorAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -365,7 +365,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testUpdateWithErrorAfterConnect() {
+    public void testUpdateWithErrorAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -401,7 +401,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testInsertWithErrorAfterConnect() {
+    public void testInsertWithErrorAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -437,7 +437,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testGetColumnsAfterConnect() {
+    public void testGetColumnsAfterConnect(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -469,7 +469,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testConnectWithWrongParametr() {
+    public void testConnectWithWrongParametr(){
         in.add("connect");
         in.add("postgres");
         in.add("postgres");
@@ -496,12 +496,12 @@ public class IntegrationTest {
                 "Good by!\r\n", getData());
     }
 
-    private String getData() {
+    private String getData(){
         try {
             String result = new String(out.toByteArray(), "UTF-8");
             out.reset();
             return result;
-        } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e){
             return e.getMessage();
         }
     }

@@ -12,23 +12,23 @@ class ExUpdate implements Command {
       private final DataInOut dataInOut;
       private final DbConnection dBconnection;
 
-    ExUpdate(DataInOut dataInOut, DbConnection dbConnection) {
+    ExUpdate(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("update");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         dataInOut.outPut("Enter Update query:");
         String updateMsg = dataInOut.inPut();
-        try(Statement statement = dBconnection.getStatement()) {
+        try(Statement statement = dBconnection.getStatement()){
             new Update(statement, updateMsg);
-        } catch (SQLException e) {
+        } catch (SQLException e){
             new InvalidException("Update ERROR", e);
         }
     }

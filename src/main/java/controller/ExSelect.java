@@ -19,12 +19,12 @@ class ExSelect implements Command {
     }
 
     @Override
-    public boolean checkCommand(String command) {
+    public boolean checkCommand(String command){
         return command.equals("select");
     }
 
     @Override
-    public void execute(String command) {
+    public void execute(String command){
         dataInOut.outPut("Enter tablename:");
         String selectMsg = dataInOut.inPut();
 
@@ -34,30 +34,30 @@ class ExSelect implements Command {
             printHeader(tableColumns);
             DataSet[] tableData = select.select(selectMsg);
             printTable(tableData);
-        } catch (SQLException e) {
+        } catch (SQLException e){
             new InvalidException("ExSelect select Error", e);
         }
     }
 
-    private void printTable(DataSet[] tableData) {
-        for (DataSet row : tableData) {
+    private void printTable(DataSet[] tableData){
+        for (DataSet row : tableData){
             printRow(row);
         }
         dataInOut.outPut("--------------------");
     }
 
-    private void printRow(DataSet row) {
+    private void printRow(DataSet row){
         Object[] values = row.getValues();
         String result = "|";
-        for (Object value : values) {
+        for (Object value : values){
             result += value + "|";
         }
         dataInOut.outPut(result);
     }
 
-    private void printHeader(String[] tableColumns) {
+    private void printHeader(String[] tableColumns){
         String result = "|";
-        for (String name : tableColumns) {
+        for (String name : tableColumns){
             result += name + "|";
         }
         dataInOut.outPut("--------------------");

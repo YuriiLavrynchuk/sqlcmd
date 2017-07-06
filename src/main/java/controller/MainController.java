@@ -9,7 +9,7 @@ class MainController {
     private final DataInOut dataInOut;
     private final Command[] commands;
 
-    public MainController(DataInOut dataInOut, DbConnection dBconnection) {
+    public MainController(DataInOut dataInOut, DbConnection dBconnection){
         this.dataInOut = dataInOut;
 
         this.commands = new Command[] {
@@ -40,16 +40,16 @@ class MainController {
         dataInOut.outPut("Hello!");
         dataInOut.outPut("Please connect to database using command 'connect'");
 
-            while (true) {
+            while (true){
                 String intPut = dataInOut.inPut();
-                for (Command command : commands) {
+                for (Command command : commands){
                     try {
-                    if (command.checkCommand(intPut)) {
+                    if (command.checkCommand(intPut)){
                         command.execute(intPut);
                         break;
                     }
-                    } catch (Exception e) {
-                        if (e instanceof ExitException) {
+                    } catch (Exception e){
+                        if (e instanceof ExitException){
                             throw e;
                         }
                         throw new InvalidException("ERROR", e);

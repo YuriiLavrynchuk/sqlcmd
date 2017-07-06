@@ -22,32 +22,32 @@ public class Select {
             ResultSetMetaData rsMd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
             int index = 0;
-        while (rs.next()) {
+        while (rs.next()){
             DataSet dataSet = new DataSet();
             result[index++] = dataSet;
-            for (int i = 1; i <= rsMd.getColumnCount(); i++) {
+            for (int i = 1; i <= rsMd.getColumnCount(); i++){
                 dataSet.put(rsMd.getColumnName(i), rs.getObject(i));
             }
         }
         return result;
-        } catch (SQLException e) {
+        } catch (SQLException e){
             return new DataSet[0];
         }
     }
 
-    private int getTableSize(String tableName) {
+    private int getTableSize(String tableName){
         int tableSize = 0;
         try{
             ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
             selectCount.next();
             tableSize = selectCount.getInt(1);
-        } catch (SQLException e) {
+        } catch (SQLException e){
             //do nothing
         }
         return tableSize;
     }
 
-    public String[] getTableColumns(String msg) {
+    public String[] getTableColumns(String msg){
         String tableName;
         int spaceIndex = msg.indexOf(" ");
         if(spaceIndex > 0){
@@ -59,13 +59,13 @@ public class Select {
             ResultSet rs = statement.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'");
             String[] tables = new String[100];
             int index = 0;
-            while (rs.next()) {
+            while (rs.next()){
                 tables[index++] = rs.getString("column_name");
             }
             tables = Arrays.copyOf(tables, index, String[].class);
 
             return tables;
-        } catch (SQLException e) {
+        } catch (SQLException e){
             return new String[0];
         }
     }
