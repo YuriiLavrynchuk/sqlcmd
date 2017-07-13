@@ -24,12 +24,12 @@ public class ExTableList implements Command{
     }
 
     @Override
-    public void execute(String command) throws InvalidException {
+    public void execute(String command) {
         try(Statement statement = dBconnection.getStatement()){
             String[] tablesList = new SelectTablesList(statement).selectAllTable();
             dataInOut.outPut(Arrays.toString(tablesList));
         } catch (SQLException e){
-            throw new InvalidException("ERROR SelectTablesList", e);
+            new InvalidException("ERROR SelectTablesList", e);
         }
     }
 }

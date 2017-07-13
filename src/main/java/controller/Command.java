@@ -2,9 +2,9 @@ package controller;
 
 import exeption.InvalidException;
 
-interface Command {
+public interface Command {
 
     boolean checkCommand (String command);
 
-    void execute(String command) throws InvalidException;
+    void execute(String command);
 }

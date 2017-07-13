@@ -9,7 +9,7 @@ import view.DataInOut;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class ExSelect implements Command {
+public class ExSelect implements Command {
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
 
