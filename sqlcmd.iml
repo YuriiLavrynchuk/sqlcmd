@@ -15,5 +15,6 @@
     <orderEntry type="library" exported="" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" exported="" name="Maven: log4j:log4j:1.2.12" level="project" />
     <orderEntry type="library" name="postgresql-42.0.0.jre7" level="project" />
+    <orderEntry type="library" name="mockito-all-1.9.1-20110911" level="project" />
   </component>
 </module>
