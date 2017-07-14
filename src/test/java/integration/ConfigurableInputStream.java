@@ -3,7 +3,7 @@ package integration;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ConfigurableInputStream extends InputStream {
+class ConfigurableInputStream extends InputStream {
     private boolean endLine = false;
     private String line;
 
