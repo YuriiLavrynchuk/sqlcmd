@@ -39,14 +39,14 @@ public class ExSelect implements Command {
         }
     }
 
-    private void printTable(DataSet[] tableData){
+    public void printTable(DataSet[] tableData){
         for (DataSet row : tableData){
             printRow(row);
         }
         dataInOut.outPut("--------------------");
     }
 
-    private void printRow(DataSet row){
+    public void printRow(DataSet row){
         Object[] values = row.getValues();
         String result = "|";
         for (Object value : values){
@@ -55,7 +55,7 @@ public class ExSelect implements Command {
         dataInOut.outPut(result);
     }
 
-    private void printHeader(String[] tableColumns){
+    public void printHeader(String[] tableColumns){
         String result = "|";
         for (String name : tableColumns){
             result += name + "|";
