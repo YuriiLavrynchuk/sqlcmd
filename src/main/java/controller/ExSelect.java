@@ -12,10 +12,17 @@ import java.sql.Statement;
 public class ExSelect implements Command {
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
+    private Select select;
 
     public ExSelect(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
+    }
+
+    public ExSelect(DataInOut dataInOut, DbConnection dbConnection, Select select) {
+        this.dataInOut = dataInOut;
+        this.dBconnection = dbConnection;
+        this.select = select;
     }
 
     @Override
@@ -29,7 +36,9 @@ public class ExSelect implements Command {
         String selectMsg = dataInOut.inPut();
 
         try (Statement statement = dBconnection.getStatement()){
-            Select select = new Select(statement, dataInOut);
+            if (select == null) {
+                select = new Select(statement, dataInOut);
+            }
             String[] tableColumns = select.getTableColumns(selectMsg);
             printHeader(tableColumns);
             DataSet[] tableData = select.select(selectMsg);
