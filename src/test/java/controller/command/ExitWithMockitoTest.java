@@ -1,12 +1,13 @@
 package controller.command;
 
-import controller.*;
+import controller.Command;
+import controller.ExExit;
 import exeption.ExitException;
+import exeption.InvalidException;
 import org.junit.Test;
 import org.mockito.Mockito;
 import view.DataInOut;
 
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
@@ -40,7 +41,7 @@ public class ExitWithMockitoTest {
     }
 
     @Test
-    public void testExecuteExitCommand_throwsExitException(){
+    public void testExecuteExitCommand_throwsExitException() throws InvalidException {
         //given
         Command command = new ExExit(dataInOut);
 
