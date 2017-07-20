@@ -8,9 +8,16 @@ import view.DataInOut;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class ExDelete implements Command {
+public class ExDelete implements Command {
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
+    private Delete delete;
+
+    public ExDelete(DataInOut dataInOut, DbConnection dbConnection, Delete delete){
+        this.dataInOut = dataInOut;
+        this.dBconnection = dbConnection;
+        this.delete = delete;
+    }
 
     ExDelete(DataInOut dataInOut, DbConnection dbConnection){
         this.dataInOut = dataInOut;
@@ -27,7 +34,9 @@ class ExDelete implements Command {
         dataInOut.outPut("Enter Delete query:");
         String deleteMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
-            new Delete(statement, deleteMsg);
+            if(delete == null) {
+                delete = new Delete(statement, deleteMsg);
+            }
         } catch (SQLException e){
             new InvalidException("ExDelete delete ERROR", e);
         }

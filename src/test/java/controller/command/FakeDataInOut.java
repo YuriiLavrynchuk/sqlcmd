@@ -5,6 +5,7 @@ import view.DataInOut;
 public class FakeDataInOut implements DataInOut {
 
     private String message = "";
+    private String input = null;
 
     @Override
     public void outPut(String msg) {
@@ -13,7 +14,16 @@ public class FakeDataInOut implements DataInOut {
 
     @Override
     public String inPut() {
-        return null;
+        if (this.input == null){
+            throw new IllegalStateException("You should initialize method 'inPut()'");
+        }
+        String result = this.input;
+        this.input = null;
+        return result;
+    }
+
+    public void addInPut(String input){
+        this.input = input;
     }
 
     public String getContent() {
