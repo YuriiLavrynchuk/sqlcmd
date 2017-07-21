@@ -47,10 +47,9 @@ class MainController {
                         command.execute(intPut);
                         break;
                     }
+                } catch (ExitException e1){
+                    throw e1;
                 } catch (Exception e){
-                    if (e instanceof ExitException){
-                        throw e;
-                    }
                     throw new InvalidException("ERROR", e);
                 }
             }

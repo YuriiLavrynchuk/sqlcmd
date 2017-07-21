@@ -57,20 +57,24 @@ public class ExSelect implements Command {
 
     public void printRow(DataSet row){
         Object[] values = row.getValues();
-        String result = "|";
-        for (Object value : values){
-            result += value + "|";
+
+        StringBuilder result = new StringBuilder("|");
+        for (Object value : values) {
+            result.append(value).append("|");
         }
-        dataInOut.outPut(result);
+        dataInOut.outPut(result.toString());
+
     }
 
     public void printHeader(String[] tableColumns){
-        String result = "|";
+
+        StringBuilder result = new StringBuilder("|");
         for (String name : tableColumns){
-            result += name + "|";
+            result.append(name).append("|");
         }
+
         dataInOut.outPut("--------------------");
-        dataInOut.outPut(result);
+        dataInOut.outPut(result.toString());
         dataInOut.outPut("--------------------");
     }
 }
