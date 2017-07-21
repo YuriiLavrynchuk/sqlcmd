@@ -11,21 +11,21 @@ class GetNamesValuesFormated {
     }
 
     public String GetNamesFormated(){
-        String string = "";
+        StringBuilder string = new StringBuilder("");
         for (String name : newValue.getNames()){
-            string += String.format(format, name);
+            string.append(String.format(format, name));
         }
-        string = string.substring(0, string.length() - 1);
-        return string;
+        string = string.delete(string.length()-1, string.length());
+        return string.toString();
     }
 
 
     public String getValuesFormated(){
-        String values = "";
+        StringBuilder values = new StringBuilder("");
         for (Object value: newValue.getValues()){
-            values += String.format(format, value);
+            values.append(String.format(format, value));
         }
-        values = values.substring(0, values.length() - 1);
-        return values;
+        values = values.delete(values.length()-1, values.length());
+        return values.toString();
     }
 }
