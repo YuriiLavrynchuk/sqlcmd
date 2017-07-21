@@ -9,7 +9,6 @@ public class InvalidException extends Exception {
         if (cause != null){
             eMessage += " " +cause.getCause();
         }
-        System.out.println("FAIL! Cause:\r\n" + eMessage + "\r\n" + message);
-        System.out.println("Try again.");
+        System.out.println("FAIL! Cause:\r\n" + eMessage + "\r\n" + message +"\r\n" + "Try again.");
     }
 }
