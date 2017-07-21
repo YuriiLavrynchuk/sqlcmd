@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DataSet {
 
@@ -16,31 +18,32 @@ public class DataSet {
         public String getName(){
             return name;
         }
-
         public Object getValue(){
             return value;
         }
     }
 
-    private final Data[] data = new Data[100]; // TODO remove magic number 100
+    private final List<Data> data = new ArrayList<>();
     private int freeIndex = 0;
 
     public void put(String name, Object value){
-        data[freeIndex++] = new Data(name, value);
+        data.add(freeIndex++, new Data(name, value));
     }
 
     public Object[] getValues(){
         Object[] result = new Object[freeIndex];
+
         for (int i = 0; i < freeIndex; i++){
-            result[i] = data[i].getValue();
+            result[i] = data.get(i).getValue();
         }
         return result;
     }
 
     public String[] getNames(){
         String[] result = new String[freeIndex];
+
         for (int i = 0; i < freeIndex; i++){
-            result[i] = data[i].getName();
+            result[i] = data.get(i).getName();
         }
         return result;
     }
