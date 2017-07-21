@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DbConnection {
-    public static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/";
+    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/";
     private Connection connection;
 
     private boolean checkParam(String dbName, String username, String password){
