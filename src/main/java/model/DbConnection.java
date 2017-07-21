@@ -44,5 +44,11 @@ public class DbConnection {
         Statement statement = connection.createStatement();
         return statement;
     }
+
+    public void closeConnection() throws SQLException {
+        if(connection != null) {
+            connection.close();
+        }
+    }
 }
 

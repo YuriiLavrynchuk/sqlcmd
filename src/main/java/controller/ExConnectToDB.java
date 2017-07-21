@@ -4,8 +4,6 @@ import exeption.InvalidException;
 import model.DbConnection;
 import view.DataInOut;
 
-import java.sql.Connection;
-
 public class ExConnectToDB implements Command{
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
@@ -32,13 +30,11 @@ public class ExConnectToDB implements Command{
             String username = dataInOut.inPut();
             dataInOut.outPut("Please insert password:");
             String password = dataInOut.inPut();
-        Connection connection;
         try {
-                connection = dBconnection.connection(dbName, username, password);
-                dataInOut.outPut("Connection success!");
-            } catch (Exception e){
-                connection = null;
-                new InvalidException("Can't get connection to database:" + dbName, e);
-            }
+            dBconnection.connection(dbName, username, password);
+            dataInOut.outPut("Connection success!");
+        } catch (Exception e){
+            new InvalidException("Can't get connection to database:" + dbName, e);
+        }
     }
 }
