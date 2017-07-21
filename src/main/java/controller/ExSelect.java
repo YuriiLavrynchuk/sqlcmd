@@ -63,7 +63,6 @@ public class ExSelect implements Command {
             result.append(value).append("|");
         }
         dataInOut.outPut(result.toString());
-
     }
 
     public void printHeader(String[] tableColumns){

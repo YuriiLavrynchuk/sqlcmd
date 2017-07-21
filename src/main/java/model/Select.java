@@ -42,7 +42,6 @@ public class Select {
             selectCount.next();
             tableSize = selectCount.getInt(1);
         } catch (SQLException e){
-            //do nothing
         }
         return tableSize;
     }

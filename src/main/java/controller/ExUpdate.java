@@ -28,6 +28,7 @@ class ExUpdate implements Command {
         String updateMsg = dataInOut.inPut();
         try(Statement statement = dBconnection.getStatement()){
             new Update(statement, updateMsg);
+            dataInOut.outPut("Row updated");
         } catch (SQLException e){
             new InvalidException("Update ERROR", e);
         }

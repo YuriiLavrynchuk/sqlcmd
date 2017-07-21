@@ -36,6 +36,7 @@ public class ExDelete implements Command {
         try (Statement statement = dBconnection.getStatement()){
             if(delete == null) {
                 delete = new Delete(statement, deleteMsg);
+                dataInOut.outPut("Row deleted");
             }
         } catch (SQLException e){
             new InvalidException("ExDelete delete ERROR", e);

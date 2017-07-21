@@ -7,7 +7,6 @@ public class Insert {
     public Insert(Statement statement, String insertMsg) throws SQLException {
         try {
             statement.executeUpdate(insertMsg);
-            System.out.println("Row inserted");
         } catch (SQLException e){
             throw e;
         }

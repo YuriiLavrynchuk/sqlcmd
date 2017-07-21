@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DbConnection {
+    public static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/";
     private Connection connection;
 
     private boolean checkParam(String dbName, String username, String password){
@@ -18,7 +19,7 @@ public class DbConnection {
     }
 
     public Connection connection(String dbName, String username, String password) throws InvalidException, SQLException {
-        String url = "jdbc:postgresql://localhost:5432/" + dbName + "?loggerLevel=OFF";
+        String url = DATABASE_URL + dbName + "?loggerLevel=OFF";
 
         if (!checkParam(dbName, username, password)){
             throw new InvalidException("Invalid incoming parameter:" + " dbname: "
@@ -41,8 +42,7 @@ public class DbConnection {
     }
 
     public Statement getStatement() throws SQLException {
-        Statement statement = connection.createStatement();
-        return statement;
+        return connection.createStatement();
     }
 
     public void closeConnection() throws SQLException {
