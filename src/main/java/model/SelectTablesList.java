@@ -3,7 +3,8 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectTablesList {
     private final Statement statement;
@@ -14,16 +15,17 @@ public class SelectTablesList {
 
     public String[] selectAllTable(){
         try {
-            ResultSet select = statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'");
-            String[] tables = new String[100];
+            ResultSet select = statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE " +
+                    "table_schema = 'public' AND table_type = 'BASE TABLE'");
+
+            List<String> listTables = new ArrayList<>();
+
             int index = 0;
             while (select.next()){
-                tables[index++] = select.getString("table_name");
+                listTables.add(index++, select.getString("table_name"));
             }
-            tables = Arrays.copyOf(tables, index, String[].class);
-            return tables;
+            return listTables.toArray(new String[0]);
         } catch (SQLException e){
-            //do nothing
         }
         return new String[0];
     }

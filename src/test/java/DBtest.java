@@ -40,7 +40,6 @@ public class DBtest {
 
     @Test
     public void testSelectAllTables() throws SQLException {
-
         String[] selectAll = new SelectTablesList(st).selectAllTable();
         assertEquals("[users]", Arrays.toString(selectAll));
         st.close();

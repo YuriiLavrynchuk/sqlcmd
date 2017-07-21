@@ -15,7 +15,7 @@ class MainController {
         this.commands = new Command[] {
                 new ExConnectToDB(dataInOut, dBconnection),
                 new ExHelp(dataInOut),
-                new ExExit(dataInOut),
+                new ExExit(dataInOut, dBconnection),
                 new CheckConnection(dataInOut, dBconnection),
                 new ExTableList(dataInOut, dBconnection),
                 new ExUpdate(dataInOut, dBconnection),
@@ -31,7 +31,6 @@ class MainController {
         try {
             start();
         } catch (ExitException e){
-            //do nothing
         }
     }
 
@@ -40,22 +39,21 @@ class MainController {
         dataInOut.outPut("Hello!");
         dataInOut.outPut("Please connect to database using command 'connect'");
 
-            while (true){
-                String intPut = dataInOut.inPut();
-                for (Command command : commands){
-                    try {
+        while (true){
+            String intPut = dataInOut.inPut();
+            for (Command command : commands){
+                try {
                     if (command.checkCommand(intPut)){
                         command.execute(intPut);
                         break;
                     }
-                    } catch (Exception e){
-                        if (e instanceof ExitException){
-                            throw e;
-                        }
-                        throw new InvalidException("ERROR", e);
-                    }
+                } catch (ExitException e1){
+                    throw e1;
+                } catch (Exception e){
+                    throw new InvalidException("ERROR", e);
                 }
-                dataInOut.outPut("Please enter command or help:");
             }
+            dataInOut.outPut("Please enter command or help:");
         }
+    }
 }

@@ -9,7 +9,6 @@ public class Update {
     public Update(Statement statement, String updateMsg) throws SQLException {
         try {
             statement.executeUpdate(updateMsg);
-            System.out.println("Row updated");
         } catch (SQLException e){
             throw e;
         }

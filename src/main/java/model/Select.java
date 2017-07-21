@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Select {
     private final Statement statement;
@@ -22,14 +23,14 @@ public class Select {
             ResultSetMetaData rsMd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
             int index = 0;
-        while (rs.next()){
-            DataSet dataSet = new DataSet();
-            result[index++] = dataSet;
-            for (int i = 1; i <= rsMd.getColumnCount(); i++){
-                dataSet.put(rsMd.getColumnName(i), rs.getObject(i));
+            while (rs.next()){
+                DataSet dataSet = new DataSet();
+                result[index++] = dataSet;
+                for (int i = 1; i <= rsMd.getColumnCount(); i++){
+                    dataSet.put(rsMd.getColumnName(i), rs.getObject(i));
+                }
             }
-        }
-        return result;
+            return result;
         } catch (SQLException e){
             return new DataSet[0];
         }
@@ -42,7 +43,6 @@ public class Select {
             selectCount.next();
             tableSize = selectCount.getInt(1);
         } catch (SQLException e){
-            //do nothing
         }
         return tableSize;
     }
@@ -56,15 +56,16 @@ public class Select {
             tableName = msg;
         }
         try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'");
-            String[] tables = new String[100];
+            ResultSet rs = statement.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema" +
+                    " = 'public' AND table_name = '" + tableName + "'");
+
+            List<String> listTable = new ArrayList<>();
+
             int index = 0;
             while (rs.next()){
-                tables[index++] = rs.getString("column_name");
+                listTable.add(index++, rs.getString("column_name"));
             }
-            tables = Arrays.copyOf(tables, index, String[].class);
-
-            return tables;
+            return listTable.toArray(new String[0]);
         } catch (SQLException e){
             return new String[0];
         }

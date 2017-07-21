@@ -28,6 +28,7 @@ class ExInsert implements Command{
         String insertMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
             new Insert(statement, insertMsg);
+            dataInOut.outPut("Row inserted");
         } catch (SQLException e){
             new InvalidException("ExInsert insert ERROR", e);
         }
