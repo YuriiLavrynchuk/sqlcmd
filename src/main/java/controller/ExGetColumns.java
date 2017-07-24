@@ -12,10 +12,12 @@ import java.util.Arrays;
 public class ExGetColumns implements Command {
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
+    private final Select select;
 
-    public ExGetColumns(DataInOut dataInOut, DbConnection dbConnection){
+    public ExGetColumns(DataInOut dataInOut, DbConnection dbConnection, Select select){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
+        this.select = select;
     }
 
     @Override
@@ -27,12 +29,12 @@ public class ExGetColumns implements Command {
     public void execute(String command){
         dataInOut.outPut("Enter tablename:");
         String selectMsg = dataInOut.inPut();
-        String[] select = new String[0];
+        String[] sel = new String[0];
         try (Statement statement = dBconnection.getStatement()){
-            select = new Select().getTableColumns(selectMsg, statement);
+            sel = select.getTableColumns(selectMsg, statement);
         } catch (SQLException e){
             new InvalidException("ExGetColumns get columns error", e);
         }
-        dataInOut.outPut(Arrays.toString(select));
+        dataInOut.outPut(Arrays.toString(sel));
     }
 }

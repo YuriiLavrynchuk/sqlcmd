@@ -11,10 +11,12 @@ import java.sql.Statement;
 class ExUpdate implements Command {
       private final DataInOut dataInOut;
       private final DbConnection dBconnection;
+      private final Update update;
 
-    ExUpdate(DataInOut dataInOut, DbConnection dbConnection){
+    ExUpdate(DataInOut dataInOut, DbConnection dbConnection, Update update){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
+        this.update = update;
     }
 
     @Override
@@ -27,7 +29,7 @@ class ExUpdate implements Command {
         dataInOut.outPut("Enter Update query:");
         String updateMsg = dataInOut.inPut();
         try(Statement statement = dBconnection.getStatement()){
-            new Update(statement, updateMsg);
+            update.updateRun(statement, updateMsg);
             dataInOut.outPut("Row updated");
         } catch (SQLException e){
             new InvalidException("Update ERROR", e);

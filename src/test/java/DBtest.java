@@ -40,7 +40,7 @@ public class DBtest {
 
     @Test
     public void testSelectAllTables() throws SQLException {
-        String[] selectAll = new SelectTablesList(st).selectAllTable();
+        String[] selectAll = new SelectTablesList().selectAllTable(st);
         assertEquals("[users]", Arrays.toString(selectAll));
         st.close();
     }
@@ -49,7 +49,7 @@ public class DBtest {
     public void testInsertUsingPut() throws SQLException {
 
         st = connectToDB.createStatement();
-        new Delete(st, "delete from users where id = 7");
+        new Delete().deleteRun(st, "delete from users where id = 7");
         st.close();
         //when
         st = connectToDB.createStatement();
@@ -71,7 +71,7 @@ public class DBtest {
         assertEquals("[7, User7, 7777]", Arrays.toString(user.getValues()));
 
         st = connectToDB.createStatement();
-        new Delete(st, "delete from users where id = 7");
+        new Delete().deleteRun(st, "delete from users where id = 7");
         st.close();
     }
 
@@ -79,7 +79,7 @@ public class DBtest {
     public void testUpdateUsingPut() throws SQLException {
 
         st = connectToDB.createStatement();
-        new Delete(st, "delete from users where id = 7");
+        new Delete().deleteRun(st, "delete from users where id = 7");
         st.close();
 
         st = connectToDB.createStatement();
@@ -106,7 +106,7 @@ public class DBtest {
         assertEquals("[7, User7777, 8888]", Arrays.toString(user.getValues()));
 
         st = connectToDB.createStatement();
-        new Delete(st, "delete from users where id = 7");
+        new Delete().deleteRun(st, "delete from users where id = 7");
         st.close();
 
     }
@@ -115,17 +115,17 @@ public class DBtest {
     public void testCRUD() throws SQLException {
         //delete
         st = connectToDB.createStatement();
-        new Delete(st, "delete from users where id = 5");
+        new Delete().deleteRun(st, "delete from users where id = 5");
         st.close();
 
         //insert
         st = connectToDB.createStatement();
-        new Insert(st, "insert into users values(5, 'User5', 5555)");
+        new Insert().insertRun(st, "insert into users values(5, 'User5', 5555)");
         st.close();
 
         //update
         st = connectToDB.createStatement();
-        new Update(st, "update users set password = '9999' where id = 5");
+        new Update().updateRun(st, "update users set password = '9999' where id = 5");
         st.close();
 
         st = connectToDB.createStatement();
