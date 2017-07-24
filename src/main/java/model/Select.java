@@ -12,7 +12,7 @@ public class Select {
     public DataSet[] select(String tableName, Statement statement) throws SQLException {
         int size = getTableSize(tableName, statement);
         try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
             ResultSetMetaData rsMd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
             int index = 0;
