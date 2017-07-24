@@ -37,7 +37,7 @@ class MainController {
     private void start() throws InvalidException, ExitException {
 
         dataInOut.outPut("Hello!");
-        dataInOut.outPut("Please connect to database using command 'connect'");
+        dataInOut.outPut("Please connect to database using command 'connect' or enter 'help'");
 
         while (true){
             String intPut = dataInOut.inPut();
@@ -53,7 +53,7 @@ class MainController {
                     throw new InvalidException("ERROR", e);
                 }
             }
-            dataInOut.outPut("Please enter command or help:");
+            dataInOut.outPut("Please enter command or 'help':");
         }
     }
 }
