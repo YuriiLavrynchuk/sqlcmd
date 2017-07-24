@@ -29,7 +29,7 @@ public class ExGetColumns implements Command {
         String selectMsg = dataInOut.inPut();
         String[] select = new String[0];
         try (Statement statement = dBconnection.getStatement()){
-            select = new Select(statement, dataInOut).getTableColumns(selectMsg);
+            select = new Select().getTableColumns(selectMsg, statement);
         } catch (SQLException e){
             new InvalidException("ExGetColumns get columns error", e);
         }

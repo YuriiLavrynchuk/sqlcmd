@@ -14,11 +14,6 @@ public class ExSelect implements Command {
     private final DbConnection dBconnection;
     private Select select;
 
-    public ExSelect(DataInOut dataInOut, DbConnection dbConnection){
-        this.dataInOut = dataInOut;
-        this.dBconnection = dbConnection;
-    }
-
     public ExSelect(DataInOut dataInOut, DbConnection dbConnection, Select select) {
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
@@ -36,12 +31,9 @@ public class ExSelect implements Command {
         String selectMsg = dataInOut.inPut();
 
         try (Statement statement = dBconnection.getStatement()){
-            if (select == null) {
-                select = new Select(statement, dataInOut);
-            }
-            String[] tableColumns = select.getTableColumns(selectMsg);
+            String[] tableColumns = select.getTableColumns(selectMsg, statement);
             printHeader(tableColumns);
-            DataSet[] tableData = select.select(selectMsg);
+            DataSet[] tableData = select.select(selectMsg, statement);
             printTable(tableData);
         } catch (SQLException e){
             new InvalidException("ExSelect select Error", e);

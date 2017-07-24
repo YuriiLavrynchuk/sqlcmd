@@ -3,6 +3,7 @@ package controller;
 import exeption.ExitException;
 import exeption.InvalidException;
 import model.DbConnection;
+import model.Select;
 import view.DataInOut;
 
 class MainController {
@@ -21,7 +22,7 @@ class MainController {
                 new ExUpdate(dataInOut, dBconnection),
                 new ExInsert(dataInOut, dBconnection),
                 new ExDelete(dataInOut, dBconnection),
-                new ExSelect(dataInOut, dBconnection),
+                new ExSelect(dataInOut, dBconnection, new Select()),
                 new ExGetColumns(dataInOut, dBconnection),
                 new ExNotExistCommand(dataInOut)
         };

@@ -25,7 +25,7 @@ public class DBtest {
     @Test
     public void testSelect() throws SQLException {
 
-        DataSet[] select = new Select(st, dataInOut).select("users");
+        DataSet[] select = new Select().select("users", st);
         assertEquals(5, select.length);
         st.close();
     }
@@ -33,7 +33,7 @@ public class DBtest {
     @Test
     public void testGetColumns() throws SQLException {
 
-        String[] columns = new Select(st, dataInOut).getTableColumns("users");
+        String[] columns = new Select().getTableColumns("users", st);
         assertEquals("[id, name, password]", Arrays.toString(columns));
         st.close();
     }
@@ -62,7 +62,7 @@ public class DBtest {
 
           // then
         st = connectToDB.createStatement();
-        DataSet[] users = new Select(st, dataInOut).select("users where id=7");
+        DataSet[] users = new Select().select("users where id=7", st);
         assertEquals(1, users.length);
         st.close();
 
@@ -97,7 +97,7 @@ public class DBtest {
         new Update (connectToDB, "users", 7, newValue);
 
         st = connectToDB.createStatement();
-        DataSet[] users = new Select(st, dataInOut).select("users where id=7");
+        DataSet[] users = new Select().select("users where id=7", st);
         assertEquals(1, users.length);
         st.close();
 
@@ -129,7 +129,7 @@ public class DBtest {
         st.close();
 
         st = connectToDB.createStatement();
-        DataSet[] select = new Select(st, dataInOut).select("users where id = 5");
+        DataSet[] select = new Select().select("users where id = 5", st);
         assertEquals("[DataSet{\n" +
                 "names:[id, name, password]\n" +
                 "values:[5, User5, 9999]\n" +
