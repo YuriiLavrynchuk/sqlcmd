@@ -11,10 +11,17 @@ import java.sql.Statement;
 class ExInsert implements Command{
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
+    private final Insert insert;
 
-    public ExInsert(DataInOut dataInOut, DbConnection dbConnection){
+//    public ExInsert(DataInOut dataInOut, DbConnection dbConnection){
+//        this.dataInOut = dataInOut;
+//        this.dBconnection = dbConnection;
+//    }
+
+    public ExInsert(DataInOut dataInOut, DbConnection dBconnection, Insert insert) {
         this.dataInOut = dataInOut;
-        this.dBconnection = dbConnection;
+        this.dBconnection = dBconnection;
+        this.insert = insert;
     }
 
     @Override
@@ -27,7 +34,7 @@ class ExInsert implements Command{
         dataInOut.outPut("Enter Insert query:");
         String insertMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
-            new Insert(statement, insertMsg);
+            insert.insertRun(statement, insertMsg);
             dataInOut.outPut("Row inserted");
         } catch (SQLException e){
             new InvalidException("ExInsert insert ERROR", e);

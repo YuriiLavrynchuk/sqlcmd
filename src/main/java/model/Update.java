@@ -6,7 +6,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Update {
-    public Update(Statement statement, String updateMsg) throws SQLException {
+    private DataSet newValue;
+    private int id;
+    private Connection connection;
+    private String tableName;
+
+    public Update() {
+    }
+
+    public Update(Connection connection, String tableName, int id, DataSet newValue) throws SQLException {
+        this.connection = connection;
+        this.tableName = tableName;
+        this.id = id;
+        this.newValue = newValue;
+        updateRunWithParameters();
+    }
+
+    public void updateRun(Statement statement, String updateMsg) throws SQLException {
         try {
             statement.executeUpdate(updateMsg);
         } catch (SQLException e){
@@ -14,8 +30,7 @@ public class Update {
         }
     }
 
-    public Update(Connection connection, String tableName, int id, DataSet newValue) throws SQLException {
-
+    public void updateRunWithParameters() throws SQLException {
         String tableNames = new GetNamesValuesFormated(newValue, "%s = ?,").GetNamesFormated();
         String sql = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";
 

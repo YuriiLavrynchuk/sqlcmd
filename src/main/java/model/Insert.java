@@ -4,13 +4,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Insert {
-    public Insert(Statement statement, String insertMsg) throws SQLException {
-        try {
-            statement.executeUpdate(insertMsg);
-        } catch (SQLException e){
-            throw e;
-        }
-    }
+
+    public Insert(){}
 
     public Insert(Statement st, String tableName, DataSet input) throws SQLException {
         try {
@@ -20,6 +15,14 @@ public class Insert {
             st.executeUpdate("INSERT INTO " + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
             st.close();
+        } catch (SQLException e){
+            throw e;
+        }
+    }
+
+    public void insertRun(Statement statement, String insertMsg) throws SQLException {
+        try {
+            statement.executeUpdate(insertMsg);
         } catch (SQLException e){
             throw e;
         }

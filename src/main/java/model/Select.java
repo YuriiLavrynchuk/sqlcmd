@@ -1,7 +1,5 @@
 package model;
 
-import view.DataInOut;
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -10,16 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Select {
-    private final Statement statement;
 
-    public Select(Statement statement, DataInOut dataInOut){
-        this.statement = statement;
-    }
-
-    public DataSet[] select(String tableName) throws SQLException {
-        int size = getTableSize(tableName);
+    public DataSet[] select(String tableName, Statement statement) throws SQLException {
+        int size = getTableSize(tableName, statement);
         try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
             ResultSetMetaData rsMd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
             int index = 0;
@@ -36,7 +29,7 @@ public class Select {
         }
     }
 
-    private int getTableSize(String tableName){
+    private int getTableSize(String tableName, Statement statement){
         int tableSize = 0;
         try{
             ResultSet selectCount = statement.executeQuery("SELECT count(*) FROM " + tableName);
@@ -47,7 +40,7 @@ public class Select {
         return tableSize;
     }
 
-    public String[] getTableColumns(String msg){
+    public String[] getTableColumns(String msg, Statement statement){
         String tableName;
         int spaceIndex = msg.indexOf(" ");
         if(spaceIndex > 0){

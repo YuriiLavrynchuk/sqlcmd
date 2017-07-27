@@ -35,9 +35,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //help
-                "Exist command:\r\n" +
+                "You should use commandwords and follow the messages in the console\r\n" +
+                "Exist commands:\r\n" +
                 "connect       - connection to database\r\n" +
                 "select        - query from table\r\n" +
                 "tablelist     - getting names all tables\r\n" +
@@ -46,11 +47,10 @@ public class IntegrationTest {
                 "delete        - delete row from table\r\n" +
                 "exit          - exit from application\r\n" +
                 "get columns   - get columns from table\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
-
 
     @Test
     public void testExit(){
@@ -60,7 +60,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -74,10 +74,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //tablelist
                 "You can't use command 'tablelist', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -91,10 +91,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //select
                 "You can't use command 'select', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -108,10 +108,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //delete
                 "You can't use command 'delete', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -125,10 +125,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //get columns
                 "You can't use command 'get columns', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -142,10 +142,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //update
                 "You can't use command 'update', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -159,10 +159,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //tablelist
                 "You can't use command 'xxxxxx', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -176,10 +176,10 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //tablelist
                 "You can't use command 'insert', please first connect to database using command 'connect'\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -196,7 +196,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -205,11 +205,11 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //notexistcommand
                 "Not exists command.\r\n" +
                 //exit
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 "Good by!\r\n", getData());
     }
 
@@ -225,7 +225,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -234,11 +234,11 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //tablelist
                 "[users]\r\n" +
                 //exit
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 "Good by!\r\n", getData());
     }
 
@@ -255,7 +255,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -264,7 +264,7 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //select
                 "Enter tablename:\r\n" +
                 //tablename
@@ -277,7 +277,7 @@ public class IntegrationTest {
                 "|4|User4|4444|\r\n" +
                 "|5|User5|9999|\r\n" +
                 "--------------------\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -299,7 +299,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -308,10 +308,10 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //tablelist
                 "[users]\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //connect
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -320,10 +320,10 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //tablelist
                 "[test]\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -341,7 +341,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -350,7 +350,7 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //delete
                 "Enter Delete query:\r\n" +
                 //deletemsg
@@ -359,7 +359,7 @@ public class IntegrationTest {
                 "  Позиция: 1\r\n" +
                 "ExDelete delete ERROR\r\n" +
                 "Try again.\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -377,7 +377,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -386,7 +386,7 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //update
                 "Enter Update query:\r\n" +
                 //updatemsg
@@ -395,7 +395,7 @@ public class IntegrationTest {
                 "  Позиция: 1\r\n" +
                 "Update ERROR\r\n" +
                 "Try again.\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -413,7 +413,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -422,7 +422,7 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //insert
                 "Enter Insert query:\r\n" +
                 //insertmsg
@@ -431,7 +431,7 @@ public class IntegrationTest {
                 "  Позиция: 1\r\n" +
                 "ExInsert insert ERROR\r\n" +
                 "Try again.\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -449,7 +449,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -458,12 +458,12 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "Connection success!\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //get columns
                 "Enter tablename:\r\n" +
                 //updatemsg
                 "[id, name, password]\r\n" +
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
     }
@@ -479,7 +479,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect'\r\n" +
+                "Please connect to database using command 'connect' or enter 'help'\r\n" +
                 //conncet
                 "Please insert dbname:\r\n" +
                 //dbname
@@ -492,7 +492,7 @@ public class IntegrationTest {
                 "Can't get connection to database:postgres\r\n" +
                 "Try again.\r\n" +
                 //exit
-                "Please enter command or help:\r\n" +
+                "Please enter command or 'help':\r\n" +
                 "Good by!\r\n", getData());
     }
 

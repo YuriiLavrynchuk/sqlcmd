@@ -8,6 +8,7 @@ import org.mockito.*;
 import view.DataInOut;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -15,6 +16,7 @@ import static org.mockito.Mockito.*;
 
 public class ExSelectTestWithMock {
     private DbConnection dbConnection;
+    private Statement statement;
     private DataInOut dataInOut;
     private Select select;
     private Command command;
@@ -22,6 +24,7 @@ public class ExSelectTestWithMock {
     @Before
     public void setup() throws SQLException {
         dataInOut = mock(DataInOut.class);
+        statement = mock(Statement.class);
         dbConnection = mock(DbConnection.class);
         select = mock(Select.class);
         command = new ExSelect(dataInOut, dbConnection, select);
@@ -45,8 +48,9 @@ public class ExSelectTestWithMock {
 
         //when
         when(dataInOut.inPut()).thenReturn("users");
-        when(select.getTableColumns("users")).thenReturn(new String[]{"id", "name", "password"});
-        when(select.select("users")).thenReturn(data);
+        when(dbConnection.getStatement()).thenReturn(statement);
+        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id", "name", "password"});
+        when(select.select("users", statement)).thenReturn(data);
 
         command.execute("select");
 
@@ -70,8 +74,9 @@ public class ExSelectTestWithMock {
 
         //when
         when(dataInOut.inPut()).thenReturn("users");
-        when(select.getTableColumns("users")).thenReturn(new String[]{"id", "name", "password"});
-        when(select.select("users")).thenReturn(data);
+        when(dbConnection.getStatement()).thenReturn(statement);
+        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id", "name", "password"});
+        when(select.select("users", statement)).thenReturn(data);
 
         command.execute("select");
 
@@ -107,8 +112,9 @@ public class ExSelectTestWithMock {
 
         //when
         when(dataInOut.inPut()).thenReturn("users");
-        when(select.getTableColumns("users")).thenReturn(new String[]{"id"});
-        when(select.select("users")).thenReturn(data);
+        when(dbConnection.getStatement()).thenReturn(statement);
+        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id"});
+        when(select.select("users", statement)).thenReturn(data);
 
         command.execute("select");
 

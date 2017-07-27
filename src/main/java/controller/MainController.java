@@ -2,7 +2,7 @@ package controller;
 
 import exeption.ExitException;
 import exeption.InvalidException;
-import model.DbConnection;
+import model.*;
 import view.DataInOut;
 
 class MainController {
@@ -17,12 +17,12 @@ class MainController {
                 new ExHelp(dataInOut),
                 new ExExit(dataInOut, dBconnection),
                 new CheckConnection(dataInOut, dBconnection),
-                new ExTableList(dataInOut, dBconnection),
-                new ExUpdate(dataInOut, dBconnection),
-                new ExInsert(dataInOut, dBconnection),
-                new ExDelete(dataInOut, dBconnection),
-                new ExSelect(dataInOut, dBconnection),
-                new ExGetColumns(dataInOut, dBconnection),
+                new ExTableList(dataInOut, dBconnection, new SelectTablesList()),
+                new ExUpdate(dataInOut, dBconnection, new Update()),
+                new ExInsert(dataInOut, dBconnection, new Insert()),
+                new ExDelete(dataInOut, dBconnection, new Delete()),
+                new ExSelect(dataInOut, dBconnection, new Select()),
+                new ExGetColumns(dataInOut, dBconnection, new Select()),
                 new ExNotExistCommand(dataInOut)
         };
     }
@@ -37,7 +37,7 @@ class MainController {
     private void start() throws InvalidException, ExitException {
 
         dataInOut.outPut("Hello!");
-        dataInOut.outPut("Please connect to database using command 'connect'");
+        dataInOut.outPut("Please connect to database using command 'connect' or enter 'help'");
 
         while (true){
             String intPut = dataInOut.inPut();
@@ -53,7 +53,7 @@ class MainController {
                     throw new InvalidException("ERROR", e);
                 }
             }
-            dataInOut.outPut("Please enter command or help:");
+            dataInOut.outPut("Please enter command or 'help':");
         }
     }
 }
