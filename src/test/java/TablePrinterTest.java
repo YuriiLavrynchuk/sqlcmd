@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import view.DataInOut;
 
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,11 +48,11 @@ public class TablePrinterTest {
 
         TextTable tt = new TextTable(tableColumns, x);
         tt.printTable();
-
+//        PrintStream ps = new PrintStream(baos);
         assertEquals("[DataSet{\n" +
                 "names:[id, name, password]\n" +
                 "values:[5, User5, 9999]\n" +
-                "}]", Arrays.toString(select.toArray()));
+                "}]", select.get(1).substring(1));
         st.close();
     }
 }

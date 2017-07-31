@@ -58,9 +58,11 @@ public class Select {
             while (rs.next()){
                 HashMap row = new HashMap(rsMd.getColumnCount());
                 for (int i = 1; i <= rsMd.getColumnCount(); i++){
-                    row.put(i,rs.getObject(i).toString());
+                    row.put(i,rs.getObject(i));
                 }
-                result.add(row.values().toString());
+
+                String x = String.valueOf(row.values());
+                result.add(x.substring(1, x.length()-1));
 //                result.add(new String[]{row.values().toString()});
             }
 //            String[] str = new String[result.size()];

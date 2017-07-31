@@ -74,8 +74,9 @@ public class ExSelect implements Command {
 //            getFields(tableData);
 
             String[][] table = new String[1][];
-            table[0] = new String[]{tableData.get(1)};
-            TextTable tt = new TextTable(tableColumns, getFields(tableData));
+            dataInOut.outPut(tableData.get(1));
+            table[0] = tableData.get(0).split(",");
+            TextTable tt = new TextTable(tableColumns, table);
             tt.printTable();
         } catch (SQLException e){
             new InvalidException("ExSelect select Error", e);
