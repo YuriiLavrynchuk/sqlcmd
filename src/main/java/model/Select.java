@@ -4,8 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Select {
 
@@ -28,6 +27,58 @@ public class Select {
             return new DataSet[0];
         }
     }
+
+//    //использование List
+//    public List<String> select2(String tableName, Statement statement) throws SQLException {
+//        int size = getTableSize(tableName, statement);
+//
+//        List<String> result = new ArrayList<>();
+//        try {
+//            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
+//            ResultSetMetaData rsMd = rs.getMetaData();
+//            while (rs.next()){
+//                for (int i = 1; i <= rsMd.getColumnCount(); i++){
+//                    result.add(rs.getString(i));
+//                }
+//                System.out.println(Arrays.toString(result.toArray()));
+//            }
+//            return result;
+//        } catch (SQLException e){
+//             result.add("nulllllllll");
+//            return result;
+//        }
+//    }
+
+    //использование HashMap
+    public List<String> select2(String tableName, Statement statement) throws SQLException {
+        try {
+            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
+            ResultSetMetaData rsMd = rs.getMetaData();
+            List<String> result = new ArrayList();
+            while (rs.next()){
+                HashMap row = new HashMap(rsMd.getColumnCount());
+                for (int i = 1; i <= rsMd.getColumnCount(); i++){
+                    row.put(i,rs.getObject(i).toString());
+                }
+                result.add(row.values().toString());
+//                result.add(new String[]{row.values().toString()});
+            }
+//            String[] str = new String[result.size()];
+//            for (int j = 0; j <result.size() ; j++) {
+//                str[j] = result.get(j).toString();
+//            }
+//            System.out.println(str[1]);
+//            System.out.println(result.get(0));
+            return result;
+        } catch (SQLException e){
+            return new ArrayList<>();
+//            return new String[]{"errror"};
+        }
+    }
+
+//    public void splitResult(String[] data){
+//
+//    }
 
     private int getTableSize(String tableName, Statement statement){
         int tableSize = 0;

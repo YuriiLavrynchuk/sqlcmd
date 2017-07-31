@@ -1,5 +1,6 @@
 package controller;
 
+import dnl.utils.text.table.TextTable;
 import exeption.InvalidException;
 import model.DbConnection;
 import model.DataSet;
@@ -8,6 +9,9 @@ import view.DataInOut;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class ExSelect implements Command {
     private final DataInOut dataInOut;
@@ -25,6 +29,36 @@ public class ExSelect implements Command {
         return command.equals("select");
     }
 
+//    @Override
+//    public void execute(String command){
+//        dataInOut.outPut("Enter tablename:");
+//        String selectMsg = dataInOut.inPut();
+//
+//        try (Statement statement = dBconnection.getStatement()){
+//            String[] tableColumns = select.getTableColumns(selectMsg, statement);
+//            printHeader(tableColumns);
+//            DataSet[] tableData = select.select(selectMsg, statement);
+//            printTable(tableData);
+//        } catch (SQLException e){
+//            new InvalidException("ExSelect select Error", e);
+//        }
+//    }
+
+
+//    @Override
+//    //использование List
+//    public void execute(String command){
+//        dataInOut.outPut("Enter tablename:");
+//        String selectMsg = dataInOut.inPut();
+//
+//        try (Statement statement = dBconnection.getStatement()){
+//            String[] tableColumns = select.getTableColumns(selectMsg, statement);
+//            List<String> tableData = select.select2(selectMsg, statement);
+//        } catch (SQLException e){
+//            new InvalidException("ExSelect select Error", e);
+//        }
+//    }
+
     @Override
     public void execute(String command){
         dataInOut.outPut("Enter tablename:");
@@ -32,12 +66,33 @@ public class ExSelect implements Command {
 
         try (Statement statement = dBconnection.getStatement()){
             String[] tableColumns = select.getTableColumns(selectMsg, statement);
-            printHeader(tableColumns);
-            DataSet[] tableData = select.select(selectMsg, statement);
-            printTable(tableData);
+//            printHeader(tableColumns);
+            List<String> tableData = select.select2(selectMsg, statement);
+//            dataInOut.outPut(Arrays.toString(tableData));
+//            dataInOut.outPut(tableData.get(1).toString());
+//            printTable(tableData);
+//            getFields(tableData);
+
+            String[][] table = new String[1][];
+            table[0] = new String[]{tableData.get(1)};
+            TextTable tt = new TextTable(tableColumns, getFields(tableData));
+            tt.printTable();
         } catch (SQLException e){
             new InvalidException("ExSelect select Error", e);
         }
+    }
+
+    public String[][] getFields(List<String> listdata) {
+        String[][] x = new String[1][];
+
+        x[0] = listdata.get(0).split(", ");
+
+//        int index = 0;
+//        for (String s : listdata) {
+//            x[index] = Arrays.toString(listdata.get(index).split(", "));
+//            index++;
+//        }
+        return x;
     }
 
     public void printTable(DataSet[] tableData){
