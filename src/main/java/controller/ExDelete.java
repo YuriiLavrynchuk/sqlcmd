@@ -31,7 +31,8 @@ public class ExDelete implements Command {
 
     @Override
     public void execute(String command){
-        dataInOut.outPut("Enter Delete query:");
+        dataInOut.outPut("Enter Delete query in format -> delete from tablename where column = 'value'\r\n" +
+                "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String deleteMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
                 delete.deleteRun(statement, deleteMsg);

@@ -18,7 +18,6 @@ public class IntegrationTest {
 
     @Before
     public void setup() throws InvalidException {
-
         in = new ConfigurableInputStream();
         out = new ByteArrayOutputStream();
 
@@ -268,15 +267,14 @@ public class IntegrationTest {
                 //select
                 "Enter tablename:\r\n" +
                 //tablename
-                "--------------------\r\n" +
-                "|id|name|password|\r\n" +
-                "--------------------\r\n" +
-                "|1|Admin|1111|\r\n" +
-                "|2|User2|4532|\r\n" +
-                "|3|User3|6443|\r\n" +
-                "|4|User4|4444|\r\n" +
-                "|5|User5|9999|\r\n" +
-                "--------------------\r\n" +
+                "_____________________\n" +
+                "| id| name | password|\n" +
+                "|====================|\n" +
+                "| 1 | Admin| 1111    |\n" +
+                "| 2 | User2| 4532    |\n" +
+                "| 3 | User3| 6443    |\n" +
+                "| 4 | User4| 4444    |\n" +
+                "| 5 | User5| 9999    |\n" +
                 "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
@@ -352,7 +350,8 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //delete
-                "Enter Delete query:\r\n" +
+                "Enter Delete query in format -> delete from tablename where column = 'value'\r\n" +
+                "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //deletemsg
                 "FAIL! Cause:\r\n" +
                 "ERROR: syntax error at or near \"del\"\n" +
@@ -388,7 +387,8 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //update
-                "Enter Update query:\r\n" +
+                "Enter Update query in format -> update tablename set column = value where column_n = value_n\r\n" +
+                "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //updatemsg
                 "FAIL! Cause:\r\n" +
                 "ERROR: syntax error at or near \"updt\"\n" +
@@ -424,7 +424,8 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //insert
-                "Enter Insert query:\r\n" +
+                "Enter Insert query in format -> insert into tablename values(value_1,... value_n)\r\n" +
+                "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //insertmsg
                 "FAIL! Cause:\r\n" +
                 "ERROR: syntax error at or near \"insr\"\n" +

@@ -1,7 +1,7 @@
+package model;
+
 import dnl.utils.text.table.TextTable;
 import exeption.InvalidException;
-import model.DbConnection;
-import model.Select;
 import org.junit.Before;
 import org.junit.Test;
 

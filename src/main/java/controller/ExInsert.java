@@ -13,11 +13,6 @@ class ExInsert implements Command{
     private final DbConnection dBconnection;
     private final Insert insert;
 
-//    public ExInsert(DataInOut dataInOut, DbConnection dbConnection){
-//        this.dataInOut = dataInOut;
-//        this.dBconnection = dbConnection;
-//    }
-
     public ExInsert(DataInOut dataInOut, DbConnection dBconnection, Insert insert) {
         this.dataInOut = dataInOut;
         this.dBconnection = dBconnection;
@@ -31,7 +26,8 @@ class ExInsert implements Command{
 
     @Override
     public void execute(String command){
-        dataInOut.outPut("Enter Insert query:");
+        dataInOut.outPut("Enter Insert query in format -> insert into tablename values(value_1,... value_n)\r\n" +
+                "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String insertMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
             insert.insertRun(statement, insertMsg);

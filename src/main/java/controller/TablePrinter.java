@@ -1,7 +1,5 @@
 package controller;
 
-import dnl.utils.text.table.TextTable;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,7 +41,7 @@ public class TablePrinter {
 //        table[0][1] = 1;
 //        table[1][0] = 1;
 //        table[1][1] = 1;
-
+        System.getProperty("line.separator");
         String animals = "dog, cat, bear, elephant, giraffe";
         String[] animalsArray = animals.split(" ");
         System.out.println(Arrays.toString(animalsArray));
