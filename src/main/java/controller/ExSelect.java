@@ -49,10 +49,8 @@ public class ExSelect implements Command {
 
         try (Statement statement = dBconnection.getStatement()){
             String[] tableColumns = select.getTableColumns(selectMsg, statement);
-            List<String> tableData = select.select2(selectMsg, statement);
-
-            TextTable tt = new TextTable(tableColumns, getFields(tableData));
-            tt.printTable();
+            List<String> tableData = select.select(selectMsg, statement);
+            printerTables(tableColumns, getFields(tableData));
         } catch (SQLException e){
             new InvalidException("ExSelect select Error", e);
         }
@@ -95,5 +93,10 @@ public class ExSelect implements Command {
         dataInOut.outPut("--------------------");
         dataInOut.outPut(result.toString());
         dataInOut.outPut("--------------------");
+    }
+
+    public void printerTables (String[] columns, String[][] data){
+        TextTable textTable = new TextTable(columns, data);
+        textTable.printTable();
     }
 }

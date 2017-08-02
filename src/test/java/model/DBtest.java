@@ -10,25 +10,29 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class DBtest {
-     private Connection connectToDB;
+    public static final String DB_NAME = "postgres";
+    public static final String USER_NAME = "postgres";
+    public static final String PASSWORD = "1234";
+    private Connection connectToDB;
      private Statement st;
      private DataInOut dataInOut;
 
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
-        connectToDB = new DbConnection().connection("postgres", "postgres", "1234");
+        connectToDB = new DbConnection().connection(DB_NAME, USER_NAME, PASSWORD);
         st = connectToDB.createStatement();
     }
 
     @Test
     public void testSelect() throws SQLException {
 
-        DataSet[] select = new Select().select("users", st);
-        assertEquals(5, select.length);
+        List<String> select = new Select().select("users", st);
+        assertEquals(5, select.size());
         st.close();
     }
 

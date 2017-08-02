@@ -8,27 +8,27 @@ import java.util.*;
 
 public class Select {
 
-    public DataSet[] select(String tableName, Statement statement) throws SQLException {
-        int size = getTableSize(tableName, statement);
-        try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
-            ResultSetMetaData rsMd = rs.getMetaData();
-            DataSet[] result = new DataSet[size];
-            int index = 0;
-            while (rs.next()){
-                DataSet dataSet = new DataSet();
-                result[index++] = dataSet;
-                for (int i = 1; i <= rsMd.getColumnCount(); i++){
-                    dataSet.put(rsMd.getColumnName(i), rs.getObject(i));
-                }
-            }
-            return result;
-        } catch (SQLException e){
-            return new DataSet[0];
-        }
-    }
+//    public DataSet[] select(String tableName, Statement statement) throws SQLException {
+//        int size = getTableSize(tableName, statement);
+//        try {
+//            ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
+//            ResultSetMetaData rsMd = rs.getMetaData();
+//            DataSet[] result = new DataSet[size];
+//            int index = 0;
+//            while (rs.next()){
+//                DataSet dataSet = new DataSet();
+//                result[index++] = dataSet;
+//                for (int i = 1; i <= rsMd.getColumnCount(); i++){
+//                    dataSet.put(rsMd.getColumnName(i), rs.getObject(i));
+//                }
+//            }
+//            return result;
+//        } catch (SQLException e){
+//            return new DataSet[0];
+//        }
+//    }
 
-    public List<String> select2(String tableName, Statement statement) throws SQLException {
+    public List<String> select(String tableName, Statement statement) throws SQLException {
         try {
             ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName + " ORDER BY 1");
             ResultSetMetaData rsMd = rs.getMetaData();

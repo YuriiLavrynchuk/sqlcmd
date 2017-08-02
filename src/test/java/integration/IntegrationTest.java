@@ -13,6 +13,9 @@ import static org.junit.Assert.assertEquals;
 
 public class IntegrationTest {
 
+    public static final String DB_NAME = "postgres";
+    public static final String USER_NAME = "postgres";
+    public static final String PASSWORD = "1234";
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
 
@@ -186,9 +189,9 @@ public class IntegrationTest {
     @Test
     public void testNoExistCommandAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("notexistcommand");
         in.add("exit");
 
@@ -244,9 +247,9 @@ public class IntegrationTest {
     @Test
     public void testSelectAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("select");
         in.add("users");
         in.add("exit");
@@ -283,11 +286,12 @@ public class IntegrationTest {
     @Test
     public void testConnectAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("tablelist");
         in.add("connect");
+        //connect to test db
         in.add("test");
         in.add("postgres");
         in.add("1234");
@@ -329,9 +333,9 @@ public class IntegrationTest {
     @Test
     public void testDeleteWithErrorAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("delete");
         in.add("del");
         in.add("exit");
@@ -366,9 +370,9 @@ public class IntegrationTest {
     @Test
     public void testUpdateWithErrorAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("update");
         in.add("updt");
         in.add("exit");
@@ -403,9 +407,9 @@ public class IntegrationTest {
     @Test
     public void testInsertWithErrorAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("insert");
         in.add("insr");
         in.add("exit");
@@ -440,9 +444,9 @@ public class IntegrationTest {
     @Test
     public void testGetColumnsAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        in.add(PASSWORD);
         in.add("get columns");
         in.add("users");
         in.add("exit");
@@ -472,8 +476,9 @@ public class IntegrationTest {
     @Test
     public void testConnectWithWrongParametr(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
+        in.add(DB_NAME);
+        in.add(USER_NAME);
+        //wrong password
         in.add("0000");
         in.add("exit");
 
@@ -506,6 +511,4 @@ public class IntegrationTest {
             return e.getMessage();
         }
     }
-
-
 }
