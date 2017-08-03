@@ -30,10 +30,26 @@ class ExInsert implements Command{
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String insertMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
-            crud.run(statement, insertMsg);
-            dataInOut.outPut("Row inserted");
+            if(checkQuery(insertMsg)) {
+                crud.run(statement, insertMsg);
+                dataInOut.outPut("Row inserted");
+            }
         } catch (SQLException e){
             new InvalidException("ExInsert insert ERROR", e);
         }
+    }
+
+    private boolean checkQuery(String query){
+        String word = "";
+        try {
+            word = query.substring(1, 11);
+        } catch (Exception e){
+            word = query.substring(1, query.length());
+        }
+        if (word.equals("insert into")){
+            return true;
+        }
+        dataInOut.outPut("Wrong query: " + query);
+        return false;
     }
 }

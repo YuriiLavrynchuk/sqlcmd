@@ -19,11 +19,6 @@ public class ExDelete implements Command {
         this.crud = crud;
     }
 
-    ExDelete(DataInOut dataInOut, DbConnection dbConnection){
-        this.dataInOut = dataInOut;
-        this.dBconnection = dbConnection;
-    }
-
     @Override
     public boolean checkCommand(String command){
         return command.equals("delete");
@@ -35,11 +30,27 @@ public class ExDelete implements Command {
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String deleteMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
+            if (checkQuery(deleteMsg)) {
                 crud.run(statement, deleteMsg);
                 dataInOut.outPut("Row deleted");
+            }
         } catch (SQLException e){
             new InvalidException("ExDelete delete ERROR", e);
         }
+    }
+
+    private boolean checkQuery(String query){
+        String word = "";
+        try {
+            word = query.substring(1, 11);
+        } catch (Exception e){
+            word = query.substring(1, query.length());
+        }
+        if (word.equals("insert into")){
+            return true;
+        }
+        dataInOut.outPut("Wrong query: " + query);
+        return false;
     }
 }
 
