@@ -1,10 +1,11 @@
 package controller.command;
 
-import controller.*;
-import model.*;
+import controller.Command;
+import controller.ExSelect;
+import model.DbConnection;
+import model.Select;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
 import view.DataInOut;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +17,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ExSelectTestWithMock {
     private DbConnection dbConnection;
@@ -24,6 +26,7 @@ public class ExSelectTestWithMock {
     private DataInOut dataInOut;
     private Select select;
     private Command command;
+    private List<String> dataList;
 
     @Before
     public void setup() throws SQLException {
@@ -32,22 +35,21 @@ public class ExSelectTestWithMock {
         dbConnection = mock(DbConnection.class);
         select = mock(Select.class);
         command = new ExSelect(dataInOut, dbConnection, select);
+        dataList = new ArrayList();
+        dataList.add("1, User1, 1111");
+        dataList.add("2, User2, 2222");
     }
 
     @Test
     public void testExSelect() throws Exception {
 
         //given
-
-        List<String> datalist = new ArrayList();
-        datalist.add("1, User1, 1111");
-        datalist.add("2, User2, 2222");
+        when(dbConnection.getStatement()).thenReturn(statement);
+        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id", "name", "password"});
+        when(select.select("users", statement)).thenReturn(dataList);
 
         //when
         when(dataInOut.inPut()).thenReturn("users");
-        when(dbConnection.getStatement()).thenReturn(statement);
-        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id", "name", "password"});
-        when(select.select("users", statement)).thenReturn(datalist);
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -66,24 +68,21 @@ public class ExSelectTestWithMock {
     public void testExSelectWithNullTable() throws Exception {
 
         //given
-        List<String> datalist = new ArrayList();
+        List<String> data = new ArrayList();
+        when(dbConnection.getStatement()).thenReturn(statement);
+        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id", "name", "password"});
+        when(select.select("users", statement)).thenReturn(data);
 
         //when
         when(dataInOut.inPut()).thenReturn("users");
-        when(dbConnection.getStatement()).thenReturn(statement);
-        when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id", "name", "password"});
-        when(select.select("users", statement)).thenReturn(datalist);
-
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
         command.execute("select");
 
         //then
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(dataInOut, atLeastOnce()).outPut(captor.capture());
-        assertEquals("[Enter tablename:" +
-                ", --------------------," +
-                " |id|name|password|," +
-                " --------------------," +
-                " --------------------]", captor.getAllValues().toString());
+        assertEquals("____________________\r\n" +
+                "| id| name| password|\r\n" +
+                "|===================|\r\n", outContent.toString());
     }
 
     @Test
@@ -96,33 +95,23 @@ public class ExSelectTestWithMock {
 
     @Test
     public void testExSelectWithOneColumn() throws Exception {
-
         //given
-//        DataSet user1 = new DataSet();
-//        user1.put("id", 1);
-//
-//        DataSet user2 = new DataSet();
-//        user2.put("id", 2);
-//
-//        DataSet[] data = new DataSet[]{user1, user2};
-        List<String> datalist = new ArrayList();
-        //when
         when(dataInOut.inPut()).thenReturn("users");
         when(dbConnection.getStatement()).thenReturn(statement);
         when(select.getTableColumns("users", statement)).thenReturn(new String[]{"id"});
-        when(select.select("users", statement)).thenReturn(datalist);
+        when(select.select("users", statement)).thenReturn(dataList);
 
+        //when
+        when(dataInOut.inPut()).thenReturn("users");
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
         command.execute("select");
 
         //then
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(dataInOut, atLeastOnce()).outPut(captor.capture());
-        assertEquals("[Enter tablename:" +
-                ", --------------------," +
-                " |id|," +
-                " --------------------," +
-                " |1|," +
-                " |2|," +
-                " --------------------]", captor.getAllValues().toString());
+        assertEquals("____\r\n" +
+                "| id|\r\n" +
+                "|===|\r\n" +
+                "| 1 |\r\n" +
+                "| 2 |\r\n", outContent.toString());
     }
 }

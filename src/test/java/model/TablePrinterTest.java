@@ -25,7 +25,7 @@ public class TablePrinterTest {
     @Test
     public void testTablePrinter() throws SQLException {
         st = connectToDB.createStatement();
-        List<String>  select = new Select().select2("users", st);
+        List<String> select = new Select().select("users", st);
 
         String[] tableColumns = new String[]{"id", "name", "password"};
         String[][] x = new String[1][];

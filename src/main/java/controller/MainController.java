@@ -18,9 +18,9 @@ class MainController {
                 new ExExit(dataInOut, dBconnection),
                 new CheckConnection(dataInOut, dBconnection),
                 new ExTableList(dataInOut, dBconnection, new SelectTablesList()),
-                new ExUpdate(dataInOut, dBconnection, new Update()),
-                new ExInsert(dataInOut, dBconnection, new Insert()),
-                new ExDelete(dataInOut, dBconnection, new Delete()),
+                new ExUpdate(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
+                new ExInsert(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
+                new ExDelete(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
                 new ExSelect(dataInOut, dBconnection, new Select()),
                 new ExGetColumns(dataInOut, dBconnection, new Select()),
                 new ExNotExistCommand(dataInOut)

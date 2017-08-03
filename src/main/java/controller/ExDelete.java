@@ -2,7 +2,7 @@ package controller;
 
 import exeption.InvalidException;
 import model.DbConnection;
-import model.Delete;
+import model.InsertUpdateDeleteCreate;
 import view.DataInOut;
 
 import java.sql.SQLException;
@@ -11,12 +11,12 @@ import java.sql.Statement;
 public class ExDelete implements Command {
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
-    private Delete delete;
+    private InsertUpdateDeleteCreate crud;
 
-    public ExDelete(DataInOut dataInOut, DbConnection dbConnection, Delete delete){
+    public ExDelete(DataInOut dataInOut, DbConnection dbConnection, InsertUpdateDeleteCreate crud){
         this.dataInOut = dataInOut;
         this.dBconnection = dbConnection;
-        this.delete = delete;
+        this.crud = crud;
     }
 
     ExDelete(DataInOut dataInOut, DbConnection dbConnection){
@@ -35,7 +35,7 @@ public class ExDelete implements Command {
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String deleteMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
-                delete.deleteRun(statement, deleteMsg);
+                crud.run(statement, deleteMsg);
                 dataInOut.outPut("Row deleted");
         } catch (SQLException e){
             new InvalidException("ExDelete delete ERROR", e);
