@@ -270,9 +270,9 @@ public class IntegrationTest {
                 //select
                 "Enter tablename:\r\n" +
                 //tablename
-                "_____________________\n" +
+                "_____________________\r\n" +
                 "| id| name | password|\n" +
-                "|====================|\n" +
+                "|====================|\r\n" +
                 "| 1 | Admin| 1111    |\n" +
                 "| 2 | User2| 4532    |\n" +
                 "| 3 | User3| 6443    |\n" +
@@ -337,7 +337,7 @@ public class IntegrationTest {
         in.add(USER_NAME);
         in.add(PASSWORD);
         in.add("delete");
-        in.add("del");
+        in.add("doloto fram");
         in.add("exit");
 
         Main.main(new String[0]);
@@ -357,11 +357,7 @@ public class IntegrationTest {
                 "Enter Delete query in format -> delete from tablename where column = 'value'\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //deletemsg
-                "FAIL! Cause:\r\n" +
-                "ERROR: syntax error at or near \"del\"\n" +
-                "  Позиция: 1\r\n" +
-                "ExDelete delete ERROR\r\n" +
-                "Try again.\r\n" +
+                "Wrong query: doloto fram\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
@@ -374,7 +370,7 @@ public class IntegrationTest {
         in.add(USER_NAME);
         in.add(PASSWORD);
         in.add("update");
-        in.add("updt");
+        in.add("updotx");
         in.add("exit");
 
         Main.main(new String[0]);
@@ -394,11 +390,7 @@ public class IntegrationTest {
                 "Enter Update query in format -> update tablename set column = value where column_n = value_n\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //updatemsg
-                "FAIL! Cause:\r\n" +
-                "ERROR: syntax error at or near \"updt\"\n" +
-                "  Позиция: 1\r\n" +
-                "Update ERROR\r\n" +
-                "Try again.\r\n" +
+                "Wrong query: updotx\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
@@ -431,11 +423,7 @@ public class IntegrationTest {
                 "Enter Insert query in format -> insert into tablename values(value_1,... value_n)\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //insertmsg
-                "FAIL! Cause:\r\n" +
-                "ERROR: syntax error at or near \"insr\"\n" +
-                "  Позиция: 1\r\n" +
-                "ExInsert insert ERROR\r\n" +
-                "Try again.\r\n" +
+                "Wrong query: insr\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());

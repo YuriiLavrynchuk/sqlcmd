@@ -2,7 +2,7 @@ package controller;
 
 import exeption.InvalidException;
 import model.DbConnection;
-import model.Insert;
+import model.InsertUpdateDeleteCreate;
 import view.DataInOut;
 
 import java.sql.SQLException;
@@ -11,12 +11,12 @@ import java.sql.Statement;
 class ExInsert implements Command{
     private final DataInOut dataInOut;
     private final DbConnection dBconnection;
-    private final Insert insert;
+    private final InsertUpdateDeleteCreate crud;
 
-    public ExInsert(DataInOut dataInOut, DbConnection dBconnection, Insert insert) {
+    public ExInsert(DataInOut dataInOut, DbConnection dBconnection, InsertUpdateDeleteCreate crud) {
         this.dataInOut = dataInOut;
         this.dBconnection = dBconnection;
-        this.insert = insert;
+        this.crud = crud;
     }
 
     @Override
@@ -30,10 +30,26 @@ class ExInsert implements Command{
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String insertMsg = dataInOut.inPut();
         try (Statement statement = dBconnection.getStatement()){
-            insert.insertRun(statement, insertMsg);
-            dataInOut.outPut("Row inserted");
+            if(checkQuery(insertMsg)) {
+                crud.run(statement, insertMsg);
+                dataInOut.outPut("Row inserted");
+            }
         } catch (SQLException e){
             new InvalidException("ExInsert insert ERROR", e);
         }
+    }
+
+    private boolean checkQuery(String query){
+        String word = "";
+        try {
+            word = query.substring(1, 11);
+        } catch (Exception e){
+            word = query.substring(1, query.length());
+        }
+        if (word.equals("insert into")){
+            return true;
+        }
+        dataInOut.outPut("Wrong query: " + query);
+        return false;
     }
 }

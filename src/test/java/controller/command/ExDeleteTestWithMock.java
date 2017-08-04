@@ -3,7 +3,7 @@ package controller.command;
 import controller.Command;
 import controller.ExDelete;
 import model.DbConnection;
-import model.Delete;
+import model.InsertUpdateDeleteCreate;
 import org.junit.Before;
 import org.junit.Test;
 import view.DataInOut;
@@ -15,15 +15,15 @@ import static org.mockito.Mockito.*;
 public class ExDeleteTestWithMock {
     private DbConnection dbConnection;
     private DataInOut dataInOut;
-    private Delete delete;
+    private InsertUpdateDeleteCreate crud;
     private Command command;
 
     @Before
     public void setup() throws SQLException {
         dataInOut = mock(DataInOut.class);
         dbConnection = mock(DbConnection.class);
-        delete = mock(Delete.class);
-        command = new ExDelete(dataInOut, dbConnection, delete);
+        crud = mock(InsertUpdateDeleteCreate.class);
+        command = new ExDelete(dataInOut, dbConnection, crud);
     }
 
     @Test
