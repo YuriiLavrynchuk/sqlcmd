@@ -58,10 +58,10 @@ public class ExSelectTestWithMock {
 
         //then
         assertEquals("_____________________\r\n" +
-                "| id| name | password|\r\n" +
+                "| id| name | password|\n" +
                 "|====================|\r\n" +
-                "| 1 | User1| 1111    |\r\n" +
-                "| 2 | User2| 2222    |\r\n", outContent.toString());
+                "| 1 | User1| 1111    |\n" +
+                "| 2 | User2| 2222    |\n", outContent.toString());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ExSelectTestWithMock {
 
         //then
         assertEquals("____________________\r\n" +
-                "| id| name| password|\r\n" +
+                "| id| name| password|\n" +
                 "|===================|\r\n", outContent.toString());
     }
 
@@ -109,9 +109,9 @@ public class ExSelectTestWithMock {
 
         //then
         assertEquals("____\r\n" +
-                "| id|\r\n" +
+                "| id|\n" +
                 "|===|\r\n" +
-                "| 1 |\r\n" +
-                "| 2 |\r\n", outContent.toString());
+                "| 1 |\n" +
+                "| 2 |\n", outContent.toString());
     }
 }

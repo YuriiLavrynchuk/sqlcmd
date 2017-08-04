@@ -27,21 +27,6 @@ public class ExSelect implements Command {
         return command.equals("select");
     }
 
-//    @Override
-//    public void execute(String command){
-//        dataInOut.outPut("Enter tablename:");
-//        String selectMsg = dataInOut.inPut();
-//
-//        try (Statement statement = dBconnection.getStatement()){
-//            String[] tableColumns = select.getTableColumns(selectMsg, statement);
-//            printHeader(tableColumns);
-//            DataSet[] tableData = select.select(selectMsg, statement);
-//            printTable(tableData);
-//        } catch (SQLException e){
-//            new InvalidException("ExSelect select Error", e);
-//        }
-//    }
-
     @Override
     public void execute(String command){
         dataInOut.outPut("Enter tablename:");

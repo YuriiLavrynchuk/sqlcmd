@@ -270,9 +270,9 @@ public class IntegrationTest {
                 //select
                 "Enter tablename:\r\n" +
                 //tablename
-                "_____________________\n" +
+                "_____________________\r\n" +
                 "| id| name | password|\n" +
-                "|====================|\n" +
+                "|====================|\r\n" +
                 "| 1 | Admin| 1111    |\n" +
                 "| 2 | User2| 4532    |\n" +
                 "| 3 | User3| 6443    |\n" +
