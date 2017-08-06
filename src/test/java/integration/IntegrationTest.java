@@ -2,22 +2,36 @@ package integration;
 
 import controller.Main;
 import exeption.InvalidException;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+
+import model.DataBaseResources;
 
 import static org.junit.Assert.assertEquals;
 
 public class IntegrationTest {
 
-    public static final String DB_NAME = "postgres";
-    public static final String USER_NAME = "postgres";
-    public static final String PASSWORD = "1234";
+    public static final String DB_NAME_TEST = "test";
+    public static final String USER_NAME_TEST = "admin";
+    public static final String PASSWORD_TEST = "pass";
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
+
+    @BeforeClass
+    public static void setupDataBase() throws SQLException, InvalidException {
+        new DataBaseResources().before();
+    }
+
+    @AfterClass
+    public static void dropDataBase() throws SQLException, InvalidException {
+        new DataBaseResources().after();
+    }
 
     @Before
     public void setup() throws InvalidException {
@@ -189,9 +203,9 @@ public class IntegrationTest {
     @Test
     public void testNoExistCommandAfterConnect(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("notexistcommand");
         in.add("exit");
 
@@ -218,9 +232,9 @@ public class IntegrationTest {
     @Test
     public void testTableListAfterConnect(){
         in.add("connect");
-        in.add("postgres");
-        in.add("postgres");
-        in.add("1234");
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("tablelist");
         in.add("exit");
 
@@ -247,9 +261,9 @@ public class IntegrationTest {
     @Test
     public void testSelectAfterConnect(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("select");
         in.add("users");
         in.add("exit");
@@ -284,58 +298,11 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testConnectAfterConnect(){
-        in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
-        in.add("tablelist");
-        in.add("connect");
-        //connect to test db
-        in.add("test");
-        in.add("postgres");
-        in.add("1234");
-        in.add("tablelist");
-        in.add("exit");
-
-        Main.main(new String[0]);
-
-        assertEquals("Hello!\r\n" +
-                "Please connect to database using command 'connect' or enter 'help'\r\n" +
-                //conncet
-                "Please insert dbname:\r\n" +
-                //dbname
-                "Please insert username:\r\n" +
-                //username
-                "Please insert password:\r\n" +
-                //password
-                "Connection success!\r\n" +
-                "Please enter command or 'help':\r\n" +
-                //tablelist
-                "[users]\r\n" +
-                "Please enter command or 'help':\r\n" +
-                //connect
-                "Please insert dbname:\r\n" +
-                //dbname
-                "Please insert username:\r\n" +
-                //username
-                "Please insert password:\r\n" +
-                //password
-                "Connection success!\r\n" +
-                "Please enter command or 'help':\r\n" +
-                //tablelist
-                "[test]\r\n" +
-                "Please enter command or 'help':\r\n" +
-                //exit
-                "Good by!\r\n", getData());
-    }
-
-    @Test
     public void testDeleteWithErrorAfterConnect(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("delete");
         in.add("doloto fram");
         in.add("exit");
@@ -366,9 +333,9 @@ public class IntegrationTest {
     @Test
     public void testUpdateWithErrorAfterConnect(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("update");
         in.add("updotx");
         in.add("exit");
@@ -399,9 +366,9 @@ public class IntegrationTest {
     @Test
     public void testInsertWithErrorAfterConnect(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("insert");
         in.add("insr");
         in.add("exit");
@@ -432,9 +399,9 @@ public class IntegrationTest {
     @Test
     public void testGetColumnsAfterConnect(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
-        in.add(PASSWORD);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
+        in.add(PASSWORD_TEST);
         in.add("get columns");
         in.add("users");
         in.add("exit");
@@ -464,8 +431,8 @@ public class IntegrationTest {
     @Test
     public void testConnectWithWrongParametr(){
         in.add("connect");
-        in.add(DB_NAME);
-        in.add(USER_NAME);
+        in.add(DB_NAME_TEST);
+        in.add(USER_NAME_TEST);
         //wrong password
         in.add("0000");
         in.add("exit");
@@ -482,8 +449,8 @@ public class IntegrationTest {
                 "Please insert password:\r\n" +
                 //password
                 "FAIL! Cause:\r\n" +
-                "FATAL: password authentication failed for user \"postgres\"\r\n" +
-                "Can't get connection to database:postgres\r\n" +
+                "FATAL: password authentication failed for user \"admin\"\r\n" +
+                "Can't get connection to database:test\r\n" +
                 "Try again.\r\n" +
                 //exit
                 "Please enter command or 'help':\r\n" +
