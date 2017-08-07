@@ -29,7 +29,7 @@ public class ExDropTable implements Command {
         dataInOut.outPut("Enter tableName:");
         String tableName = dataInOut.inPut();
 
-        String insertMsg = "DROP TABLE IF EXISTS " + tableName;
+        String insertMsg = "DROP TABLE " + tableName;
         try (Statement statement = dBconnection.getStatement()){
                 crud.run(statement, insertMsg);
                 dataInOut.outPut("Table dropped");

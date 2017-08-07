@@ -41,6 +41,7 @@ public class DataBaseResources extends DbConnection {
             statement.execute("INSERT INTO users VALUES(3, 'User3', '6443')");
             statement.execute("INSERT INTO users VALUES(4, 'User4', '4444')");
             statement.execute("INSERT INTO users VALUES(5, 'User5', '9999')");
+            statement.execute("CREATE TABLE assets (id integer, asset_number text)");
 
             closeConnection(test);
         }

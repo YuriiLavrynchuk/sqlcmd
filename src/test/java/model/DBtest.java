@@ -58,7 +58,7 @@ public class DBtest {
     @Test
     public void testSelectAllTables() throws SQLException {
         String[] selectAll = new SelectTablesList().selectAllTable(st);
-        assertEquals("[users]", Arrays.toString(selectAll));
+        assertEquals("[users, assets]", Arrays.toString(selectAll));
         st.close();
     }
 
@@ -79,6 +79,7 @@ public class DBtest {
         new InsertUpdateDeleteCreate().run(st, "update users set password = '9999' where id = 5");
         st.close();
 
+        //select
         st = connectToDB.createStatement();
         List<String> select = new Select().select("users where id = 5", st);
         assertEquals("[5, User5, 9999]", Arrays.toString(select.toArray()));
