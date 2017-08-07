@@ -1,8 +1,7 @@
 package model;
 
 import exeption.InvalidException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,16 +12,31 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 public class DBtest {
-    public static final String DB_NAME = "postgres";
-    public static final String USER_NAME = "postgres";
-    public static final String PASSWORD = "1234";
+    public static final String DB_NAME = "test";
+    public static final String USER_NAME = "admin";
+    public static final String PASSWORD = "pass";
     private Connection connectToDB;
      private Statement st;
+
+    @BeforeClass
+    public static void setupDataBase() throws SQLException, InvalidException {
+        new DataBaseResources().before();
+    }
+
+    @AfterClass
+    public static void dropDataBase() throws SQLException, InvalidException {
+        new DataBaseResources().after();
+    }
 
     @Before
     public void testGetAllTables() throws SQLException, InvalidException, ClassNotFoundException {
         connectToDB = new DbConnection().connection(DB_NAME, USER_NAME, PASSWORD);
         st = connectToDB.createStatement();
+    }
+
+    @After
+    public void closeConnect() throws SQLException {
+        connectToDB.close();
     }
 
     @Test
