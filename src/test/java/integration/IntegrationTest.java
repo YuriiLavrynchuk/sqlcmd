@@ -2,16 +2,16 @@ package integration;
 
 import controller.Main;
 import exeption.InvalidException;
+import model.DataBaseResources;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-
-import model.DataBaseResources;
 
 import static org.junit.Assert.assertEquals;
 
@@ -57,12 +57,14 @@ public class IntegrationTest {
                 "Exist commands:\r\n" +
                 "connect       - connection to database\r\n" +
                 "select        - query from table\r\n" +
-                "tablelist     - getting names all tables\r\n" +
+                "tablelist     - get names all tables from data base\r\n" +
+                "new_table     - create table in data base\r\n" +
                 "update        - update rows in the table\r\n" +
                 "insert        - insert new row in the table\r\n" +
                 "delete        - delete row from table\r\n" +
+                "drop_table    - delete table from data base\r\n" +
                 "exit          - exit from application\r\n" +
-                "get columns   - get columns from table\r\n" +
+                "get_columns   - get columns from table\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //exit
                 "Good by!\r\n", getData());
@@ -282,7 +284,7 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //select
-                "Enter tablename:\r\n" +
+                "Enter tableName:\r\n" +
                 //tablename
                 "_____________________\r\n" +
                 "| id| name | password|\n" +
@@ -321,7 +323,8 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //delete
-                "Enter Delete query in format -> delete from tablename where column = 'value'\r\n" +
+                "Enter Delete query in format ->\r\n" +
+                "delete from tablename where column = 'value'\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //deletemsg
                 "Wrong query: doloto fram\r\n" +
@@ -354,7 +357,8 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //update
-                "Enter Update query in format -> update tablename set column = value where column_n = value_n\r\n" +
+                "Enter Update query in format ->\r\n" +
+                "update tablename set column = value where column_n = value_n\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //updatemsg
                 "Wrong query: updotx\r\n" +
@@ -387,7 +391,8 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //insert
-                "Enter Insert query in format -> insert into tablename values(value_1,... value_n)\r\n" +
+                "Enter Insert query in format ->\r\n" +
+                "insert into tablename values(value_1,... value_n)\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'\r\n" +
                 //insertmsg
                 "Wrong query: insr\r\n" +
@@ -402,7 +407,7 @@ public class IntegrationTest {
         in.add(DB_NAME_TEST);
         in.add(USER_NAME_TEST);
         in.add(PASSWORD_TEST);
-        in.add("get columns");
+        in.add("get_columns");
         in.add("users");
         in.add("exit");
 
@@ -420,7 +425,7 @@ public class IntegrationTest {
                 "Connection success!\r\n" +
                 "Please enter command or 'help':\r\n" +
                 //get columns
-                "Enter tablename:\r\n" +
+                "Enter tableName:\r\n" +
                 //updatemsg
                 "[id, name, password]\r\n" +
                 "Please enter command or 'help':\r\n" +

@@ -19,25 +19,21 @@ public class DataBaseResources extends DbConnection {
     private Connection test;
 
     public void before() throws SQLException, InvalidException {
-        //get connection to local database
+
         local = connection(DB_NAME_LOCAL, USER_NAME_LOCAL, PASSWORD_LOCAL);
 
         try(Statement statement = local.createStatement()) {
-            //drop exists database
             statement.execute("DROP DATABASE IF EXISTS test");
-            //drop user
             statement.execute("DROP ROLE IF EXISTS admin");
-            //create user with password
             statement.execute("CREATE ROLE " + USER_NAME_TEST + " LOGIN " + " PASSWORD " +
                     "'" + PASSWORD_TEST + "'" + " SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION");
-            //create database
             statement.executeUpdate("CREATE DATABASE " + DB_NAME_TEST);
-            //close connection to local database
+
             closeConnection(local);
         }
-        //get connection to test database
+
         test = connection(DB_NAME_TEST, USER_NAME_TEST, PASSWORD_TEST);
-        //create table and insert values
+
         try(Statement statement = test.createStatement()){
             statement.execute("CREATE TABLE users (id integer, name text, password text)");
             statement.execute("INSERT INTO users VALUES(1, 'Admin', '1111')");
@@ -45,7 +41,7 @@ public class DataBaseResources extends DbConnection {
             statement.execute("INSERT INTO users VALUES(3, 'User3', '6443')");
             statement.execute("INSERT INTO users VALUES(4, 'User4', '4444')");
             statement.execute("INSERT INTO users VALUES(5, 'User5', '9999')");
-            //close connection to test database
+
             closeConnection(test);
         }
     }
@@ -54,11 +50,8 @@ public class DataBaseResources extends DbConnection {
         local = connection(DB_NAME_LOCAL, USER_NAME_LOCAL, PASSWORD_LOCAL);
 
         try(Statement statement = local.createStatement()){
-            //drop database
             statement.execute("DROP DATABASE IF EXISTS test");
-            //drop user
             statement.execute("DROP ROLE IF EXISTS admin");
-            //close connection to local database
             closeConnection(local);
         }
     }

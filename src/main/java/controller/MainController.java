@@ -19,9 +19,11 @@ class MainController {
                 new CheckConnection(dataInOut, dBconnection),
                 new ExTableList(dataInOut, dBconnection, new SelectTablesList()),
                 new ExUpdate(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
+                new ExNewTable(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
                 new ExInsert(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
                 new ExDelete(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
                 new ExSelect(dataInOut, dBconnection, new Select()),
+                new ExDropTable(dataInOut, dBconnection, new InsertUpdateDeleteCreate()),
                 new ExGetColumns(dataInOut, dBconnection, new Select()),
                 new ExNotExistCommand(dataInOut)
         };

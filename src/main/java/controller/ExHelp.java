@@ -22,11 +22,13 @@ public class ExHelp implements  Command{
                 "Exist commands:\r\n" +
                 "connect       - connection to database\r\n" +
                 "select        - query from table\r\n" +
-                "tablelist     - getting names all tables\r\n" +
+                "tablelist     - get names all tables from data base\r\n" +
+                "new_table     - create table in data base\r\n" +
                 "update        - update rows in the table\r\n" +
                 "insert        - insert new row in the table\r\n" +
                 "delete        - delete row from table\r\n" +
+                "drop_table    - delete table from data base\r\n" +
                 "exit          - exit from application\r\n" +
-                "get columns   - get columns from table");
+                "get_columns   - get columns from table");
     }
 }

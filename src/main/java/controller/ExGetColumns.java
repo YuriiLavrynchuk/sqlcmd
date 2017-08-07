@@ -22,18 +22,18 @@ public class ExGetColumns implements Command {
 
     @Override
     public boolean checkCommand(String command){
-        return command.equals("get columns");
+        return command.equals("get_columns");
     }
 
     @Override
     public void execute(String command){
-        dataInOut.outPut("Enter tablename:");
+        dataInOut.outPut("Enter tableName:");
         String selectMsg = dataInOut.inPut();
         String[] sel = new String[0];
         try (Statement statement = dBconnection.getStatement()){
             sel = select.getTableColumns(selectMsg, statement);
         } catch (SQLException e){
-            new InvalidException("ExGetColumns get columns error", e);
+            new InvalidException("ExGetColumns ERROR", e);
         }
         dataInOut.outPut(Arrays.toString(sel));
     }

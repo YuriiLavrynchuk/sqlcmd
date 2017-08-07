@@ -29,7 +29,7 @@ public class ExSelect implements Command {
 
     @Override
     public void execute(String command){
-        dataInOut.outPut("Enter tablename:");
+        dataInOut.outPut("Enter tableName:");
         String selectMsg = dataInOut.inPut();
 
         try (Statement statement = dBconnection.getStatement()){

@@ -26,7 +26,8 @@ class ExUpdate implements Command {
 
     @Override
     public void execute(String command){
-        dataInOut.outPut("Enter Update query in format -> update tablename set column = value where column_n = value_n\r\n" +
+        dataInOut.outPut("Enter Update query in format ->\r\n" +
+                "update tablename set column = value where column_n = value_n\r\n" +
                 "Remember! If you use textwords like values you must wrap these words in quotes: 'textword'");
         String updateMsg = dataInOut.inPut();
         try(Statement statement = dBconnection.getStatement()){
@@ -42,11 +43,11 @@ class ExUpdate implements Command {
     private boolean checkQuery(String query){
         String word = "";
         try {
-            word = query.substring(1, 6);
+            word = query.substring(0, 6);
         } catch (Exception e){
-            word = query.substring(1, query.length());
+            word = query.substring(0, query.length());
         }
-        if (word.equals("insert into")){
+        if (word.equals("update")){
             return true;
         }
         dataInOut.outPut("Wrong query: " + query);
