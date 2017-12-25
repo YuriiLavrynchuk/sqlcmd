@@ -1,13 +1,24 @@
 package controller;
 
+/**
+ * Класс комманды "help". Выводит список доступных комманд.
+ * Проверяет вводимую комманду, считывает и выполняет sql-запрос.
+ *
+ * @version 1.0.0
+ *
+ * @author Yuriy.Lavrinchuk
+ *
+ */
 import view.DataInOut;
 
 public class ExHelp implements  Command{
-
     private final DataInOut dataInOut;
 
+    /**
+     * Создаёт объект комманды "help".
+     * @param dataInOut объект ввода/вывода
+     */
     public ExHelp(DataInOut dataInOut){
-
         this.dataInOut = dataInOut;
     }
 

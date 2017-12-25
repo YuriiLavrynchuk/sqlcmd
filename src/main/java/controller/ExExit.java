@@ -5,11 +5,25 @@ import exeption.InvalidException;
 import model.DbConnection;
 import view.DataInOut;
 
-public class ExExit implements Command {
+/**
+ * Класс комманды выхода "exit".
+ * Проверяет вводимую комманду, считывает выход из программы.
+ *
+ * @version 1.0.0
+ *
+ * @author Yuriy.Lavrinchuk
+ *
+ */
 
+public class ExExit implements Command {
     private final DataInOut dataInOut;
     private DbConnection dBconnection;
 
+    /**
+     * Создаёт объект комманды "exit".
+     * @param dataInOut объект ввода/вывода
+     * @param dBconnection объект подключения к БД
+     */
     public ExExit(DataInOut dataInOut, DbConnection dBconnection){
         this.dataInOut = dataInOut;
         this.dBconnection = dBconnection;
@@ -30,6 +44,10 @@ public class ExExit implements Command {
         throw new ExitException();
     }
 
+    /**
+     * Инкапсулированній метод, который запускает закрытие соединения.
+     * @throws InvalidException
+     */
     private void close() throws InvalidException {
         try {
             dBconnection.closeConnection();
