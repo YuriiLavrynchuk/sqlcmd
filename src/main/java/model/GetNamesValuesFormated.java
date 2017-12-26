@@ -1,8 +1,16 @@
 package model;
 
+/**
+ * Класс предназначен для форматирования данных полученых из БД для дальнейшего использования.
+ * @deprecated
+ * @version 1.0.0
+ *
+ * @author Yuriy.Lavrinchuk
+ *
+ */
 class GetNamesValuesFormated {
 
-/*    private final String format;
+    private final String format;
     private final DataSet newValue;
 
     public GetNamesValuesFormated(DataSet newValue, String format){
@@ -27,5 +35,5 @@ class GetNamesValuesFormated {
         }
         values = values.delete(values.length()-1, values.length());
         return values.toString();
-    }*/
+    }
 }

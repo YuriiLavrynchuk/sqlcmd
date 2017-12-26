@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * Класс кастомного формата данных.
+ * Предназначен для преобразования из БД и внесения данных в БД.
+ * @deprecated
+ * @version 1.0.0
+ *
+ * @author Yuriy.Lavrinchuk
+ *
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
