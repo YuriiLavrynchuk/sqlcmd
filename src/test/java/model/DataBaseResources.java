@@ -1,23 +1,42 @@
 package model;
 
+/**
+ * Класс предназначен для создания таблиц с данными для тестирования.
+ *
+ * @version 1.0.0
+ *
+ * @author Yuriy.Lavrinchuk
+ *
+ */
 import exeption.InvalidException;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataBaseResources extends DbConnection {
 
+    /**
+     * Константы с данными о пользовательской базе (название базы, логин, пароль)
+     * Перед запуском тестов необходимо заменить данные констаныты на свои
+     */
     public static final String DB_NAME_LOCAL = "postgres";
     public static final String USER_NAME_LOCAL = "postgres";
     public static final String PASSWORD_LOCAL = "1234";
 
+    /**
+     * Константы для создаваемой базы
+     */
     public static final String DB_NAME_TEST = "test";
     public static final String USER_NAME_TEST = "admin";
     public static final String PASSWORD_TEST = "pass";
     private Connection local;
     private Connection test;
 
+    /**
+     * Метод непосредственно создает тестовую бд с данными, используя подключение к пользовательской базе.
+     * @throws SQLException
+     * @throws InvalidException
+     */
     public void before() throws SQLException, InvalidException {
 
         local = connection(DB_NAME_LOCAL, USER_NAME_LOCAL, PASSWORD_LOCAL);
@@ -47,6 +66,11 @@ public class DataBaseResources extends DbConnection {
         }
     }
 
+    /**
+     * Метод удаляет тестовую базу и роль после выполнения тестов.
+     * @throws SQLException
+     * @throws InvalidException
+     */
     public void after() throws SQLException, InvalidException {
         local = connection(DB_NAME_LOCAL, USER_NAME_LOCAL, PASSWORD_LOCAL);
 
@@ -57,6 +81,11 @@ public class DataBaseResources extends DbConnection {
         }
     }
 
+    /**
+     * Метод закрывает соединение с БД.
+     * @param connection
+     * @throws SQLException
+     */
     private void closeConnection(Connection connection) throws SQLException {
         connection.close();
     }
